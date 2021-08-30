@@ -5,6 +5,11 @@
 {% block content %}
 <h1 class="">homepage</h1>
 <p>
-    {{ products }}
+
+{% for product in products %}
+    <ul>
+        <li>{{ product.name }}</li>
+    </ul>
+{% endfor %}
 </p>
 {% endblock %}
