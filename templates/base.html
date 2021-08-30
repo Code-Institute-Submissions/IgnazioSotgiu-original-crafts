@@ -1,53 +1,54 @@
 {% load static %}
-
 <!DOCTYPE html>
 <html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta http-equiv="X-UA-Compatible" content="ie=edge">
-<meta name="Description" content="Enter your description here"/>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <meta name="Description" content="Enter your description here"/>
 
-{% block core_css %}
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.0/css/bootstrap.min.css">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
-<link rel="stylesheet" href="">
-{% endblock %}
-<title>Original Crafts {% block extra_title %}{% endblock %}</title>
-</head>
-<body>
-{% block messages %}
-{% endblock %}
-
-
-{% block header %}
-
-{% endblock %}
+        {% block core_css %}
+            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.0/css/bootstrap.min.css">
+            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+            <link rel="stylesheet" href="{% static 'css/base.css' %}">
+        {% endblock %}
+        <title>Original Crafts {% block extra_title %}{% endblock %}</title>
+    </head>
+    <body>
+        {% block messages %}
+        {% endblock %}
 
 
+        {% block header %}
+        {% include 'includes/header.html' %}
 
-{% block navbar %}
-
-{% endblock %}
+        {% endblock %}
 
 
 
-{% block content %}
-
-{% endblock %}
-
-
-
-{% block footer %}
-
-{% endblock %}
+        {% block navbar %}
+        {% include 'includes/navbar.html' %}
+        {% endblock %}
 
 
 
-{% block core_js %}
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.slim.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.1/umd/popper.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.0/js/bootstrap.min.js"></script>
-{% endblock %}
-</body>
+        {% block content %}
+        {% include 'includes/promo_banner.html' %}
+        {% endblock %}
+
+
+
+        {% block footer %}
+        {% include 'includes/footer.html' %}
+        {% endblock %}
+
+
+
+        {% block core_js %}
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.slim.min.js"></script>
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.1/umd/popper.min.js"></script>
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.0/js/bootstrap.min.js"></script>
+            <script src="https://kit.fontawesome.com/3e532e3652.js" crossorigin="anonymous"></script>
+        {% endblock %}
+    </body>
 </html>
