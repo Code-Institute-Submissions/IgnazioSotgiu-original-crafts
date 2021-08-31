@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% load static %}
+
+
+{% block content %}
+<h1 class="">Products</h1>
+<p>
+
+{% for product in products %}
+    <ul>
+        <li><a href="{% url 'single_product' product.id %}">{{ product.name }}</a></li>
+    </ul>
+{% endfor %}
+</p>
+{% endblock %}

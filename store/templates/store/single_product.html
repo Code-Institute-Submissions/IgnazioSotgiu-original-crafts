@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{% load static %}
+
+
+{% block content %}
+<h1 class="">Single Product Page</h1>
+<p>
+    <ul> 
+        <li>{{ product.name }}</li>
+        <li>{{ product.description }}</li>
+        <li>{{ product.price }}</li>
+    </ul>
+</p>
+{% endblock %}
