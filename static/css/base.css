@@ -1,4 +1,99 @@
+
+/* top banner */
 .top-banner-container {
-    background-color: rgb(235, 12, 4);
+    background-color: #c1eb04;
     color: #000;
+    height: 50px;
+    text-align: center;
+}
+.top-banner-message {
+    font-size: 30px;
+    font-weight: 300;
+    top: 3px;
+}
+.top-banner-tag {
+    background-color: #e20303d5;
+    color: #fff;
+    border-radius: 10px;
+    padding: 5px;
+}
+.br-top-banner {
+    display: none;
+}
+.logo-container {
+    height: 100px;
+    color: rgb(17, 7, 7);
+    text-align: center;
+    font-size: 60px;
+}
+.logo-container {
+    background: url('/media/ms4-header-bg.jpg') no-repeat center center fixed;
+    background-size: cover;
+}
+.logo-text {
+    height: 100px;
+    color: #000;
+    font-family: 'Lato';
+}
+/************navbar********************/
+.navbar-expand-md .navbar-nav .nav-link {
+    padding-right: 20px;
+    padding-left: 20px;
+}
+
+/**************media queries*********************/
+@media screen and (max-width: 900px){
+    /*top banner - header */
+    .top-banner-message {
+        font-size: 20px;
+        font-weight: 300;
+        top: 3px;
+        padding-top: 7px;
+    }
+    .logo-container {
+        height: 80px;
+        color: rgb(17, 7, 7);
+        text-align: center;
+        font-size: 40px;
+    }
+    .logo-text {
+        padding-top: 10px;
+    }
+    /*********navbar************/
+    .navbar-dark .navbar-nav .nav-link {
+        color: #fafafa;
+        font-size: 15px;
+        padding-left: 20px;
+        padding-right: 20px;
+        text-align: right;
+        margin-left: 40%;
+    }
+}
+@media screen and (max-width: 554px){
+    /*top banner - header */
+    .top-banner-tag {
+        background-color: #e20303d5;
+        color: #fff;
+        border-radius: 10px;
+        padding: 3px;
+    }
+    .top-banner-message {
+        font-size: 15px;
+        font-weight: 300;
+        top: 3px;
+        padding-top: 3px;
+    }
+    .logo-container {
+        height: 50px;
+        color: rgb(17, 7, 7);
+        text-align: center;
+        font-size: 30px;
+    }
+    .logo-text {
+        padding-top: 3px;
+    }
+    .br-top-banner {
+        display: inline;
+    }
+
 }
