@@ -1,10 +1,10 @@
-@import url('https://fonts.googleapis.com/css2?family=Lato:wght@100;300;400;500;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap');
 html, body {
     overflow-x: hidden;
     width: 100%;
     height: auto;
     min-height: 100vh;
-    font-family: "Roboto", sans-serif;
+    font-family: "Lato", sans-serif;
     position: relative;
     }
 body {
@@ -38,7 +38,7 @@ body {
     font-size: 60px;
 }
 .logo-container {
-    background: url('/media/ms4-header-bg.jpg') no-repeat center center fixed;
+    background: url('/media/ms4-header2.jpg') no-repeat center center;
     background-size: cover;
 }
 .logo-image {
@@ -75,9 +75,11 @@ body {
 }
 /*****************************footer***************************/
 footer {
-    position: absolute;
-    bottom: 0;
     width: 100%;
+    height: 100px;
+    bottom: 0;
+    padding: 10px;
+    margin-bottom: 0;
 }
 .footer-container {
     padding: 20px 150px 5px;
@@ -94,12 +96,11 @@ footer {
 }
 /***********index.html****************/
 .sunset-bg {
-    background: url('/media/Crohy_Head_Sea_Arch_Ireland.jpg') no-repeat center center fixed;
+    background: url('/media/welcome-message-img.JPG') no-repeat center center;
     -webkit-background-size: contain;
     -moz-background-size: contain;
     -o-background-size: contain;
     background-size: 100% 100%;
-    background-attachment: fixed;
 }
 .home-message-container {
     padding: 20px;
@@ -111,20 +112,37 @@ footer {
     align-items: center;
     flex-direction: column;
     font-family: lato;
+    font-weight: 700;
     font-size: 20px;
     letter-spacing: 2px;
     text-align: center;
-    color: #fafafa;
+    color: #000;
+}
+.white-overlay {
+    background-color: rgba(255, 255, 255, 0.6);
+    border: #000 solid 1px;
+    border-radius: 5px;
+}
+.register-now-btn {
+    margin-top: 10px;
+    background-color: #c1eb04;
+    border: #000 1px solid;
+    border-radius: 5px;
 }
 .go-to-store-btn {
     margin-top: 20px;
     background-color: #c1eb04;
-    border: #c1eb04;
+    border: #000 1px solid;
     border-radius: 5px;
 }
-.carousel-row {
+.promotion-section {
     background-color: #000;
-    padding: 100px;
+    text-align: center;
+    color: #fff;
+    font-size: 30px;
+}
+.promotion-section-title {
+    padding: 20px;
 }
 /**************media queries*********************/
 @media screen and (max-width: 900px){
