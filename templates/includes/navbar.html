@@ -1,12 +1,9 @@
-<nav class="navbar navbar-expand-md navbar-dark bg-dark">
+<nav class="navbar navbar-expand-sm navbar-dark bg-dark">
   <div class="container-fluid">
-    <a class="navbar-brand ml-auto d-md-none" href="{% url 'home' %}">Original Crafts</a>
-    <form class="d-flex mr-auto d-none d-md-inline">
-      <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-      <button class="btn btn-outline-success" type="submit">Search</button>
-    </form>
+    <a class="navbar-brand navbar-container mx-auto d-sm-none" href="{% url 'home' %}">Original Crafts</a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
+      <span class="navbar-toggler-icon">
+      </span>
     </button>
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav mx-auto">
@@ -18,10 +15,6 @@
             Products
           </a>
           <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <form class="d-flex mr-auto">
-              <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-              <button class="btn btn-outline-success" type="submit">Search</button>
-            </form>
             <li><a class="dropdown-item" href="#">Paint by Numbers</a></li>
             <li><a class="dropdown-item" href="#">Jigsaw</a></li>
             <li><a class="dropdown-item" href="#">Prints</a></li>
@@ -51,3 +44,13 @@
     </div>
   </div>
 </nav>
+<div class="container-fluid search-form">
+  <div class="row">
+    <div class="col-12 col-sm-6 offset-sm-3 col-lg-4 offset-lg-4">
+      <form class="d-flex mx-auto ">
+        <input class="form-control" type="search" placeholder="Search" aria-label="Search">
+        <button class="btn btn-success" type="submit">Search</button>
+      </form>
+    </div>
+  </div>
+</div>

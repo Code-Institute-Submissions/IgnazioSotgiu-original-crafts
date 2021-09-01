@@ -4,9 +4,24 @@
             <span class="top-banner-tag"> Special Offer !!!</span><br class="br-top-banner"> Pick 3 products and the delivery is on us!!! 
         </div>
     </div>
+    <!-- shopping cart -->
+    <div class="shopping-cart-container">
+        <a href="#" class="shopping-cart-icon">
+            <i class="fas fa-shopping-cart"></i>
+        </a>
+        {% if products %}
+            <span class="cart-products-qty">
+                {{ products.length }}
+            </span>
+        {% else %}
+            <span class="cart-products-qty">
+                0
+            </span>
+        {% endif %}
+    </div>
 </div>
 
-<div class="logo-container mx-auto">
+<div class="logo-container mx-auto d-none d-sm-block">
     <a href="{ url 'home' }" class="logo-image">
         <div class="logo-text">Original Crafts</div>
     </a>
