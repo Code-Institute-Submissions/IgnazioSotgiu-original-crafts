@@ -1,4 +1,15 @@
-
+@import url('https://fonts.googleapis.com/css2?family=Lato:wght@100;300;400;500;700&display=swap');
+html, body {
+    overflow-x: hidden;
+    width: 100%;
+    height: auto;
+    min-height: 100vh;
+    font-family: "Roboto", sans-serif;
+    position: relative;
+    }
+body {
+    overflow-x: hidden;
+}
 /* top banner */
 .top-banner-container {
     background-color: #c1eb04;
@@ -29,6 +40,9 @@
 .logo-container {
     background: url('/media/ms4-header-bg.jpg') no-repeat center center fixed;
     background-size: cover;
+}
+.logo-image {
+    text-decoration: none;
 }
 .logo-text {
     height: 100px;
@@ -77,6 +91,40 @@ footer {
 .copyright-container {
     font-size: 15px;
     padding-top: 15px;
+}
+/***********index.html****************/
+.sunset-bg {
+    background: url('/media/Crohy_Head_Sea_Arch_Ireland.jpg') no-repeat center center fixed;
+    -webkit-background-size: contain;
+    -moz-background-size: contain;
+    -o-background-size: contain;
+    background-size: 100% 100%;
+    background-attachment: fixed;
+}
+.home-message-container {
+    padding: 20px;
+    height: 300px;
+}
+.home-message {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    font-family: lato;
+    font-size: 20px;
+    letter-spacing: 2px;
+    text-align: center;
+    color: #fafafa;
+}
+.go-to-store-btn {
+    margin-top: 20px;
+    background-color: #c1eb04;
+    border: #c1eb04;
+    border-radius: 5px;
+}
+.carousel-row {
+    background-color: #000;
+    padding: 100px;
 }
 /**************media queries*********************/
 @media screen and (max-width: 900px){
@@ -177,4 +225,13 @@ footer {
         font-size: 30px;
         font-family: loto;
     }
+    /* footer*/
+    .footer-container {
+        padding: 20px 20px 5px;
+        text-align: center;
+    }
+    .copyright-container {
+        font-size: 15px;
+        padding-top: 10px;
+    }    
 }

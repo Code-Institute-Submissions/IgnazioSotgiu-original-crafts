@@ -3,13 +3,35 @@
 
 
 {% block content %}
-<h1 class="">homepage</h1>
-<p>
-
-{% for product in products %}
-    <ul>
-        <li>{{ product.name }}</li>
-    </ul>
-{% endfor %}
-</p>
+<div class="container-fluid sunset-bg">
+  <div class="row home-message-container">
+    <div class="col-10 offset-1 col-sm-8 offset-sm-3 col-md-6 offset-md-4  offset-4 home-message">Welcome to our site!!! Here you will find everything you need for your favourite hobbies.<br>We have a beautiful selection of original and classics designs for every taste!!! <br>
+    <button class="btn go-to-store-btn">Go to the store</button></div>
+  </div>
+</div>
+<div class="row carousel-row">
+  <div class="col-10 offset-1 col-md-8 offset-md-2 col-lg-6 offset-lg-3">
+    <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
+      <div class="carousel-inner">
+        <div class="carousel-item active">
+          <img src="../../../media/Cliffs_of_Moher.jpg" class="d-block w-100" alt="...">
+        </div>
+        <div class="carousel-item">
+          <img src="../../../media/Crohy_Head_Sea_Arch_Ireland.jpg" class="d-block w-100" alt="...">
+        </div>
+        <div class="carousel-item">
+          <img src="../../../media/Crohy_Head_Sea_Arch_Ireland.jpg" class="d-block w-100" alt="...">
+        </div>
+      </div>
+      <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Previous</span>
+      </button>
+      <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Next</span>
+      </button>
+    </div>
+  </div>
+</div>
 {% endblock %}
