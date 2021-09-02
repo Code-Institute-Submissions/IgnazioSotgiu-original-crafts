@@ -1,23 +1,48 @@
 <div class="container-fluid top-banner-container">
     <div class="row">
-        <div class="col-12 top-banner-message">
-            <span class="top-banner-tag"> Special Offer !!!</span><br class="br-top-banner"> Pick 3 products and the delivery is on us!!! 
+        <div class="col-8 top-banner-message">
+            {% if delivery_difference %}
+                {% if delivery_difference > 0 %} 
+                    <span class="top-banner-text text-red">
+                        Add {{ delivery_difference }} to qualify for free delivery!
+                    </span>  
+                {% else %}
+                    <span class="top-banner-text text-green">
+                        You qualify for free delivery
+                    </span>
+                {% endif %}
+            {% else %} 
+                <span class="top-banner-text text-red">
+                    <span class="save-tag d-none d-sm-inline">SAVE</span> Spend € 50 and get free delivery!
+                </span>
+            {% endif %}
         </div>
-    </div>
-    <!-- shopping cart -->
-    <div class="shopping-cart-container">
-        <a href="#" class="shopping-cart-icon">
-            <i class="fas fa-shopping-cart"></i>
-        </a>
-        {% if products %}
-            <span class="cart-products-qty">
-                {{ products.length }}
+        <div class="col-4 cart-container">
+            <span class="shopping-cart-container">
+                <a href="#" class="shopping-cart-icon">
+                    <i class="fas fa-shopping-cart"></i>
+                </a>
+                {% if products %}
+                    <span class="cart-products-qty">
+                        {{ products.length }}
+                    </span>
+                {% else %}
+                    <span class="cart-products-qty">
+                        0
+                    </span>
+                {% endif %}
             </span>
-        {% else %}
-            <span class="cart-products-qty">
-                0
-            </span>
-        {% endif %}
+            |
+            {% if grand_total %}
+                {% if grand_total > 50 %}
+                    <span class="cart-products-total text-green">€{{ grand_total }}</span>
+                {% else %}
+                    <span class="cart-products-total text-red">€{{ grand_total }}</span>
+                {% endif %}
+            {% else %}
+                <span class="cart-products-total text-red">€0.00</span>
+            {% endif %}
+        </div>
     </div>
 </div>
 
