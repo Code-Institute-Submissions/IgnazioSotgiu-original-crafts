@@ -10,6 +10,23 @@ html, body {
 body {
     overflow-x: hidden;
 }
+a:hover {
+    text-decoration: none;
+}
+/* back to top link */
+.back-to-top-container {
+    background-color: black;
+    color: white;
+    position: fixed;
+    bottom: 20px;
+    right: 50px;
+    border: 1px #fff solid;
+    border-radius: 5px;
+    text-align: center;
+    padding: 5px;
+    cursor: pointer;
+    display: none;
+}
 /* top banner */
 .top-banner-container {
     background-color: #c1eb04;
@@ -147,7 +164,18 @@ footer {
     border: #000 1px solid;
     border-radius: 5px;
 }
+.image-container {
+    max-width: 100%;
+    padding: 5px;
+    height: 300px;
+    overflow: hidden;
+}
+.cover {
+    height: 100%;
+    width: 100%;
+}
 .promotion-section {
+    padding: 20px 0;
     background-color: #000;
     text-align: center;
     color: #fff;
@@ -167,7 +195,7 @@ footer {
     margin: 5px;
 }
 .card-img-top {
-    padding: 20px;
+    padding: 10px;
     background-color: #796363;
 }
 .card-body {
@@ -179,6 +207,9 @@ footer {
     padding-right: 20px;
     margin-bottom: 5px;
 
+}
+a:hover {
+    text-decoration: none;
 }
 
 /**************media queries*********************/

@@ -1,0 +1,24 @@
+<div class="back-to-top-container bg-black white-text" id="back-to-top">
+    <i class="fas fa-arrow-up"></i>
+    <br>
+    <h4>Back To Top</h4>
+</div>
+
+<script>
+    backToTop = document.getElementById("back-to-top");
+    window.onscroll = function() {
+        scrollFunction()
+    };
+
+    function scrollFunction() {
+        if (document.body.scrollTop > 500 || document.documentElement.scrollTop > 500) {
+            backToTop.style.display = "block";
+        } else {
+            backToTop.style.display = "none";
+        }
+    }
+
+    backToTop.addEventListener('click', function() {
+        document.documentElement.scrollTop = 0;
+    })
+</script>

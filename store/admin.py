@@ -12,7 +12,8 @@ admin.site.register(Category, CategoryAdmin)
 
 
 class ProductAdmin(admin.ModelAdmin):
-    list_display = ['id', 'name', 'category', 'price', 'number_in_stock']
+    list_display = ['id', 'name', 'category', 'price',
+                    'special_price', 'number_in_stock']
     list_filter = ['created', 'number_in_stock', 'updated',
                    'name']
     ordering = ('-created',)

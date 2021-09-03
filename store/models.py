@@ -42,7 +42,7 @@ class Product(models.Model):
     hot_tag = models.BooleanField(default=False)
     original_tag = models.BooleanField(default=False)
     selling_fast_tag = models.BooleanField(default=False)
-    add_to_banner = models.BooleanField(default=False)
+    add_to_popular_products = models.BooleanField(default=True)
     new_tag = models.BooleanField(default=False)
     rating = models.DecimalField(
         max_digits=4, decimal_places=2, blank=True, null=True)
