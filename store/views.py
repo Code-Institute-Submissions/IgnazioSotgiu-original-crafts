@@ -5,10 +5,15 @@ from .models import Product
 def display_homepage(request):
     """ Display the homepage """
     template = 'store/index.html'
-    return render(request, template)
+    products = Product.objects.all()
+    context = {
+        'products': products,
+    }
+    return render(request, template, context)
 
 
 def products(request):
+    """ display all products in e store - all products page """
     products = Product.objects.all()
     template = 'store/products.html'
     context = {

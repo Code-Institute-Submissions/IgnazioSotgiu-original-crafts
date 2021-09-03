@@ -13,7 +13,7 @@
         <br>
         Free delivery on orders over 50 euro!!!
         <br>
-        <a href="">
+        <a href="{% url 'products' %}">
           <button class="btn go-to-store-btn">Go to the store</button>
         </a>
       </div>
@@ -21,12 +21,12 @@
       <div class="col-10 offset-1 col-sm-6 offset-sm-4 col-md-6 offset-md-4 col-lg-4 offset-lg-6 home-message white-overlay">
         Welcome to our site!!!
         <br>
-        <a href="">
+        <a href="{% url 'account_signup' %}">
           <button class="btn register-now-btn">Register Now!</button>
         </a>
         Get free delivery on orders over 50 euro!!!
         <br>
-        <a href="">
+        <a href="{% url 'products' %}">
           <button class="btn go-to-store-btn">Go to the store</button>
         </a>
       </div>
@@ -40,18 +40,32 @@
     <i class="fas fa-arrow-down"></i>
   </div>
 </div>
-<div class="row">
+<div class="row bg-black">
   {% for product in products %}
-    <div class="col-12 col-sm-6 col-md-6 col-lg-4">
-      <a href="#">
-        <div class="card" style="width: 18rem;">
-          <img src="..." class="card-img-top" alt="...">
-          <div class="card-body">
-            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+    {% if product.number_in_stock > 0 and not product.hide_product %}
+      <div class="col-12 col-sm-6 col-lg-4 popular-products-div">
+        <a href="{% url 'single_product' product.id %}">
+          <div class="card">
+            <img src="{{ product.image.url }}" class="card-img-top" alt="{{ product.name }}">
+            <div class="card-body">
+              <p class="card-text">{{ product.name | title }}.</p>
+              {% if product.special_price %}
+                <p class="card-text"><span class="text-red">SALE   </span><del>€{{ product.price}}</del><span>   €{{ product.special_price }}</span></p>
+              {% else %}
+                <p class="card-text">€{{ product.price }}</p>
+              {% endif %}
+              <p class="card-text">{{ product.category | title }}.</p>
+              {% if product.original_tag %}
+                <p class="card-text">Original Design</p>
+              {% endif %}
+              {% if product.selling_fast %}
+                <p class="card-text">Selling Fast !!!</p>
+              {% endif %}
+            </div>
           </div>
-        </div>
-      </a>
-    </div>
+        </a>
+      </div>
+    {% endif %}
   {% endfor %}
 </div>
 {% endblock %}

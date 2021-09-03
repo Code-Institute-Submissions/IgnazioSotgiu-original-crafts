@@ -4,7 +4,7 @@ from .models import Product, Category
 
 
 class CategoryAdmin(admin.ModelAdmin):
-    list_display = ['name', 'slug']
+    list_display = ['name', 'friendly_name', 'slug']
     prepopulated_fields = {'slug': ('name',)}
 
 
@@ -12,8 +12,10 @@ admin.site.register(Category, CategoryAdmin)
 
 
 class ProductAdmin(admin.ModelAdmin):
-    list_filter = ['created', 'in_stock', 'updated',
+    list_display = ['id', 'name', 'category', 'price', 'number_in_stock']
+    list_filter = ['created', 'number_in_stock', 'updated',
                    'name']
+    ordering = ('-created',)
 
 
 admin.site.register(Product, ProductAdmin)

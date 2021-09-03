@@ -8,7 +8,18 @@
 
 {% for product in products %}
     <ul>
+        {% if product.image %}
+            <a href="{% url 'single_product' product.id %}">
+                <img src="{{ product.image.url }}" alt="{{ product.name }}">
+            </a>
+        {% else %}
+            <a href="{% url 'single_product' product.id %}">
+                <img src="{{ MEDIA_URL }}noimage.png" alt="{{ product.name }}">
+            </a>
+        {% endif %}
         <li><a href="{% url 'single_product' product.id %}">{{ product.name }}</a></li>
+        <li><a href="{% url 'single_product' product.id %}">{{ product.price }}</a></li>
+        <li><a href="{% url 'single_product' product.id %}">{{ product.description }}</a></li>
     </ul>
 {% endfor %}
 </p>

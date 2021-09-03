@@ -1,4 +1,5 @@
 from django.db import models
+from django.core.validators import MinValueValidator, MaxValueValidator
 
 
 class Category(models.Model):
@@ -30,7 +31,12 @@ class Product(models.Model):
         max_digits=4, decimal_places=2, blank=True, null=True)
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
-    in_stock = models.BooleanField(default=True)
+    number_in_stock = models.IntegerField(
+            validators=[
+                MinValueValidator(0),
+                MaxValueValidator(100)
+            ],
+            default=99)
     hide_product = models.BooleanField(default=False)
     on_special = models.BooleanField(default=False)
     hot_tag = models.BooleanField(default=False)
