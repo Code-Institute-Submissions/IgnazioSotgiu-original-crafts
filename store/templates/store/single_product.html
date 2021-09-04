@@ -3,12 +3,32 @@
 
 
 {% block content %}
-<h1 class="">Single Product Page</h1>
-<p>
-    <ul> 
-        <li>{{ product.name }}</li>
-        <li>{{ product.description }}</li>
-        <li>{{ product.price }}</li>
-    </ul>
-</p>
+<div class="bg-black jumbotron-container">
+    <div class="jumbotron bg-black single-product-container">
+        <div class="row">
+            <div class="col-12 col-md-6">
+                <img src="{{ product.image.url }}" class="single-product-img" alt="{{ product.name }}">
+            </div>
+            <div class="col-12 col-md-6">
+                <ul>
+                    <li class="white-text">{{ product.name }}</li>
+                    <li class="white-text">{{ product.category }}</li>
+                    {% if product.special_price %}
+                    <li><span class="text-red">SALE   </span><del class="grey-text">€{{ product.price}}</del><span class="white-text">   €{{ product.special_price }}</span></li>
+                {% else %}
+                    <li class="white-text">€{{ product.price }}</li>
+                {% endif %}
+                    <li class="white-text">{{ product.description }}</li>
+                </ul>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12 text-center">
+                <a href="">
+                    <button class="btn btn-success mt-5">Add to Trolley</button>
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
 {% endblock %}

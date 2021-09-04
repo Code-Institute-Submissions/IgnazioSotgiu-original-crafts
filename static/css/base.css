@@ -9,9 +9,16 @@ html, body {
     }
 body {
     overflow-x: hidden;
+    background-color: #000;
 }
 a:hover {
     text-decoration: none;
+}
+.white-text {
+    color: #fff;
+}
+.grey-text {
+    color: #695c5c;
 }
 /* back to top link */
 .back-to-top-container {
@@ -210,6 +217,20 @@ footer {
 }
 a:hover {
     text-decoration: none;
+}
+.jumbotron-container {
+
+    top: 0;
+}
+.jumbotron {
+    padding: 4rem 2rem;
+    margin: 50px;
+    border: 1px #fff solid;
+}
+.single-product-img {
+    padding: 10px;
+    background-color: #796363;
+    max-width: 100%;
 }
 
 /**************media queries*********************/

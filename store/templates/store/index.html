@@ -5,9 +5,9 @@
 {% block content %}
 <div class="container-fluid sunset-bg">
   <div class="row home-message-container">
-    {% if session.user %}
-    <div class="col-10 offset-1 col-sm-6 offset-sm-4 col-md-6 offset-md-4 col-lg-4 offset-lg-6 home-message white-overlay">
-        Welcome {{ session.user.username }},
+    {% if request.user.is_authenticated or request.user.is_superuser %}
+      <div class="col-10 offset-1 col-sm-6 offset-sm-4 col-md-6 offset-md-4 col-lg-4 offset-lg-6 home-message white-overlay">
+        Welcome {{ request.user.username }},
         <br>
         Check out our new products in the store!!!
         <br>
@@ -33,20 +33,6 @@
     {% endif %}
   </div>
 </div>
-<div class="row bg-black pt-3">
-  <div class="col-6 col-md-6 col-lg-4 col-xl-3 image-container">
-    <img class="cover" src="{{ MEDIA_URL }}oc-logo-small.png" alt="">
-  </div>
-  <div class="col-6 col-md-6 col-lg-4 col-xl-3 image-container">
-    <img class="cover" src="{{ MEDIA_URL }}jigsaw-puzzle-1-small.jpg" alt="">
-  </div>
-  <div class="d-none d-lg-block col-lg-4 col-xl-3 image-container">
-    <img class="cover" src="{{ MEDIA_URL }}Paintbynumbers-2-small.jpg" alt="">
-  </div>
-  <div class="d-none d-xl-block col-xl-3 image-container">
-    <img class="cover" src="{{ MEDIA_URL }}paint-by-numbers-history-1-small.jpg" alt="">
-  </div>
-</div>
 <div class="row">
   <div class="col-12 promotion-section">
     <i class="fas fa-arrow-down"></i>
@@ -60,7 +46,15 @@
       <div class="col-12 col-sm-6 col-lg-4 popular-products-div">
         <a href="{% url 'single_product' product.id %}">
           <div class="card">
-            <img src="{{ product.image.url }}" class="card-img-top" alt="{{ product.name }}">
+            {% if product.image %}
+                <a href="{% url 'single_product' product.id %}">
+                    <img src="{{ product.image.url }}" class="card-img-top" alt="{{ product.name }}">
+                </a>
+            {% else %}
+                <a href="{% url 'single_product' product.id %}">
+                    <img src="{{ MEDIA_URL }}noimage.png" class="card-img-top" alt="{{ product.name }}">
+                </a>
+            {% endif %}
             <div class="card-body">
               <p class="card-text">{{ product.name | title }}.</p>
               {% if product.special_price %}
@@ -81,5 +75,19 @@
       </div>
     {% endif %}
   {% endfor %}
+</div>
+<div class="row bg-black pt-3">
+  <div class="col-6 col-md-6 col-lg-4 col-xl-3 image-container">
+    <img class="cover" src="{{ MEDIA_URL }}oc-logo-small.png" alt="">
+  </div>
+  <div class="col-6 col-md-6 col-lg-4 col-xl-3 image-container">
+    <img class="cover" src="{{ MEDIA_URL }}jigsaw-puzzle-1-small.jpg" alt="">
+  </div>
+  <div class="d-none d-lg-block col-lg-4 col-xl-3 image-container">
+    <img class="cover" src="{{ MEDIA_URL }}Paintbynumbers-2-small.jpg" alt="">
+  </div>
+  <div class="d-none d-xl-block col-xl-3 image-container">
+    <img class="cover" src="{{ MEDIA_URL }}paint-by-numbers-history-1-small.jpg" alt="">
+  </div>
 </div>
 {% endblock %}
