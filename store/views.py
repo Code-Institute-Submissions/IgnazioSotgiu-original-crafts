@@ -1,7 +1,7 @@
 from django.shortcuts import render, get_object_or_404
 from django.views.generic import ListView
 from django.db.models import Q
-from .models import Product
+from .models import Product, Category
 
 
 def display_homepage(request):
@@ -39,8 +39,17 @@ def search_result(request):
 
     """ display search result - search result page """
     products = Product.objects.all()
+    categories = None
+    query = None
+    total_items = 0
 
     if request.GET:
+        if 'category' in request.GET:
+            categories = request.GET['category'].split(',')
+            products = products.filter(category__name__in=categories)
+            category = Category.objects.filter(name__in=categories)
+            selected_categories = category
+
         if 'q' in request.GET:
             query = request.GET['q']
             if query:
@@ -48,9 +57,12 @@ def search_result(request):
                     description__icontains=query)
             products = products.filter(search_terms)
 
+    total_items = len(products)
     template = 'store/search_result.html'
     context = {
         'products': products,
-        'search': query
+        'search': query,
+        'total_items': total_items,
+        'selected_categories': selected_categories,
     }
     return render(request, template, context)

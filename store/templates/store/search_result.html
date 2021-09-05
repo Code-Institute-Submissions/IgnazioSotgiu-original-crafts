@@ -4,8 +4,17 @@
 
 {% block content %}
 <div class="row">
-    <div class="col-12 search-result-title-container">
-       <span class="search-result-title">Search Result for "{{ search }}"</span>
+    <div class="col-12 search-result-title-container"> 
+        {% if query %}
+          <span class="search-result-title">Found {{total_items }} result for "{{ search }}"
+        {% elif selected_categories %}
+          {% for c in selected_categories %}
+            <span class="search-result-title">Found {{total_items }} result for {{ c.friendly_name }}
+          {% endfor %}
+        {% else %}
+          <span class="search-result-title text-red">No Products were found try a new search!
+        {% endif %}
+        </span>
     </div>
   </div>
   <div class="row bg-black">

@@ -15,12 +15,12 @@
             Products
           </a>
           <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <li><a class="dropdown-item" href="#">Paint by Numbers</a></li>
-            <li><a class="dropdown-item" href="#">Jigsaw</a></li>
-            <li><a class="dropdown-item" href="#">Prints</a></li>
-            <li><a class="dropdown-item" href="#">Kids Section</a></li>
-            <li><a class="dropdown-item" href="#">Accessories</a></li>
-            <li><a class="dropdown-item" href="{% url 'products' %}">All Products</a></li>
+            <li><a class="dropdown-item" href="{% url 'search_result' %}?category=paint_by_numbers">Paint by Numbers</a></li>
+            <li><a class="dropdown-item" href="{% url 'search_result' %}?category=jigsaw">Jigsaw Puzzle</a></li>
+            <li><a class="dropdown-item" href="{% url 'search_result' %}?category=prints">Prints</a></li>
+            <li><a class="dropdown-item" href="{% url 'search_result' %}?category=kids">Kids Section</a></li>
+            <li><a class="dropdown-item" href="{% url 'search_result' %}?category=accessories">Accessories</a></li>
+            <li><a class="dropdown-item" href="{% url 'search_result' %}?category=paint_by_numbers,jigsaw,prints,kids,accessories">All Products</a></li>
           </ul>
         </li>
         <li class="nav-item dropdown">
