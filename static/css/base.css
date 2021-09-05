@@ -10,6 +10,7 @@ html, body {
 body {
     overflow-x: hidden;
     background-color: #000;
+    padding-bottom: 100px;
 }
 a:hover {
     text-decoration: none;
@@ -18,6 +19,18 @@ a:hover {
     color: #fff;
 }
 .grey-text {
+    color: #695c5c;
+}
+.center-align {
+    text-align: center;
+}
+.yellow-btn {
+    margin-top: 10px;
+    background-color: #c1eb04;
+    border: #000 1px solid;
+    border-radius: 5px;
+}
+label.required-field {
     color: #695c5c;
 }
 /* back to top link */
@@ -122,6 +135,8 @@ footer {
     text-align: center;
     background-color: #c1eb04;
     color: #000;
+    position: absolute;
+    bottom: 0;
 }
 .footer-container i {
     color: #000;
@@ -238,7 +253,7 @@ a:hover {
     background-color: #000;
     text-align: center;
     color: #fff;
-    font-size: 30px;
+    font-size: 20px;
 }
 .search-result-title {
     padding: 20px;

@@ -1,5 +1,6 @@
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, redirect, reverse, get_object_or_404
 from django.views.generic import ListView
+from django.contrib import messages
 from django.db.models import Q
 from .models import Product, Category
 
@@ -42,6 +43,7 @@ def search_result(request):
     categories = None
     query = None
     total_items = 0
+    selected_categories = None
 
     if request.GET:
         if 'category' in request.GET:
@@ -55,13 +57,19 @@ def search_result(request):
             if query:
                 search_terms = Q(name__icontains=query) | Q(
                     description__icontains=query)
+
+            else:
+                messages.error(request, 'Enter a valid search parameter')
+                return redirect(reverse('home'))
+                
             products = products.filter(search_terms)
+        
 
     total_items = len(products)
     template = 'store/search_result.html'
     context = {
         'products': products,
-        'search': query,
+        'query': query,
         'total_items': total_items,
         'selected_categories': selected_categories,
     }
