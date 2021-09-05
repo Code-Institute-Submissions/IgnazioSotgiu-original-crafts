@@ -53,7 +53,7 @@
 <div class="container-fluid search-form">
   <div class="row">
     <div class="col-12 col-sm-6 offset-sm-3 col-lg-4 offset-lg-4">
-      <form method="GET" action="#" class="d-flex mx-auto ">
+      <form method="GET" action="{% url 'search_result' %}" class="d-flex mx-auto ">
         <input class="form-control" type="text" name="q" placeholder="Search Products" aria-label="Search">
         <button class="btn btn-black" type="submit"><i class="fas fa-search"></i></button>
       </form>

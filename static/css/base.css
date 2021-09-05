@@ -232,7 +232,17 @@ a:hover {
     background-color: #796363;
     max-width: 100%;
 }
-
+/***************search result page **************/
+.search-result-title-container {
+    padding: 20px 0;
+    background-color: #000;
+    text-align: center;
+    color: #fff;
+    font-size: 30px;
+}
+.search-result-title {
+    padding: 20px;
+}
 /**************media queries*********************/
 @media screen and (max-width: 900px){
     /*top banner - header */

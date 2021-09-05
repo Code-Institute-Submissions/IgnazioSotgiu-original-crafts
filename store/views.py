@@ -1,4 +1,6 @@
 from django.shortcuts import render, get_object_or_404
+from django.views.generic import ListView
+from django.db.models import Q
 from .models import Product
 
 
@@ -27,5 +29,28 @@ def single_product(request, product_id):
     template = 'store/single_product.html'
     context = {
         'product': product,
+    }
+    return render(request, template, context)
+
+# code taken from code institute lecture
+
+
+def search_result(request):
+
+    """ display search result - search result page """
+    products = Product.objects.all()
+
+    if request.GET:
+        if 'q' in request.GET:
+            query = request.GET['q']
+            if query:
+                search_terms = Q(name__icontains=query) | Q(
+                    description__icontains=query)
+            products = products.filter(search_terms)
+
+    template = 'store/search_result.html'
+    context = {
+        'products': products,
+        'search': query
     }
     return render(request, template, context)
