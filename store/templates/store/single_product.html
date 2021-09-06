@@ -7,7 +7,15 @@
     <div class="jumbotron bg-black single-product-container">
         <div class="row">
             <div class="col-12 col-md-6">
-                <img src="{{ product.image.url }}" class="single-product-img" alt="{{ product.name }}">
+                {% if product.image %}
+                    <a href="{% url 'single_product' product.id %}">
+                        <img src="{{ product.image.url }}" class="single-product-img" alt="{{ product.name }}">
+                    </a>
+                {% else %}
+                    <a href="{% url 'single_product' product.id %}">
+                        <img src="{{ MEDIA_URL }}noimage.png" class="single-product-img" alt="{{ product.name }}">
+                    </a>
+                {% endif %}
             </div>
             <div class="col-12 col-md-6">
                 <ul>

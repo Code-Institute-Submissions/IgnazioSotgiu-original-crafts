@@ -61,9 +61,8 @@ def search_result(request):
             else:
                 messages.error(request, 'Enter a valid search parameter')
                 return redirect(reverse('home'))
-                
+
             products = products.filter(search_terms)
-        
 
     total_items = len(products)
     template = 'store/search_result.html'
