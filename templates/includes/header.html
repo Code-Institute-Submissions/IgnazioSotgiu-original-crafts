@@ -24,9 +24,9 @@
                 <a href="{% url 'view_trolley' %}" class="shopping-cart-icon">
                     <i class="fas fa-shopping-cart"></i>
                 </a>
-                {% if products %}
+                {% if trolley_items %}
                     <span class="cart-products-qty">
-                        {{ products.length }}
+                        {{ items_count }}
                     </span>
                 {% else %}
                     <span class="cart-products-qty">

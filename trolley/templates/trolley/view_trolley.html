@@ -5,52 +5,65 @@
 {% block content %}
 
 <div class="row">
-    <div class="col-12 promotion-section">
-        <span class="promotion-section-title">Your Trolley</span>
+    <div class="col-12 offset-2 mt-3 mb-5">
+        <span class="white-text trolley-title">Your Trolley</span>
     </div>
 </div>
-<div class="row">
-    {% if trolley_content %}
-        <div class="col-10 offset-1 col-lg-4 offset-lg-1">
-            {% for product in trolley_content %}
-            <div class="row">
-                <div class="col-4">
-                    {% if product.image %}
-                        <a href="">
-                            <img src="{{ product.image.url }}" class="single-product-img" alt="{{ product.name }}">
-                        </a>
-                    {% else %}
-                        <a href="">
-                            <img src="{{ MEDIA_URL }}noimage.png" class="single-product-img" alt="{{ product.name }}">
-                        </a>
-                    {% endif %}
-                </div>
-                <div class="col-8">
-
-                </div>
+{% if trolley_items %}
+    <div class="row white-text">
+        <div class="col-6 offset-1 center-align">
+            Products
+        </div>
+    </div>
+    <hr class="hr-trolley">
+    {% for item in trolley_items %}
+        <div class="row mt-3">
+            <div class="col-5 offset-1 center-align">
+                {% if item.product.image %}
+                    <img src="{{ item.product.image.url }}" alt="{{ item.product.name }}" class="trolley-image">
+                {% else %}
+                    <img src="{{ MEDIA_URL }}noimage.png" alt="{{ item.product.name }}" class="trolley-image">
+                {% endif %}
             </div>
-            {% endfor %}
-            <div class="row">
-                <div class="col-10 offset-1 center-align white-text">
-                    Keep Shopping
+            <div class="col-5 white-text center-align">
+                {{ item.product.name }}
+                <hr class="hr-trolley">
+                Cat. {{ item.product.category|title }}
+                <hr class="hr-trolley">
+                Price
+                {% if item.product.special_price %}
+                    <span class="text-red">SALE</span>
                     <br>
-                    <a href="{% url 'products' %}">
-                        <button class="btn yellow-btn center-align">Back to Store</button>
-                    </a> 
-                </div>
+                    <del class="grey-text">€{{ item.product.price}}</del>
+                    <span class="white-text">€{{ item.product.special_price }}</span>
+                {% else %}
+                    <div class="white-text">€{{ item.product.price }}</div>
+                {% endif %}
+            </div>
+            <div class="col-5 offset-1 center-align mt-3 white-text">
+                Qty.
+                <input class="w-50" type="number" value="{{ item.quantity }}">
+            </div>
+            <div class="col-5 white-text center-align mt-3">
+                Subtotal {{ item.total }}
             </div>
         </div>
-        <div class="col-10 offset-1 col-lg-4 offset-lg-1">
-            
-        </div>
-    {% else %}
-        <div class="col-10 offset-1 center-align text-red">
-            Your Trolley is empty!
-            <br>
+        <hr class="hr-trolley">
+    {% endfor %}
+    <div class="row">
+        <div class="col-10 offset-1 center-align white-text">
             <a href="{% url 'products' %}">
-                <button class="btn yellow-btn center-align">Go Shopping!</button>
+                <button class="btn yellow-btn center-align">Back to Store</button>
             </a> 
         </div>
-    {% endif %}
-</div>
+    </div>
+{% else %}
+    <div class="col-10 offset-1 center-align text-red">
+        Your Trolley is empty!
+        <br>
+        <a href="{% url 'products' %}">
+            <button class="btn yellow-btn center-align">Go Shopping!</button>
+        </a> 
+    </div>
+{% endif %}
 {% endblock %}
