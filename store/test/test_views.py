@@ -1,7 +1,6 @@
 from django.test import TestCase, Client
 from django.urls import reverse
 from store.models import Category, Product
-from store.views import search_result
 
 
 class test_homepage_view(TestCase):

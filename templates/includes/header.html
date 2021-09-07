@@ -2,24 +2,26 @@
     <div class="row">
         <div class="col-8 top-banner-message">
             {% if delivery_difference %}
-                {% if delivery_difference > 0 %} 
+                {% if delivery_difference > 0 and delivery_difference != free_delivery_min_spend %} 
                     <span class="top-banner-text text-red">
+                        <span class="save-tag d-none d-sm-inline">SAVE</span>
                         Add {{ delivery_difference }} to qualify for free delivery!
                     </span>  
                 {% else %}
                     <span class="top-banner-text text-green">
+                        <span class="great-tag d-none d-sm-inline">GREAT</span>
                         You qualify for free delivery
                     </span>
                 {% endif %}
             {% else %} 
                 <span class="top-banner-text text-red">
-                    <span class="save-tag d-none d-sm-inline">SAVE</span> Spend € 50 and get free delivery!
+                    <span class="save-tag d-none d-sm-inline">SAVE</span> Spend €{{ free_delivery_min_spend }} and get free delivery!
                 </span>
             {% endif %}
         </div>
         <div class="col-4 cart-container">
             <span class="shopping-cart-container">
-                <a href="#" class="shopping-cart-icon">
+                <a href="{% url 'view_trolley' %}" class="shopping-cart-icon">
                     <i class="fas fa-shopping-cart"></i>
                 </a>
                 {% if products %}
@@ -33,8 +35,8 @@
                 {% endif %}
             </span>
             |
-            {% if grand_total %}
-                {% if grand_total > 50 %}
+            {% if grand_total > 0 %}
+                {% if grand_total > free_delivery_min_spend %}
                     <span class="cart-products-total text-green">€{{ grand_total }}</span>
                 {% else %}
                     <span class="cart-products-total text-red">€{{ grand_total }}</span>

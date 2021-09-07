@@ -1,0 +1,56 @@
+{% extends 'base.html' %}
+{% load static %}
+
+
+{% block content %}
+
+<div class="row">
+    <div class="col-12 promotion-section">
+        <span class="promotion-section-title">Your Trolley</span>
+    </div>
+</div>
+<div class="row">
+    {% if trolley_content %}
+        <div class="col-10 offset-1 col-lg-4 offset-lg-1">
+            {% for product in trolley_content %}
+            <div class="row">
+                <div class="col-4">
+                    {% if product.image %}
+                        <a href="">
+                            <img src="{{ product.image.url }}" class="single-product-img" alt="{{ product.name }}">
+                        </a>
+                    {% else %}
+                        <a href="">
+                            <img src="{{ MEDIA_URL }}noimage.png" class="single-product-img" alt="{{ product.name }}">
+                        </a>
+                    {% endif %}
+                </div>
+                <div class="col-8">
+
+                </div>
+            </div>
+            {% endfor %}
+            <div class="row">
+                <div class="col-10 offset-1 center-align white-text">
+                    Keep Shopping
+                    <br>
+                    <a href="{% url 'products' %}">
+                        <button class="btn yellow-btn center-align">Back to Store</button>
+                    </a> 
+                </div>
+            </div>
+        </div>
+        <div class="col-10 offset-1 col-lg-4 offset-lg-1">
+            
+        </div>
+    {% else %}
+        <div class="col-10 offset-1 center-align text-red">
+            Your Trolley is empty!
+            <br>
+            <a href="{% url 'products' %}">
+                <button class="btn yellow-btn center-align">Go Shopping!</button>
+            </a> 
+        </div>
+    {% endif %}
+</div>
+{% endblock %}

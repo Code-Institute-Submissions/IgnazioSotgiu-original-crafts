@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'allauth.socialaccount',
 
     'store',
+    'trolley',
 
     'crispy_forms',
 ]
@@ -76,6 +77,7 @@ TEMPLATES = [
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
                 'django.template.context_processors.media',
+                'trolley.context.trolley_contents',
             ],
             'builtins': [
                 'crispy_forms.templatetags.crispy_forms_tags',
@@ -172,3 +174,8 @@ STATICFILES_DIRS = (os.path.join(BASE_DIR, 'static'),)
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+# trolley variables
+
+FREE_DELIVERY_MIN_SPEND = 50
+APPLY_DELIVERY_PERCENTAGE = 15

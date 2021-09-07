@@ -28,15 +28,52 @@
                 {% endif %}
                     <li class="white-text">{{ product.description }}</li>
                 </ul>
+                <form class="form" action="{% url 'add_to_trolley' product.id %}" method="POST">
+                    {% csrf_token %}
+                    <div class="row form-row">
+                        <div class="col-12">
+                            <p class="mt-3"><strong class="white-text">Quantity:</strong></p>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-12">
+                            <button id="decrement" class="btn yellow-btn mt-0 qty-button"><i class="fas fa-minus"></i></button>
+                            <input class="qty-input" type="number" name="quantity" value="1" min="1" max="{{ product.number_in_stock }}" data-product_id="{{ product.id }}" id="id_qty_{{ product.id }}">
+                            <button id="increment" class="btn yellow-btn mt-0 qty-button"><i class="fas fa-plus"></i></button>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-12 center-align  mt-5">
+                            <a href="{{ url 'products' }}" class="btn yellow-btn">
+                                <span class="icon">
+                                    <i class="fas fa-search"></i>
+                                </span>
+                                <span class="">Check more products</span>
+                            </a>
+                            <input type="submit" class="btn yellow-btn" value="Add to Trolley">
+                        </div>
+                        <input type="hidden" name="redirect_url" value="{{ request.path }}">
+                    </div>
+                </form>
+                    
             </div>
         </div>
-        <div class="row">
-            <div class="col-12 text-center">
-                <a href="">
-                    <button class="btn btn-success mt-5">Add to Trolley</button>
+        <!--
+        {% if session.user.is_autenticated %}
+            {% if product.id in user.purchase_history %}
+                <a href="" class="center-align btn btn-success">
+                    Write a review of this product!
                 </a>
+            {% endif %}
+        {% endif %}
+        {% if products.reviews %}
+        {% else %}
+            <div class="row">
+                <div class="col-12 center-align white-text">
+                    There are not reviews of this product yet!
+                </div>
             </div>
-        </div>
+        {% endif%}-->
     </div>
 </div>
 {% endblock %}
