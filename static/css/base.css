@@ -30,6 +30,13 @@ a:hover {
     border: #000 1px solid;
     border-radius: 5px;
 }
+.yellow-inverse-btn {
+    margin-top: 10px;
+    background-color: #000;
+    border: #c1eb04 1px solid;
+    border-radius: 5px;
+    color: #fff;
+}
 label.required-field {
     color: #695c5c;
 }
@@ -284,6 +291,10 @@ a:hover {
     background-color: #fff;
     width: 80%;
     margin-left: 10%;
+}
+.grand-total {
+    font-weight: 600;
+    font-size: 30px;
 }
 /**************media queries*********************/
 @media screen and (max-width: 900px){

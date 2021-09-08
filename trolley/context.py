@@ -34,7 +34,7 @@ def trolley_contents(request):
     else:
         delivery_charge = 0
 
-    free_delivery_min_spend = settings.FREE_DELIVERY_MIN_SPEND,
+    free_delivery_min_spend = settings.FREE_DELIVERY_MIN_SPEND
     grand_total = total + delivery_charge
 
     context = {
