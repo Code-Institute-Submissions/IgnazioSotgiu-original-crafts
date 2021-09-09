@@ -152,7 +152,6 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-
 # Internationalization
 # https://docs.djangoproject.com/en/3.2/topics/i18n/
 
@@ -182,3 +181,8 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 FREE_DELIVERY_MIN_SPEND = 50
 APPLY_DELIVERY_PERCENTAGE = 15
+
+"""
+email in console to confirm subscription
+"""
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
