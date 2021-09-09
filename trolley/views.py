@@ -1,4 +1,7 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import (
+    render, redirect, get_object_or_404, reverse, HttpResponse)
+
+from store.models import Product, Category
 
 
 def view_trolley(request):
@@ -10,7 +13,6 @@ def view_trolley(request):
 def add_to_trolley(request, product_id):
 
     quantity = int(request.POST.get('quantity'))
-    redirect_url = request.POST.get('redirect_url')
 
     trolley = request.session.get('trolley', {})
 
@@ -20,4 +22,30 @@ def add_to_trolley(request, product_id):
         trolley[product_id] = quantity
 
     request.session['trolley'] = trolley
-    return redirect(redirect_url)
+    return redirect('view_trolley')
+
+
+def update_trolley(request, product_id):
+    quantity = int(request.POST.get('quantity'))
+    trolley = request.session.get('trolley', {})
+
+    if quantity > 0:
+        trolley[product_id] = quantity
+
+    else:
+        trolley.pop(product_id)
+
+    request.session['trolley'] = trolley
+
+    return redirect(reverse('view_trolley'))
+
+
+def delete_trolley_product(request, product_id):
+
+    product = get_object_or_404(Product, pk=product_id)
+    trolley = request.session.get('trolley', {})
+
+    trolley.pop(product_id)
+
+    request.session['trolley'] = trolley
+    return redirect(reverse('view_trolley'))

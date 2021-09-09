@@ -9,7 +9,6 @@ def trolley_contents(request):
     trolley_items = []
     total = 0
     items_count = 0
-    delivery_difference = settings.FREE_DELIVERY_MIN_SPEND - total
 
     trolley = request.session.get('trolley', {})
     for product_id, quantity in trolley.items():
@@ -23,14 +22,16 @@ def trolley_contents(request):
         trolley_items.append({
             'product_id': product_id,
             'product': product,
-            'total': total,
+            'total': round(total, 2),
             'quantity': quantity,
             'items_count': items_count,
         })
-        delivery_difference -= total
+
+    delivery_difference = settings.FREE_DELIVERY_MIN_SPEND - total
 
     if delivery_difference > 0:
-        delivery_charge = Decimal(total * settings.APPLY_DELIVERY_PERCENTAGE)
+        delivery_charge = Decimal(
+            total * settings.APPLY_DELIVERY_PERCENTAGE / 100)
     else:
         delivery_charge = 0
 
@@ -39,12 +40,12 @@ def trolley_contents(request):
 
     context = {
         'trolley_items': trolley_items,
-        'total': total,
+        'total': round(total, 2),
         'items_count': items_count,
-        'delivery_difference': delivery_difference,
+        'delivery_difference': round(delivery_difference, 2),
         'free_delivery_min_spend': free_delivery_min_spend,
-        'delivery_charge': delivery_charge,
-        'grand_total': grand_total,
+        'delivery_charge': round(delivery_charge, 2),
+        'grand_total': round(grand_total, 2),
     }
 
     return context

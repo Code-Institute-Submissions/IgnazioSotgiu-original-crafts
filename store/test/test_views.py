@@ -34,6 +34,7 @@ class TestSingleProduct(TestCase):
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, 'store/single_product.html')
 
+
 class TestSearchResultView(TestCase):
 
     def setUp(self):

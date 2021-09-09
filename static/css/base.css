@@ -30,6 +30,12 @@ a:hover {
     border: #000 1px solid;
     border-radius: 5px;
 }
+.yellow-btn:hover {
+    margin-top: 10px;
+    background-color: #e2d407;
+    border: #000 1px solid;
+    border-radius: 5px;
+}
 .yellow-inverse-btn {
     margin-top: 10px;
     background-color: #000;
@@ -37,8 +43,17 @@ a:hover {
     border-radius: 5px;
     color: #fff;
 }
+
+.yellow-inverse-btn:hover {
+    color: grey;
+    text-decoration: none;
+}
 label.required-field {
     color: #695c5c;
+}
+.hidden-btn {
+    background-color: transparent;
+    border: 0;
 }
 /* back to top link */
 .back-to-top-container {
@@ -200,8 +215,10 @@ footer {
     border-radius: 5px;
 }
 .image-container {
-    max-width: 100%;
-    padding: 5px;
+    width: 90%;
+    height: auto;
+    background-color: #695c5c;
+    padding: 10px;
     height: 300px;
     overflow: hidden;
 }
@@ -294,7 +311,7 @@ a:hover {
 }
 .grand-total {
     font-weight: 600;
-    font-size: 30px;
+    font-size: 20px;
 }
 /**************media queries*********************/
 @media screen and (max-width: 900px){

@@ -1,8 +1,8 @@
 <div class="container-fluid top-banner-container">
     <div class="row">
         <div class="col-8 top-banner-message">
-            {% if delivery_difference %}
-                {% if delivery_difference > 0 and delivery_difference != free_delivery_min_spend %} 
+            {% if delivery_difference != free_delivery_min_spend %}
+                {% if delivery_difference >= 0 and delivery_difference <= free_delivery_min_spend %} 
                     <span class="top-banner-text text-red">
                         <span class="save-tag d-none d-sm-inline">SAVE</span>
                         Add {{ delivery_difference }} to qualify for free delivery!
@@ -35,11 +35,11 @@
                 {% endif %}
             </span>
             |
-            {% if grand_total > 0 %}
-                {% if grand_total > free_delivery_min_spend %}
-                    <span class="cart-products-total text-green">€{{ grand_total }}</span>
+            {% if total %}
+                {% if total > free_delivery_min_spend %}
+                    <span class="cart-products-total text-green">€{{ total }}</span>
                 {% else %}
-                    <span class="cart-products-total text-red">€{{ grand_total }}</span>
+                    <span class="cart-products-total text-red">€{{ total }}</span>
                 {% endif %}
             {% else %}
                 <span class="cart-products-total text-red">€0.00</span>
