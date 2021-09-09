@@ -131,6 +131,9 @@ DATABASES = {
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
 
+# messages
+MESSAGE_STORAGE = 'django.contrib.messages.storage.session.SessionStorage'
+
 # Password validation
 # https://docs.djangoproject.com/en/3.2/ref/settings/#auth-password-validators
 

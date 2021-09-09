@@ -300,8 +300,9 @@ a:hover {
 }
 .trolley-image {
     margin-top: 30px;
-    max-width: 150px;
+    max-width: 200px;
     height: auto;
+    border: 1px solid #695c5c;
 }
 .hr-trolley {
     margin: 10px;
@@ -312,6 +313,25 @@ a:hover {
 .grand-total {
     font-weight: 600;
     font-size: 20px;
+}
+/**********messages****************/
+.message-container {
+    position: fixed;
+    top: 100px;
+    right: 50px;
+    z-index: 99999999;
+}
+.toast-success {
+    border: 4px solid green;
+}
+.toast-info {
+    border: 4px solid blue;
+}
+.toast-danger {
+    border: 4px solid red;
+}
+.toast-warning {
+    border: 4px solid orange;
 }
 /**************media queries*********************/
 @media screen and (max-width: 900px){

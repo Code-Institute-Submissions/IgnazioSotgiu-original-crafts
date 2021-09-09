@@ -35,14 +35,14 @@
                     <hr class="hr-trolley">
                     Cat. {{ item.product.category|title }}
                     <hr class="hr-trolley">
-                    Price
+                    Price 
                     {% if item.product.special_price %}
-                        <span class="text-red">SALE</span>
+                        <span class="text-red ml-1"> SALE</span>
                         <br>
                         <del class="grey-text">€{{ item.product.price}}</del>
                         <span class="white-text">€{{ item.product.special_price }}</span>
                     {% else %}
-                        <div class="white-text">€{{ item.product.price }}</div>
+                        <span class="white-text ml-1">€{{ item.product.price }}</span>
                     {% endif %}
                 </div>
                 <div class="col-5 offset-1 center-align mt-3 white-text">
@@ -52,12 +52,12 @@
                             <strong class="white-text">Quantity:</strong>
                             <input class="qty-selector ml-3" type="number" name="quantity" value="{{ item.quantity }}" min="1" max="{{ item.product.number_in_stock }}" data-item_id="{{ item.product.id }}" id="id_qty_{{ item.product.id }}" required>
                         </p>
-                        <button class="hidden-btn float-left ml-2" type="submit" formaction="{% url 'update_trolley' item.product.id  %}">
+                        <button class="hidden-btn float-left ml-4" type="submit" formaction="{% url 'update_trolley' item.product.id  %}">
                             <a class="update-trolley-product text-success " href="" >
                                 <small>Update</small>
                             </a>
                         </button>
-                        <button class="hidden-btn float-right" type="submit" formaction="{% url 'delete_trolley_product' item.product.id  %}">
+                        <button class="hidden-btn float-right mr-4" type="submit" formaction="{% url 'delete_trolley_product' item.product.id  %}">
                             <a class="delete-trolley-product text-danger " href="" id="remove_{{ item.product.id }}">
                                 <small>Delete</small>
                             </a>

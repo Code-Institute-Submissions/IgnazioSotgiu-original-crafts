@@ -59,7 +59,7 @@ def search_result(request):
                     description__icontains=query)
 
             else:
-                messages.error(request, 'Enter a valid search parameter')
+                messages.warning(request, 'Enter a valid search parameter')
                 return redirect(reverse('home'))
 
             products = products.filter(search_terms)
