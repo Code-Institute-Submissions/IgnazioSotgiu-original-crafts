@@ -31,6 +31,7 @@
             {% if request.user.is_authenticated %}
               {% if request.user.is_superuser %}
                 <li><a class="dropdown-item" href="{% url 'add_product' %}">Admin Add Product</a></li>
+                <li><a class="dropdown-item" href="{% url 'hidden_products' %}">Admin Hidden Products</a></li>
               {% endif%}
               <li><a class="dropdown-item" href="#">My Account</a></li>
               <li><a class="dropdown-item" href="{% url 'account_logout' %}">Logout</a></li>

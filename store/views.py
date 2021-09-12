@@ -78,6 +78,17 @@ def search_result(request):
 
 
 @login_required
+def hidden_products(request):
+    """ display hidden products to the admin """
+    products = Product.objects.filter(hide_product=True)
+    template = 'store/hidden_products.html'
+    context = {
+        'products': products,
+    }
+    return render(request, template, context)
+
+
+@login_required
 def add_product(request):
     form = ProductForm()
 
@@ -124,7 +135,6 @@ def update_product(request, product_id):
 @login_required
 def delete_warning(request, product_id):
     product = Product.objects.get(id=product_id)
-    form = ProductForm(instance=product)
 
     template = 'store/delete_product_warning.html'
     context = {

@@ -13,5 +13,6 @@ urlpatterns = [
          views.delete_warning, name='delete_warning'),
     path('store/delete_product/<int:product_id>/',
          views.delete_product, name='delete_product'),
-
+    path('store/hidden_products/',
+         views.hidden_products, name='hidden_products'),
 ]

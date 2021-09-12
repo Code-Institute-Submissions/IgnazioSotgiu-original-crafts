@@ -22,7 +22,7 @@ def add_to_trolley(request, product_id):
         trolley[product_id] = quantity
 
     request.session['trolley'] = trolley
-    return redirect('view_trolley')
+    return redirect(request, 'view_trolley')
 
 
 def update_trolley(request, product_id):

@@ -62,3 +62,26 @@ class TestSearchResultView(TestCase):
             reverse('search_result'), {'q': ''})
         self.assertEqual(response.status_code, 302)
         self.assertTemplateUsed(reverse('home'))
+
+
+# class TestAdminCrudFunction(TestCase):
+
+#     def setUp(self):
+#         self.client = Client()
+#         self.category = Category.objects.create(name='test', slug='slugtest')
+#         self.product = Product.objects.create(
+#             category_id=1, name='product', price=19.99)
+
+#     def test_admin_can_add_product(self):
+#         product2 = Product.objects.create(
+#             category_id=1, name='product2', price=19.99)
+#         response = self.client.post('/add_product', product2)
+#         self.assertRedirects(response, '/products')
+
+#     def test_admin_can_update_product(self):
+#         product = self.product
+#         response = self.client.get(f'/store/update/{product.id}/')
+#         self.assertEqual(response.status_code, 200)
+#         self.assertTemplateUsed(response, 'store/update_product.html')
+
+#     # def test_admin_can_delete_product(self):

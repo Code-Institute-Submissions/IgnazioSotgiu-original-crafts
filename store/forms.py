@@ -16,9 +16,3 @@ class ProductForm(forms.ModelForm):
                   'add_to_popular_products', 'new_tag']
 
         image = forms.ImageField(required=False)
-
-        def __init__(self, *args, **kwargs):
-            super().__init__(*args, **kwargs)
-            categories = Category.objects.all()
-
-            self.fields['category'].choices = categories
