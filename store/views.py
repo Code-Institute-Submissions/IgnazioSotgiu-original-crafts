@@ -1,8 +1,10 @@
 from django.shortcuts import render, redirect, reverse, get_object_or_404
 from django.views.generic import ListView
+from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from django.db.models import Q
 from .models import Product, Category
+from .forms import ProductForm
 
 
 def display_homepage(request):
@@ -72,4 +74,23 @@ def search_result(request):
         'total_items': total_items,
         'selected_categories': selected_categories,
     }
+    return render(request, template, context)
+
+
+@login_required
+def add_product(request):
+    form = ProductForm()
+
+    if request.method == 'POST':
+        form = ProductForm(request.POST, request.FILES)
+        if form.is_valid:
+            form.save()
+            messages.success(request, 'Product successfully added to store')
+            return redirect('products')
+
+    template = 'store/add_product.html'
+    context = {
+        'form': form,
+    }
+
     return render(request, template, context)
