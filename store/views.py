@@ -94,3 +94,27 @@ def add_product(request):
     }
 
     return render(request, template, context)
+
+
+@login_required
+def update_product(request, product_id):
+    product = Product.objects.get(id=product_id)
+    form = ProductForm(instance=product)
+
+    if request.method == 'POST':
+        try:
+            form = ProductForm(request.POST, request.FILES, instance=product)
+            if form.is_valid:
+                form.save()
+                messages.success(request, 'Product successfully updated')
+                return redirect('products')
+        except ValueError:
+            messages.error(request, 'The form submitted \
+                was invalid. Please enter valid data')
+
+    template = 'store/update_product.html'
+    context = {
+        'form': form,
+    }
+
+    return render(request, template, context)
