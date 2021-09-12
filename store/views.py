@@ -111,6 +111,7 @@ def update_product(request, product_id):
         except ValueError:
             messages.error(request, 'The form submitted \
                 was invalid. Please enter valid data')
+            return redirect('products')
 
     template = 'store/update_product.html'
     context = {
@@ -118,3 +119,30 @@ def update_product(request, product_id):
     }
 
     return render(request, template, context)
+
+
+@login_required
+def delete_warning(request, product_id):
+    product = Product.objects.get(id=product_id)
+    form = ProductForm(instance=product)
+
+    template = 'store/delete_product_warning.html'
+    context = {
+        'product': product,
+    }
+
+    return render(request, template, context)
+
+
+@login_required
+def delete_product(request, product_id):
+    product = Product.objects.get(id=product_id)
+    try:
+        product.delete()
+        messages.success(request, f'{product.name} was successfully deleted')
+        return redirect('products')
+
+    except ValueError:
+        messages.error(request, f'Request denied! \
+            Was not possible to delete {product.name} from the database')
+        return redirect('products')
