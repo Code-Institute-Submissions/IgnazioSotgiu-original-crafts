@@ -2,6 +2,7 @@ from decimal import Decimal
 from django.shortcuts import get_object_or_404
 from django.conf import settings
 from store.models import Product
+from django.contrib import messages
 
 
 def trolley_contents(request):
@@ -21,7 +22,16 @@ def trolley_contents(request):
         else:
             total += product.price * quantity
             line_product_subtotal = product.price * quantity
-        items_count += quantity
+        
+        if quantity > product.number_in_stock:
+            messages.error(
+                request, f'There are only {product.number_in_stock} \
+                    of {product.name} left in stock.')
+            quantity = product.number_in_stock
+            items_count += quantity
+        else:
+            items_count += quantity
+
         trolley_items.append({
             'product_id': product_id,
             'product': product,
