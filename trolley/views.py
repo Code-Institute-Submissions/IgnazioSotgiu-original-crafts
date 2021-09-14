@@ -1,5 +1,6 @@
 from django.shortcuts import (
-    render, redirect, get_object_or_404, reverse, HttpResponse)
+    render, redirect, get_object_or_404, reverse, HttpResponse,
+    HttpResponseRedirect)
 from django.contrib import messages
 from store.models import Product, Category
 
@@ -22,12 +23,15 @@ def add_to_trolley(request, product_id):
         trolley[product_id] = quantity
 
     request.session['trolley'] = trolley
-    return redirect(request, 'view_trolley')
+
+    return redirect('view_trolley')
 
 
 def update_trolley(request, product_id):
     product = get_object_or_404(Product, pk=product_id)
     quantity = int(request.POST.get('quantity'))
+    next = request.POST.get('next')
+
     trolley = request.session.get('trolley', {})
 
     if quantity > 0:
@@ -42,17 +46,18 @@ def update_trolley(request, product_id):
 
     request.session['trolley'] = trolley
 
-    return redirect(reverse('view_trolley'))
+    return HttpResponseRedirect(next)
 
 
 def delete_trolley_product(request, product_id):
 
     product = get_object_or_404(Product, pk=product_id)
     trolley = request.session.get('trolley', {})
+    next = request.POST.get('next')
 
     trolley.pop(product_id)
     messages.success(
             request, f'{product.name} removed successfully from your trolley')
 
     request.session['trolley'] = trolley
-    return redirect(reverse('view_trolley'))
+    return HttpResponseRedirect(next)

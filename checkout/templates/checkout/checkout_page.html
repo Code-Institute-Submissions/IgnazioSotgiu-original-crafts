@@ -6,17 +6,14 @@
 
 <div class="row">
     <div class="col-8 offset-2 center-align mt-3 mb-5">
-        <span class="white-text trolley-title">Your Trolley</span>
+        <span class="white-text trolley-title">Checkout</span>
     </div>
-</div>
-<div class="row">
-    
 </div>
 {% if trolley_items %}
 <div class="row">
-    <div class="col-12 col-md-8 order-12">
+    <div class="col-10 offset-1 col-sm-8 offset-sm-2 col-md-6 offset-md-3 col-lg-6 offset-lg-0 order-12">
         <div class="row white-text">
-            <div class="col center-align">
+            <div class="col-12 center-align mb-3">
                 Products in your trolley
             </div>
         </div>
@@ -25,9 +22,9 @@
             <div class="row mt-3">
                 <div class="col-5 offset-1 center-align">
                     {% if item.product.image %}
-                        <img src="{{ item.product.image.url }}" alt="{{ item.product.name }}" class="trolley-image">
+                        <img src="{{ item.product.image.url }}" alt="{{ item.product.name }}" class="checkout-image">
                     {% else %}
-                        <img src="{{ MEDIA_URL }}noimage.png" alt="{{ item.product.name }}" class="trolley-image">
+                        <img src="{{ MEDIA_URL }}noimage.png" alt="{{ item.product.name }}" class="checkout-image">
                     {% endif %}
                 </div>
                 <div class="col-5 white-text center-align">
@@ -50,10 +47,6 @@
                         {% csrf_token %}
                         <p class="mt-3 ml-2">
                             <strong class="white-text">Quantity:</strong>
-                            <select id="counter" name="counter" class="counter">
-                                <option value="{{ item.quantity }}" selected>{{ item.quantity }}</option>
-                            </select>
-
                             <input class="qty-selector ml-3" type="number" name="quantity" value="{{ item.quantity }}" min="1" max="{{ item.product.number_in_stock }}" data-item_id="{{ item.product.id }}" id="id_qty_{{ item.product.id }}" required>
                         </p>
                         <button class="hidden-btn float-left" type="submit" formaction="{% url 'update_trolley' item.product.id  %}">
@@ -76,49 +69,58 @@
             <hr class="hr-trolley">
         {% endfor %}
     </div>
-    <div class="col-12 col-md-4">
-        <div class="row">
-            <div class="col-10 offset-1 text-white">
-                <div class="row">
-                    <div class="col center-align white-text mb-5">
-                        {% if items_count > 1 %}
-                            <strong>Your trolley contains {{ items_count }} products</strong>
-                        {% else %}
-                            <strong>Your trolley contains {{ items_count }} product</strong>
-                        {% endif %}
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-6 text-right white-text">
-                        <p>Total </p>
-                        <p>Delivery</p>
-                        <p class="grand-total">Grand Total</p>
-                    </div>
-                    <div class="col-6 text-left white-text">
-                        <p>€{{ total|floatformat:2 }}</p>
-                        {% if total > free_delivery_min_spend %}
-                            <p class="text-green">FREE</p>
-                        {% else %}
-                            <p>€{{ delivery_charge }}</p>
-                        {% endif %}
-                        <p class="grand-total">€{{ grand_total }}</p>
-                    </div>
+    <div class="col-10 offset-1 col-sm-8 offset-sm-2 col-md-6 offset-md-3 col-lg-4 offset-lg-1 white-text">
+        <form action="{% url 'view_checkout_page' %}" method="POST">
+            {% csrf_token %}
+            <div class="row">
+                <div class="col-10 offset-1">
+                    {{ form.deliver_to_name | as_crispy_field }}
+                    {{ form.email_address | as_crispy_field }}
+                    <hr class="hr-trolley">
+                    <hr class="hr-trolley">
+                    {{ form.street_address | as_crispy_field }}
+                    {{ form.town_or_city | as_crispy_field }}
+                    {{ form.county | as_crispy_field }}
+                    {{ form.zip_postcode | as_crispy_field }}
+                    {{ form.country | as_crispy_field }}
+                    <hr class="hr-trolley">
+                    <hr class="hr-trolley">
                 </div>
             </div>
-            <div class="col-12 center-align white-text mt-3 mb-5">
-                <a href="{% url 'products' %}">
-                    <button class="btn yellow-inverse-btn center-align">Back to Store</button>
-                </a> 
-                <a href="{% url 'view_checkout_page' %}">
-                    <button class="btn yellow-btn center-align">Checkout</button>
-                </a> 
+            <div class="row">
+                <div class="col-10 offset-1 text-white">
+                    <div class="row">
+                        <div class="col-6 text-right white-text">
+                            <p>Total </p>
+                            <p>Delivery</p>
+                            <p class="grand-total">Grand Total</p>
+                        </div>
+                        <div class="col-6 text-left white-text">
+                            <p>€{{ total|floatformat:2 }}</p>
+                            {% if total > free_delivery_min_spend %}
+                                <p class="text-green">FREE</p>
+                            {% else %}
+                                <p>€{{ delivery_charge }}</p>
+                            {% endif %}
+                            <p class="grand-total">€{{ grand_total }}</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-10 offset-1 center-align white-text m-5">
+                    <a href="{% url 'products' %}">
+                        <button class="btn yellow-inverse-btn float-left">Back to Store</button>
+                    </a> 
+                    <a href="">
+                        <button type="submit" class="btn yellow-btn float-right">Pay</button>
+                    </a> 
+                </div>
             </div>
-        </div>
+        </form>
     </div>
 </div>
 {% else %}
     <div class="col-10 offset-1 center-align text-red">
-        Your Trolley is empty!
+        Your trolley is empty!
         <br>
         <a href="{% url 'products' %}">
             <button class="btn yellow-btn center-align">Go Shopping!</button>
@@ -132,11 +134,4 @@
         $('.update-form').action("{% url 'update_trolley' item.product.id  %}");
         $('.update-form').submit();
     })
-
-    $(function(){
-        var $select = $("#counter");
-        for (i=1;i<=100;i++){
-            $select.append($('<option></option>').val(i).html(i))
-        }
-    });
 </script>

@@ -1,4 +1,5 @@
-from django.shortcuts import render, redirect, reverse, get_object_or_404
+from django.shortcuts import (
+    render, redirect, reverse, get_object_or_404, HttpResponseRedirect)
 from django.views.generic import ListView
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
@@ -94,10 +95,11 @@ def add_product(request):
 
     if request.method == 'POST':
         form = ProductForm(request.POST, request.FILES)
+        next = request.POST.get('next')
         if form.is_valid:
             form.save()
             messages.success(request, 'Product successfully added to store')
-            return redirect('products')
+            return HttpResponseRedirect(next)
 
     template = 'store/add_product.html'
     context = {
@@ -113,16 +115,17 @@ def update_product(request, product_id):
     form = ProductForm(instance=product)
 
     if request.method == 'POST':
+        next = request.POST.get('next')
         try:
             form = ProductForm(request.POST, request.FILES, instance=product)
             if form.is_valid:
                 form.save()
                 messages.success(request, 'Product successfully updated')
-                return redirect('products')
+                return HttpResponseRedirect(next)
         except ValueError:
             messages.error(request, 'The form submitted \
                 was invalid. Please enter valid data')
-            return redirect('products')
+            return HttpResponseRedirect(next)
 
     template = 'store/update_product.html'
     context = {
