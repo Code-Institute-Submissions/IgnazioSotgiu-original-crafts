@@ -8,9 +8,8 @@ from django.conf import settings
 
 class CheckoutOrder(models.Model):
     order_number = models.CharField(
-        max_length=32, null=False, blank=False, editable=True)
-    deliver_to_name = models.CharField(max_length=60, null=False, blank=False)
-    buyer_name = models.CharField(max_length=60, null=False, blank=False)
+        max_length=32, null=False, editable=False)
+    full_name = models.CharField(max_length=60, null=False, blank=False)
     email_address = models.EmailField(max_length=254, null=False, blank=False)
     street_address = models.CharField(max_length=254, null=False, blank=False)
     town_or_city = models.CharField(max_length=254, null=False, blank=False)

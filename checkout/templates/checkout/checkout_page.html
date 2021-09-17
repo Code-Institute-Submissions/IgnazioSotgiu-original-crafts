@@ -1,5 +1,9 @@
 {% extends 'base.html' %}
 {% load static %}
+{% block extra_css %}
+    {{ block.super }}
+    <link rel="stylesheet" href="{% static 'checkout/css/checkout.css' %}">
+{% endblock %}
 
 
 {% block content %}
@@ -70,11 +74,11 @@
         {% endfor %}
     </div>
     <div class="col-10 offset-1 col-sm-8 offset-sm-2 col-md-6 offset-md-3 col-lg-4 offset-lg-1 white-text">
-        <form action="{% url 'view_checkout_page' %}" method="POST">
+        <form action="{% url 'view_checkout_page' %}" method="POST" id="payment-form">
             {% csrf_token %}
             <div class="row">
                 <div class="col-10 offset-1">
-                    {{ form.deliver_to_name | as_crispy_field }}
+                    {{ form.full_name | as_crispy_field }}
                     {{ form.email_address | as_crispy_field }}
                     <hr class="hr-trolley">
                     <hr class="hr-trolley">
@@ -84,6 +88,34 @@
                     {{ form.zip_postcode | as_crispy_field }}
                     {{ form.country | as_crispy_field }}
                     <hr class="hr-trolley">
+                    {% if user.is_authenticated %}
+                        {% if user.delivery_info %}
+                            <div class="form-check center_align">
+                                <input class="save-delivery-details" type="checkbox" value="" name="save-delivery-details" id="save-delivery-datails">
+                                <label class="form-check-label" for="save-delivery-details">
+                                    Save Delivery Details
+                                </label>
+                            </div>
+                        {% else %}
+                            <div class="form-check center-align">
+                                <input class="save-delivery-details" type="checkbox" value="" name="save-delivery-details" id="save-delivery-datails" checked>
+                                <label class="form-check-label" for="save-delivery-details">
+                                    Save Delivery Details
+                                </label>
+                            </div>
+                        {% endif %}
+                    {% else %}
+                        <div class="row">
+                            <div class="col center-align">
+                                <div>
+                                    <a class="yellow-text" href="{% url 'account_signup' %}">Sign Up  </a>
+                                    <span>or</span>
+                                    <a class="yellow-text" href="{% url 'account_login' %}">  Login</a>
+                                </div>
+                                <div>to save delivery details to your profile</div>
+                            </div>
+                        </div>
+                    {% endif %}
                     <hr class="hr-trolley">
                 </div>
             </div>
@@ -106,12 +138,22 @@
                         </div>
                     </div>
                 </div>
+                <hr class="hr-trolley">
+                <h3 class="ml-5 mt-3">Payment</h3>
+                <div class="col-10 offset-1">
+                    <label for="card-element">
+                        Credit or debit card
+                    </label>
+                    <div id="card-element">
+                    </div>
+                    <div id="card-errors" role="alert" class=''></div>
+                    </div>
+                    <input type="hidden" value="{{ client_secret }}" name="client_secret">
+                </div>
                 <div class="col-10 offset-1 center-align white-text m-5">
-                    <a href="{% url 'products' %}">
-                        <button class="btn yellow-inverse-btn float-left">Back to Store</button>
-                    </a> 
+                    <a href="{% url 'products' %}" class="btn yellow-inverse-btn float-left mb-5">Back to Store</a> 
                     <a href="">
-                        <button type="submit" class="btn yellow-btn float-right">Pay</button>
+                        <button id="submit" type="submit" class="btn yellow-btn float-right mb-5" data-secret="{{ client_secret }}">Complete Order</button>
                     </a> 
                 </div>
             </div>
@@ -128,10 +170,10 @@
     </div>
 {% endif %}
 {% endblock %}
-<!-- 
-<script type="text/javascript">
-    $('.update-trolley-product').click(function() {
-        $('.update-form').action("{% url 'update_trolley' item.product.id  %}");
-        $('.update-form').submit();
-    })
-</script> -->
+
+{% block postloadjs %}
+    {{ block.super }}
+    <script src="{% static 'checkout/js/checkout.js' %}"></script>
+    {{ stripe_public_key|json_script:"id_stripe_public_key" }}
+    {{ client_secret|json_script:"id_client_secret" }}
+{% endblock %}

@@ -18,17 +18,15 @@
                 {% endif %}
             </div>
             <div class="col-12 col-md-6">
-                <ul>
-                    <li class="white-text">{{ product.name }}</li>
-                    <li class="white-text">{{ product.category }}</li>
-                    {% if product.special_price %}
-                    <li><span class="text-red">SALE </span><del class="grey-text">€{{ product.price}}</del><span
-                            class="white-text"> €{{ product.special_price }}</span></li>
-                    {% else %}
-                    <li class="white-text">€{{ product.price }}</li>
-                    {% endif %}
-                    <li class="white-text">{{ product.description }}</li>
-                </ul>
+                <p class="white-text">{{ product.name }}</p>
+                <p class="white-text">{{ product.category }}</p>
+                {% if product.special_price %}
+                <p><span class="text-red">SALE </span><del class="grey-text">€{{ product.price}}</del><span
+                        class="white-text"> €{{ product.special_price }}</span></p>
+                {% else %}
+                <p class="white-text">€{{ product.price }}</p>
+                {% endif %}
+                <p class="white-text">{{ product.description }}</p>
                 <form class="form" action="{% url 'add_to_trolley' product.id %}" method="POST">
                     {% csrf_token %}
                     <div class="row form-row">

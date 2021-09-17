@@ -21,6 +21,12 @@ a:hover {
 .grey-text {
     color: #695c5c;
 }
+.yellow-text {
+    color: #e2d407;
+}
+.yellow-text:hover {
+    color: #c1eb04;
+}
 .center-align {
     text-align: center;
 }

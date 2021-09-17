@@ -6,7 +6,7 @@ class CheckoutForm(ModelForm):
 
     class Meta:
         model = CheckoutOrder
-        fields = ['deliver_to_name', 'email_address',
+        fields = ['full_name', 'email_address',
                   'street_address', 'town_or_city', 'county',
                   'country', 'zip_postcode']
 
@@ -17,7 +17,7 @@ class CheckoutForm(ModelForm):
         """
         super().__init__(*args, **kwargs)
         placeholders = {
-            'deliver_to_name': 'Deliver To',
+            'full_name': 'Full Name',
             'email_address': 'Contact Email',
             'street_address': 'Address',
             'town_or_city': 'Town or City',

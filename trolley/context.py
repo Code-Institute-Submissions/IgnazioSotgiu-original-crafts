@@ -22,7 +22,7 @@ def trolley_contents(request):
         else:
             total += product.price * quantity
             line_product_subtotal = product.price * quantity
-        
+
         if quantity > product.number_in_stock:
             messages.error(
                 request, f'There are only {product.number_in_stock} \
