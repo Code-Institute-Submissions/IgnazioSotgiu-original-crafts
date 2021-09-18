@@ -6,6 +6,7 @@ from django.template import RequestContext
 from .forms import CheckoutForm
 from store.models import Product, Category
 from trolley.context import trolley_contents
+from checkout.models import CheckoutOrder
 import stripe
 import json
 
@@ -17,6 +18,7 @@ def view_checkout_page(request):
     stripe_secret_key = settings.STRIPE_SECRET_KEY
 
     if request.method == 'POST':
+        trolley = request.session.get('trolley', {})
         form_info = {
             'full_name': request.POST['full_name'],
             'email_address': request.POST['email_address'],
@@ -35,15 +37,16 @@ def view_checkout_page(request):
             order.your_trolley = json.dumps(trolley)
             order.save()
 
-            for item_id in trolley.items():
-                try:
-                    product = Product.objects.get(product_id=item_id)
+            # for item_id in trolley.items():
+            #     try:
+            #         product = Product.objects.get(product_id=item_id)
+            #         quantity = trolley.product.quantity
 
-                except Product.DoesNotExist:
-                    messages.error(request, f'{product.name} was not\
-                        found in the database. Order NOT completed')
-                order.delete()
-                return redirect(reverse('view_trolley'))
+            #     except Product.DoesNotExist:
+            #         messages.error(request, f'{product.name} was not\
+            #             found in the database. Order NOT completed')
+            #     order.delete()
+            #     return redirect(reverse('view_trolley'))
 
             return redirect(reverse(
                 'checkout_completed', args=[order.order_number]))
@@ -55,7 +58,6 @@ def view_checkout_page(request):
 
     else:
         trolley = request.session.get('trolley', {})
-
         if not trolley:
             messages.info(request, 'Your trolley is empty! Go Shopping')
             return redirect('products')
@@ -72,6 +74,10 @@ def view_checkout_page(request):
 
     form = CheckoutForm()
 
+    if not stripe_public_key:
+        messages.warning(request, 'Stripe public key is missing. \
+             Did you forget to set it in your environment?')
+
     template = 'checkout/checkout_page.html'
     context = {
         'form': form,
@@ -79,4 +85,13 @@ def view_checkout_page(request):
         'client_secret': intent.client_secret,
     }
 
+    return render(request, template, context)
+
+
+def checkout_completed(request, order_number):
+    template = 'checkout/checkout_completed.html'
+    order = get_object_or_404(CheckoutOrder, order_number=order_number)
+    context = {
+        order: order,
+    }
     return render(request, template, context)
