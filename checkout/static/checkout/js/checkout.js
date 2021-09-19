@@ -1,10 +1,11 @@
-$(document).ready(function() {
+document.addEventListener("DOMContentLoaded", function() {
     var stripePublicKey = $('#id_stripe_public_key').text().slice(1, -1);
     var clientSecret = $('#id_client_secret').text().slice(1, -1);
 
     var stripe = Stripe(stripePublicKey);
     var submitButton = document.getElementById('submit');
     var elements = stripe.elements();
+
     var style = {
         base: {
             color: '#000',
@@ -24,14 +25,17 @@ $(document).ready(function() {
     var card = elements.create('card', {style: style});
     card.mount('#card-element');
 
+    // checking changes to detect card errors
     card.addEventListener('change', function (event) {
         var displayError = document.getElementById('card-errors');
         if (event.error) {
-            displayError.textContent = event.error.message;
-            $('#card-errors').addClass('danger-text');
+            html = `
+            <span class="text-danger">
+            ${event.error.message}
+            </span>`
+            $(displayError).html(html);
         } else {
-            displayError.textContent = '';
-            $('#card-errors').removeClass('danger-text'); 
+            displayError.textContent = ''; 
         }
     });
-})
+});

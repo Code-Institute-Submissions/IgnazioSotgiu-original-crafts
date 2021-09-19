@@ -2,11 +2,10 @@ from django.shortcuts import (
     render, redirect, get_object_or_404, reverse, HttpResponse)
 from django.contrib import messages
 from django.conf import settings
-from django.template import RequestContext
 from .forms import CheckoutForm
-from store.models import Product, Category
+from store.models import Product
 from trolley.context import trolley_contents
-from checkout.models import CheckoutOrder
+from checkout.models import CheckoutOrder, OrderLineItem
 import stripe
 import json
 
@@ -31,23 +30,15 @@ def view_checkout_page(request):
 
         checkout_form = CheckoutForm(form_info)
         if checkout_form.is_valid():
-            order = checkout_form.save(commit=False)
-            pid = request.POST.get('client_secret').split('_secret')[0]
-            order.stripe_pid = pid
-            order.your_trolley = json.dumps(trolley)
-            order.save()
-
-            # for item_id in trolley.items():
-            #     try:
-            #         product = Product.objects.get(product_id=item_id)
-            #         quantity = trolley.product.quantity
-
-            #     except Product.DoesNotExist:
-            #         messages.error(request, f'{product.name} was not\
-            #             found in the database. Order NOT completed')
-            #     order.delete()
-            #     return redirect(reverse('view_trolley'))
-
+            order = checkout_form.save()
+            for product_id, quantity in trolley.items():
+                product = Product.objects.get(id=product_id)
+                order_line_item = OrderLineItem(
+                    order=order,
+                    product=product,
+                    quantity=quantity,
+                )
+                order_line_item.save()
             return redirect(reverse(
                 'checkout_completed', args=[order.order_number]))
 
@@ -94,4 +85,10 @@ def checkout_completed(request, order_number):
     context = {
         order: order,
     }
+    messages.success(request, f'Your order number {order_number} \
+        was completed successfully')
+
+    if 'trolley' in request.session:
+        del request.session['trolley']
+
     return render(request, template, context)

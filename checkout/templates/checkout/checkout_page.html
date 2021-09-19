@@ -78,15 +78,15 @@
             {% csrf_token %}
             <div class="row">
                 <div class="col-10 offset-1">
-                    {{ form.full_name | as_crispy_field }}
-                    {{ form.email_address | as_crispy_field }}
+                    <span id="name">{{ form.full_name | as_crispy_field }}</span>
+                    <span id="email-address">{{ form.email_address | as_crispy_field }}</span>
                     <hr class="hr-trolley">
                     <hr class="hr-trolley">
-                    {{ form.street_address | as_crispy_field }}
-                    {{ form.town_or_city | as_crispy_field }}
-                    {{ form.county | as_crispy_field }}
-                    {{ form.zip_postcode | as_crispy_field }}
-                    {{ form.country | as_crispy_field }}
+                    <span id="street-address">{{ form.street_address | as_crispy_field }}</span>
+                    <span id="town">{{ form.town_or_city | as_crispy_field }}</span>
+                    <span id="county">{{ form.county | as_crispy_field }}</span>
+                    <span id="postcode">{{ form.zip_postcode | as_crispy_field }}</span>
+                    <span id="country">{{ form.country | as_crispy_field }}</span>
                     <hr class="hr-trolley">
                     {% if user.is_authenticated %}
                         {% if user.delivery_info %}
@@ -127,14 +127,14 @@
                             <p>Delivery</p>
                             <p class="grand-total">Grand Total</p>
                         </div>
-                        <div class="col-6 text-left white-text">
+                        <div class="col-6 text-left white-text" id="subtotal">
                             <p>€{{ total|floatformat:2 }}</p>
                             {% if total > free_delivery_min_spend %}
                                 <p class="text-green">FREE</p>
                             {% else %}
-                                <p>€{{ delivery_charge }}</p>
+                                <p id="delivery">€{{ delivery_charge }}</p>
                             {% endif %}
-                            <p class="grand-total">€{{ grand_total }}</p>
+                            <p id="grand-total" class="grand-total">€{{ grand_total }}</p>
                         </div>
                     </div>
                 </div>
@@ -146,7 +146,7 @@
                     </label>
                     <div id="card-element">
                     </div>
-                    <div id="card-errors" role="alert" class=''></div>
+                    <div id="card-errors" role="alert" class='mt-1'></div>
                     </div>
                     <input type="hidden" value="{{ client_secret }}" name="client_secret">
                 </div>

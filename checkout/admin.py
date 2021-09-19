@@ -1,10 +1,16 @@
 from django.contrib import admin
-from .models import CheckoutOrder
+from .models import CheckoutOrder, OrderLineItem
 
 # code from code institute lecture
 
 
+class CheckoutOrderLineItemAdmin(admin.TabularInline):
+    model = OrderLineItem
+    readonly_fields = ('lineitem_total',)
+
+
 class CheckoutOrderAdmin(admin.ModelAdmin):
+    inlines = (CheckoutOrderLineItemAdmin,)
     readonly_fields = ('order_number', 'order_date', 'delivery',
                        'order_total', 'grand_total')
 

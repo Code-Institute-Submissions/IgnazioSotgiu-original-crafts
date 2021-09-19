@@ -26,7 +26,6 @@ class CheckoutForm(ModelForm):
             'zip_postcode': 'Postcode',
         }
 
-        # self.fields['deliver_to_name'].attrs['autofocus'] = True
         for field in self.fields:
             if self.fields[field].required:
                 placeholder = f'{placeholders[field]} *'
