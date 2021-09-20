@@ -31,9 +31,13 @@
         <hr class="hr-trolley">
         <p class="mt-5">{{ order.full_name }}</p>
         <p>{{ order.street_address }}</p>
-        <p>{{ order.city_or_town }}</p>
-        <p>{{ order.county }}</p>
-        <p>{{ order.zip_postcode }}</p>
+        <p>{{ order.city_or_town|title }}</p>
+        {% if order.county %}
+            <p>{{ order.county|title }}</p>
+        {% endif %}
+        {% if order.zip_postcode %}
+            <p>{{ order.zip_postcode }}</p>
+        {% endif %}
         <p>{{ order.country }}</p>
     </div>
 </div>
