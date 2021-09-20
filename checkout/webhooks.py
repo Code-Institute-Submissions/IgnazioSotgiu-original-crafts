@@ -34,5 +34,23 @@ def webhook_view(request):
         # All other exceptions
         return HttpResponse(content=e, status=400)
 
-    print('success')
-    return HttpResponse(status=200)
+    # connect to webhook handler
+
+    handler = WebhookHandler(request)
+
+    # connect methods to handle stripe webhook events
+
+    event_connect = {
+        'payment_intent.succeeded': handler.handle_payment_succeeded,
+        'payment_intent.payment_failed': handler.handle_payment_failed,
+    }
+
+    # event from stripe
+    event_type = event['type']
+
+    event_handler = event_connect.get(event_type, handler.handle_event)
+
+    # call the method to handle the event
+
+    response = event_handler(event)
+    return response
