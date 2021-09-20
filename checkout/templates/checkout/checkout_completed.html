@@ -10,32 +10,43 @@
     </div>
 </div>
 <div class="row">
+    <div class="col-8 offset-2 center-align mt-3 mb-5">
+        <span class="center-align yellow-text mt-2 mb-5 checkout-complated-header">Thank You</span>
+    </div>
+</div>
+<div class="row">
     <div class="col-10 offset-1 col-md-5 offset-md-1 white-text">
-        <p>Your order was successfully completed</p>
-        <p>Order Number : {{ order.order_number }}</p>
+        <p class="center-align">Your order was successfully completed</p>
+        <hr class="hr-trolley">
+        <p class="mt-5">Order Number : {{ order.order_number }}</p>
         <p>Customer : {{ order.full_name }}</p>
         <p>Email address : {{ order.email_address }}</p>
         <p>Date  : {{ order.order_date }}</p>
         <p>Items Total  : €{{ order.order_total }}</p>
         <p>Delivery  : €{{ order.delivery }}</p>
         <p>Grand Total  : €{{ order.grand_total }}</p>
-        
-        <hr class="hr-checkout-completed">
-        <br>
-        <p>Delivery Details:</p>
-        <p>{{ order.full_name }}</p>
+    </div>
+    <div class="col-10 offset-1 col-md-5 offset-md-1 white-text">
+        <p class="center-align">Delivery Details:</p>
+        <hr class="hr-trolley">
+        <p class="mt-5">{{ order.full_name }}</p>
         <p>{{ order.street_address }}</p>
         <p>{{ order.city_or_town }}</p>
         <p>{{ order.county }}</p>
         <p>{{ order.zip_postcode }}</p>
         <p>{{ order.country }}</p>
     </div>
-    <div class="col-10 offset-1 col-md-5  white-text">
-        
-            {{ order. }}
-        
+</div>
+<hr class="hr-checkout-completed">
+<div class="row">
+    <div class="col-12 col-md-8 offset-md-2 col-lg-6 offset-lg-3 col-xl-4 offset-xl-4 center-align">
+        <div class="jumbotron">
+            <p>A Confirmation email was sent at <strong>{{ order.email_address }}</strong></p>
+            <p>Thank You</p>
+            <p>For any information you can contact us <strong><a class="" href="#">here</a></strong></p>
+            <a href="{% url 'home' %}" class="btn yellow-inverse-btn  mb-5">Back to Homepage</a>
+        </div>
     </div>
-
 </div>
 
 {% endblock %}

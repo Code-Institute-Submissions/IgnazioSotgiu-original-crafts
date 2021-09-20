@@ -353,6 +353,9 @@ a:hover {
     padding: 3px;
     background-color: #695c5c;
 }
+.checkout-complated-header {
+    font-size: 30px;
+}
 /**************media queries*********************/
 @media screen and (max-width: 900px){
     /*top banner - header */
