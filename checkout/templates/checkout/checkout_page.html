@@ -74,21 +74,21 @@
         {% endfor %}
     </div>
     <div class="col-10 offset-1 col-sm-8 offset-sm-2 col-md-6 offset-md-3 col-lg-4 offset-lg-1 white-text">
-        <form action="{% url 'view_checkout_page' %}" method="POST" id="payment-form">
+        <form id="payment-form" action="{% url 'view_checkout_page' %}" method="POST" >
             {% csrf_token %}
             <div class="row">
                 <div class="col-10 offset-1">
-                    <span id="name">{{ form.full_name | as_crispy_field }}</span>
-                    <span id="email-address">{{ form.email_address | as_crispy_field }}</span>
+                    {{ form.full_name | as_crispy_field }}
+                    {{ form.email_address | as_crispy_field }}
                     <hr class="hr-trolley">
                     <hr class="hr-trolley">
-                    <span id="street-address">{{ form.street_address | as_crispy_field }}</span>
-                    <span id="town">{{ form.town_or_city | as_crispy_field }}</span>
-                    <span id="county">{{ form.county | as_crispy_field }}</span>
-                    <span id="postcode">{{ form.zip_postcode | as_crispy_field }}</span>
-                    <span id="country">{{ form.country | as_crispy_field }}</span>
+                    {{ form.street_address | as_crispy_field }}
+                    {{ form.town_or_city | as_crispy_field }}
+                    {{ form.county | as_crispy_field }}
+                    {{ form.zip_postcode | as_crispy_field }}
+                    {{ form.country | as_crispy_field }}
                     <hr class="hr-trolley">
-                    {% if user.is_authenticated %}
+                    <!-- {% if user.is_authenticated %}
                         {% if user.delivery_info %}
                             <div class="form-check center_align">
                                 <input class="save-delivery-details" type="checkbox" value="" name="save-delivery-details" id="save-delivery-datails">
@@ -115,7 +115,7 @@
                                 <div>to save delivery details to your profile</div>
                             </div>
                         </div>
-                    {% endif %}
+                    {% endif %} -->
                     <hr class="hr-trolley">
                 </div>
             </div>
@@ -149,12 +149,11 @@
                     <div id="card-errors" role="alert" class='mt-1'></div>
                     </div>
                     <input type="hidden" value="{{ client_secret }}" name="client_secret">
-                </div>
+            </div>
+            <div class="row">
                 <div class="col-10 offset-1 center-align white-text m-5">
-                    <a href="{% url 'products' %}" class="btn yellow-inverse-btn float-left mb-5">Back to Store</a> 
-                    <a href="">
-                        <button id="submit" type="submit" class="btn yellow-btn float-right mb-5" data-secret="{{ client_secret }}">Complete Order</button>
-                    </a> 
+                    <a href="{% url 'products' %}" class="btn yellow-inverse-btn float-left mb-5">Back to Store</a>
+                    <button id="form-post-button"class="btn yellow-btn float-right mb-5">Complete Order</button>
                 </div>
             </div>
         </form>

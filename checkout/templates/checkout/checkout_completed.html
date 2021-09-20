@@ -9,5 +9,33 @@
         <span class="white-text trolley-title">Checkout Completed</span>
     </div>
 </div>
+<div class="row">
+    <div class="col-10 offset-1 col-md-5 offset-md-1 white-text">
+        <p>Your order was successfully completed</p>
+        <p>Order Number : {{ order.order_number }}</p>
+        <p>Customer : {{ order.full_name }}</p>
+        <p>Email address : {{ order.email_address }}</p>
+        <p>Date  : {{ order.order_date }}</p>
+        <p>Items Total  : €{{ order.order_total }}</p>
+        <p>Delivery  : €{{ order.delivery }}</p>
+        <p>Grand Total  : €{{ order.grand_total }}</p>
+        
+        <hr class="hr-checkout-completed">
+        <br>
+        <p>Delivery Details:</p>
+        <p>{{ order.full_name }}</p>
+        <p>{{ order.street_address }}</p>
+        <p>{{ order.city_or_town }}</p>
+        <p>{{ order.county }}</p>
+        <p>{{ order.zip_postcode }}</p>
+        <p>{{ order.country }}</p>
+    </div>
+    <div class="col-10 offset-1 col-md-5  white-text">
+        
+            {{ order. }}
+        
+    </div>
+
+</div>
 
 {% endblock %}

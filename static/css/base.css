@@ -318,6 +318,11 @@ a:hover {
     width: 80%;
     margin-left: 10%;
 }
+.hr-checkout-completed {
+    margin: 10px;
+    background-color: #fff;
+    width: 100%;
+}
 .grand-total {
     font-weight: 600;
     font-size: 20px;

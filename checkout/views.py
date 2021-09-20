@@ -1,5 +1,7 @@
 from django.shortcuts import (
-    render, redirect, get_object_or_404, reverse, HttpResponse)
+    render, redirect, get_object_or_404, reverse,
+    HttpResponse)
+from django.views.decorators.http import require_POST
 from django.contrib import messages
 from django.conf import settings
 from .forms import CheckoutForm
@@ -8,6 +10,25 @@ from trolley.context import trolley_contents
 from checkout.models import CheckoutOrder, OrderLineItem
 import stripe
 import json
+
+# code taken from cade institute lecture
+
+
+@require_POST
+def cache_checkout_data(request):
+    try:
+        pid = request.POST.get('client_secret').split('_secret')[0]
+        stripe.api_key = settings.STRIPE_SECRET_KEY
+        stripe.PaymentIntent.modify(pid, metadata={
+            'trolley': json.dumps(request.session.get('trolley', {})),
+            'username': request.user,
+        })
+        return HttpResponse(status=200)
+    except Exception as e:
+        messages.error(request, ('Sorry, your payment cannot be '
+                                 'processed right now. Please try '
+                                 'again later.'))
+        return HttpResponse(content=e, status=400)
 
 
 def view_checkout_page(request):
@@ -40,7 +61,7 @@ def view_checkout_page(request):
                 )
                 order_line_item.save()
             return redirect(reverse(
-                'checkout_completed', args=[order.order_number]))
+                'checkout_completed', args=[order.order_number]),)
 
         else:
             messages.error(request, 'Form NOT valid.\
@@ -82,8 +103,17 @@ def view_checkout_page(request):
 def checkout_completed(request, order_number):
     template = 'checkout/checkout_completed.html'
     order = get_object_or_404(CheckoutOrder, order_number=order_number)
+
+    # Update number in stock after products are successfully purchased
+    trolley = request.session.get('trolley', {})
+    purchased_products = trolley
+    for product_id, quantity in trolley.items():
+        product = Product.objects.get(id=product_id)
+        product.number_in_stock -= quantity
+        product.save()
     context = {
-        order: order,
+        'order': order,
+        'purchased_products': purchased_products,
     }
     messages.success(request, f'Your order number {order_number} \
         was completed successfully')
