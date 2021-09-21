@@ -1,6 +1,8 @@
 from django.forms import ModelForm
 from .models import CheckoutOrder
 
+# code taken from code institute lecture
+
 
 class CheckoutForm(ModelForm):
 

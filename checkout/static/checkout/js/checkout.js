@@ -5,6 +5,7 @@ document.addEventListener("DOMContentLoaded", function() {
     var stripe = Stripe(stripePublicKey);
     var elements = stripe.elements();
 
+    // code taken from stripe docs and code institute lecture
     var style = {
         base: {
             color: '#000',
@@ -80,7 +81,7 @@ document.addEventListener("DOMContentLoaded", function() {
                     $('#form-post-button').attr('disabled', false);
                 } else {
                     if (result.paymentIntent.status === 'succeeded') {
-                        form.submit();
+                        form.submit()
                     }
                 }
             });

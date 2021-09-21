@@ -3,6 +3,8 @@ from django.dispatch import receiver
 
 from .models import OrderLineItem
 
+# code taken from code institute lecture
+
 
 @receiver(post_save, sender=OrderLineItem)
 def update_save(sender, instance, created, **kwargs):

@@ -2,6 +2,7 @@ from django.http import HttpResponse
 from .models import CheckoutOrder, OrderLineItem
 from store.models import Product
 import json
+import time
 
 # code structure taken from code institute lecture
 
@@ -13,7 +14,7 @@ class WebhookHandler():
         self.request = request
 
     def handle_event(self, event):
-        # handle a webhook event
+        # handle generic  webhook event
 
         return HttpResponse(
             content=f'Generic webhook received {event["type"]}',
@@ -22,76 +23,78 @@ class WebhookHandler():
 
     def handle_payment_succeeded(self, event):
         # handle a webhook payment succeeded event
+
+        # create the variables
         intent = event.data.object
-        pid = intent.id
         trolley = intent.metadata.trolley
         save_address_details = intent.metadata.save_address_details
-
         billing_details = intent.charges.data[0].billing_details
         grand_total = round(intent.charges.data[0].amount / 100, 2)
 
-        try:
-            order_exists = False
+        checkout_order_exists = False
+        checkout_order = None
+        attempt = 1
+        # check if order exists in database
+        while attempt <= 5:
+            try:
+                checkout_order = CheckoutOrder.objects.get(
+                    full_name__iexact=billing_details.name,
+                    email_address__iexact=billing_details.email,
+                    street_address__iexact=billing_details.address.line1,
+                    town_or_city__iexact=billing_details.address.city,
+                    county__iexact=billing_details.address.state,
+                    zip_postcode__iexact=billing_details.address.postal_code,
+                    country__iexact=billing_details.address.country,
+                )
 
-            order = CheckoutOrder.objects.get(
-                full_name__iexact=intent.charges.data[
-                    0].name,
-                email_address__iexact=intent.charges.data[
-                    0].email,
-                street_address__iexact=intent.charges.data[
-                    0].billing_details.address.line1,
-                town_or_city__iexact=intent.charges.data[
-                    0].billing_details.address.city,
-                county__iexact=intent.charges.data[
-                    0].billing_details.address.state,
-                zip_postcode__iexact=intent.charges.data[
-                    0].billing_details.address.postal_code,
-                country__iexact=intent.charges.data[
-                    0].billing_details.address.country,
-            )
+                checkout_order_exists = True
+                break
 
-            order_exists = True
+            except CheckoutOrder.DoesNotExist:
+                attempt += 1
+                time.sleep(1)
 
-            print(intent)
+        if checkout_order_exists:
             return HttpResponse(
                 content=f'Webhook received {event["type"]}.\
-                    The order is alerady in the database',
+                    Found order in the database',
                 status=200,
             )
-        except CheckoutOrder.DoesNotExist:
+        else:
+            checkout_order = None
+            # retrieve data order from webhook and save it
             try:
-                order = CheckoutOrder.objects.create(
-                    full_name=intent.charges.data[0].name,
-                    email_address=intent.charges.data[0].email,
-                    street_address=intent.charges.data[
-                        0].billing_details.address.line1,
-                    town_or_city=intent.charges.data[
-                        0].billing_details.address.city,
-                    county=intent.charges.data[
-                        0].billing_details.address.state,
-                    zip_postcode=intent.charges.data[
-                        0].billing_details.address.postal_code,
-                    country=intent.charges.data[
-                        0].billing_details.address.country,
+                checkout_order = CheckoutOrder.objects.create(
+                    full_name=billing_details.name,
+                    email_address=billing_details.email,
+                    street_address=billing_details.address.line1,
+                    town_or_city=billing_details.address.city,
+                    county=billing_details.address.state,
+                    zip_postcode=billing_details.address.postal_code,
+                    country=billing_details.address.country,
                 )
-                for product_id, quantity in json.load(trolley).items():
+
+                print(checkout_order)
+                for product_id, quantity in json.loads(trolley).items():
                     product = Product.objects.get(id=product_id)
                     order_line_item = OrderLineItem(
-                        order=order,
+                        order=checkout_order,
                         product=product,
                         quantity=quantity,
                     )
                     order_line_item.save()
-            except Exception as e:
-                if order:
-                    order.delete()
 
+            except Exception as e:
+                # other errors
+                if checkout_order:
+                    checkout_order.delete()
                 return HttpResponse(
                     content=f'Webhook received {event["type"]}. ERROR {e}',
                     status=500)
 
         return HttpResponse(
-            content=f'Webhook received {event["type"]}.',
+            content=f'Webhook received {event["type"]}. \
+                Order create with webhook handler',
             status=200)
 
     def handle_payment_failed(self, event):
