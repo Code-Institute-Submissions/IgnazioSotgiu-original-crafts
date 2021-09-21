@@ -88,19 +88,19 @@
                     {{ form.zip_postcode | as_crispy_field }}
                     {{ form.country | as_crispy_field }}
                     <hr class="hr-trolley">
-                    <!-- {% if user.is_authenticated %}
+                    {% if user.is_authenticated %}
                         {% if user.delivery_info %}
                             <div class="form-check center_align">
-                                <input class="save-delivery-details" type="checkbox" value="" name="save-delivery-details" id="save-delivery-datails">
-                                <label class="form-check-label" for="save-delivery-details">
-                                    Save Delivery Details
+                                <input class="save-address-details" type="checkbox" name="save-address-details" id="save-address-details">
+                                <label class="form-check-label" for="save-address-details">
+                                    Save Address Details
                                 </label>
                             </div>
                         {% else %}
                             <div class="form-check center-align">
-                                <input class="save-delivery-details" type="checkbox" value="" name="save-delivery-details" id="save-delivery-datails" checked>
-                                <label class="form-check-label" for="save-delivery-details">
-                                    Save Delivery Details
+                                <input class="save-address-details" type="checkbox" name="save-address-details" id="save-address-details" checked>
+                                <label class="form-check-label" for="save-address-details">
+                                    Save Address Details
                                 </label>
                             </div>
                         {% endif %}
@@ -115,7 +115,7 @@
                                 <div>to save delivery details to your profile</div>
                             </div>
                         </div>
-                    {% endif %} -->
+                    {% endif %}
                     <hr class="hr-trolley">
                 </div>
             </div>
