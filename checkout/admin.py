@@ -1,3 +1,6 @@
+"""
+Admin panel settings
+"""
 from django.contrib import admin
 from .models import CheckoutOrder, OrderLineItem
 
@@ -5,6 +8,9 @@ from .models import CheckoutOrder, OrderLineItem
 
 
 class CheckoutOrderLineItemAdmin(admin.TabularInline):
+    """
+    class for ever line of items
+    """
     model = OrderLineItem
     readonly_fields = ('lineitem_total',)
 
