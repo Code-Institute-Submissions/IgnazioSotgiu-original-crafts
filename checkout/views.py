@@ -52,6 +52,10 @@ def view_checkout_page(request):
         checkout_form = CheckoutForm(form_info)
         if checkout_form.is_valid():
             order = checkout_form.save()
+            pid = request.POST.get('client_secret').split('_secret')[0]
+            order.pid = pid
+            order.order_trolley = json.dumps(trolley)
+            order.save()
             for product_id, quantity in trolley.items():
                 product = Product.objects.get(id=product_id)
                 order_line_item = OrderLineItem(

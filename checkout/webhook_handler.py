@@ -27,6 +27,7 @@ class WebhookHandler():
         # create the variables
         intent = event.data.object
         trolley = intent.metadata.trolley
+        pid = intent.id
         save_address_details = intent.metadata.save_address_details
         billing_details = intent.charges.data[0].billing_details
         grand_total = round(intent.charges.data[0].amount / 100, 2)
@@ -45,6 +46,8 @@ class WebhookHandler():
                     county__iexact=billing_details.address.state,
                     zip_postcode__iexact=billing_details.address.postal_code,
                     country__iexact=billing_details.address.country,
+                    order_trolley=trolley,
+                    order_pid=pid,
                 )
 
                 checkout_order_exists = True
@@ -53,7 +56,6 @@ class WebhookHandler():
             except CheckoutOrder.DoesNotExist:
                 attempt += 1
                 time.sleep(1)
-
         if checkout_order_exists:
             return HttpResponse(
                 content=f'Webhook received {event["type"]}.\
@@ -72,9 +74,10 @@ class WebhookHandler():
                     county=billing_details.address.state,
                     zip_postcode=billing_details.address.postal_code,
                     country=billing_details.address.country,
+                    order_trolley=trolley,
+                    order_pid=pid,
                 )
 
-                print(checkout_order)
                 for product_id, quantity in json.loads(trolley).items():
                     product = Product.objects.get(id=product_id)
                     order_line_item = OrderLineItem(

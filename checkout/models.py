@@ -26,6 +26,10 @@ class CheckoutOrder(models.Model):
         max_digits=6, decimal_places=2, null=False, default=0)
     grand_total = models.DecimalField(
         max_digits=8, decimal_places=2, null=False, default=0)
+    order_trolley = models.TextField(
+        null=False, blank=False, default='')
+    order_pid = models.CharField(
+        max_length=254, null=False, blank=False, default='')
 
     # Create an order number
     def _generate_order_number(self):
