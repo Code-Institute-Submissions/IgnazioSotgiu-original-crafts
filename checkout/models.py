@@ -1,9 +1,12 @@
 from django.db import models
 from django.db.models import Sum
 from django_countries.fields import CountryField
+from django.shortcuts import get_object_or_404
 import uuid
+from django.contrib.auth.models import User
 from django.conf import settings
 from store.models import Product
+from profiles.models import Profile
 
 # code taken from code institute lecture
 
@@ -11,6 +14,9 @@ from store.models import Product
 class CheckoutOrder(models.Model):
     order_number = models.CharField(
         max_length=32, null=False, editable=False)
+    profile = models.ForeignKey(Profile, on_delete=models.SET_NULL,
+                                null=True, blank=True,
+                                related_name='profile_orders')
     full_name = models.CharField(max_length=60, null=False, blank=False)
     email_address = models.EmailField(max_length=254, null=False, blank=False)
     street_address = models.CharField(max_length=254, null=False, blank=False)
@@ -43,13 +49,15 @@ class CheckoutOrder(models.Model):
         """
         if not self.order_number:
             self.order_number = self._generate_order_number()
+
         super().save(*args, **kwargs)
 
     def update_total(self):
         self.order_total = self.lineitems.aggregate(Sum(
             'lineitem_total'))['lineitem_total__sum'] or 0
         if self.order_total < settings.FREE_DELIVERY_MIN_SPEND:
-            self.delivery = self.order_total * settings.APPLY_DELIVERY_PERCENTAGE / 100
+            self.delivery = (
+                self.order_total * settings.APPLY_DELIVERY_PERCENTAGE / 100)
         else:
             self.delivery = 0
 

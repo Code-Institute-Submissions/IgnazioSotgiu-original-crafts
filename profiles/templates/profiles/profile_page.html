@@ -3,7 +3,25 @@
 
 
 {% block content %}
-
-<h1>Your Profile</h1>
-
+<div class="row">
+    <div class="col-10 offset-1 col-md-4 offset-1">
+        <h1 class="white-text center-align mt-5">Your Profile</h1>
+        <div class="white-text">
+            {{ form|crispy }}
+        </div>
+    </div>
+    <div class="col-10 offset-1 col-md-6 offset-0">
+        <h1 class="white-text center-align mt-5">Your Orders</h1>
+        <div class="white-text">
+            <p></p>{% for order in orders %}
+            <p></p>{{ order.order_number }}
+            <p></p>{{ order.order_date }}
+            <p></p>{{ order.grand_total }}
+            <p></p>{{ order.order_number }}
+            <p></p>{{ order.image}}
+            {% endfor %}
+            
+        </div>
+    </div>
+</div>
 {% endblock %}

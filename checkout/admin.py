@@ -20,7 +20,7 @@ class CheckoutOrderAdmin(admin.ModelAdmin):
     readonly_fields = ('order_number', 'order_date', 'delivery',
                        'order_total', 'grand_total', 'order_pid')
 
-    fields = ('order_number', 'full_name',
+    fields = ('profile', 'order_number', 'full_name',
               'email_address', 'town_or_city', 'county', 'country',
               'zip_postcode', 'order_date', 'delivery', 'order_total',
               'grand_total', 'order_trolley', 'order_pid',)

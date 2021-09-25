@@ -1,12 +1,12 @@
 from django.contrib import admin
-from .models import Profiles
+from .models import Profile
 
 # Register your models here.
 
 
-class ProfilesAdmin(admin.ModelAdmin):
-    list_display = ['user_name', 'street_address', 'town_or_city',
+class ProfileAdmin(admin.ModelAdmin):
+    list_display = ['user', 'street_address', 'town_or_city',
                     'county', 'country']
 
 
-admin.site.register(Profiles, ProfilesAdmin)
+admin.site.register(Profile, ProfileAdmin)

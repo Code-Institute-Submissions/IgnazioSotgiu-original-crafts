@@ -5,7 +5,9 @@ from django.views.decorators.http import require_POST
 from django.contrib import messages
 from django.conf import settings
 from .forms import CheckoutForm
+from django.contrib.auth import get_user_model
 from store.models import Product
+from profiles.models import Profile
 from trolley.context import trolley_contents
 from checkout.models import CheckoutOrder, OrderLineItem
 import stripe
@@ -55,6 +57,7 @@ def view_checkout_page(request):
             pid = request.POST.get('client_secret').split('_secret')[0]
             order.pid = pid
             order.order_trolley = json.dumps(trolley)
+            order.profile = get_object_or_404(Profile, user=request.user)
             order.save()
             for product_id, quantity in trolley.items():
                 product = Product.objects.get(id=product_id)
@@ -90,10 +93,6 @@ def view_checkout_page(request):
 
     form = CheckoutForm()
 
-    if not stripe_public_key:
-        messages.warning(request, 'Stripe public key is missing. \
-             Did you forget to set it in your environment?')
-
     template = 'checkout/checkout_page.html'
     context = {
         'form': form,
@@ -110,14 +109,13 @@ def checkout_completed(request, order_number):
 
     # Update number in stock after products are successfully purchased
     trolley = request.session.get('trolley', {})
-    purchased_products = trolley
+
     for product_id, quantity in trolley.items():
         product = Product.objects.get(id=product_id)
         product.number_in_stock -= quantity
         product.save()
     context = {
         'order': order,
-        'purchased_products': purchased_products,
     }
     messages.success(request, f'Your order number {order_number} \
         was completed successfully')
