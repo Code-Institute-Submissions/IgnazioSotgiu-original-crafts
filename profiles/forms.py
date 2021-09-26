@@ -27,6 +27,6 @@ class ProfileForm(ModelForm):
             'zip_postcode': 'Postcode',
         }
 
-        for field in self.fields:
-            placeholder = placeholders[field]
-            self.fields[field].widget.attrs['placeholder'] = placeholder
+        # for field in self.fields:
+        #     placeholder = placeholders[field]
+        #     self.fields[field].widget.attrs['placeholder'] = placeholder

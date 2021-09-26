@@ -15,7 +15,7 @@ class Profile(models.Model):
     zip_postcode = models.CharField(max_length=20, null=True, blank=True)
     county = models.CharField(max_length=30, null=True, blank=True)
     country = CountryField(
-        blank_label='(select country)', null=False, blank=False)
+        blank_label='(select country)', null=True, blank=True)
 
     class Meta:
         verbose_name_plural = 'profiles'

@@ -57,7 +57,9 @@ def view_checkout_page(request):
             pid = request.POST.get('client_secret').split('_secret')[0]
             order.pid = pid
             order.order_trolley = json.dumps(trolley)
-            order.profile = get_object_or_404(Profile, user=request.user)
+            user = request.user
+            if user.is_authenticated:
+                order.profile = get_object_or_404(Profile, user=request.user)
             order.save()
             for product_id, quantity in trolley.items():
                 product = Product.objects.get(id=product_id)
@@ -90,8 +92,11 @@ def view_checkout_page(request):
             currency=settings.STRIPE_CURRENCY,
         )
         print(intent)
+    user = request.user
+    if user.is_authenticated:
+        profile = get_object_or_404(Profile, user=request.user)
 
-    form = CheckoutForm()
+    form = CheckoutForm(instance=profile)
 
     template = 'checkout/checkout_page.html'
     context = {

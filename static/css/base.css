@@ -61,6 +61,10 @@ label.required-field {
     background-color: transparent;
     border: 0;
 }
+.bg-jumbotron-dark {
+    background-color: #695c5c;
+
+}
 /* back to top link */
 .back-to-top-container {
     background-color: black;
@@ -405,7 +409,7 @@ a:hover {
         padding-top: 3px;
     }
     .bg-dark {
-        background: url('/media/ms4-header-bg.jpg') no-repeat center center fixed;
+        background: url('/media/ms4-header-bg.jpg') no-repeat center center;
         background-size: cover;
     }
     .navbar-dark .navbar-toggler {
@@ -433,12 +437,16 @@ a:hover {
         margin-left: 40%;
     }
     .dropdown-item:focus, .dropdown-item:hover {
-        color: rgba(255,255,255,.75);
+        color: rgb(247, 240, 240);
         text-decoration: none;
         background-color: transparent;
     }
+    .navbar-dark .navbar-brand:focus, .navbar-dark .navbar-brand:hover{
+        color: #796363;
+    }
     .navbar-container {
         padding-left: 56px;
+        padding-top: 40px;
     }
     .navbar-dark .navbar-brand {
         color: #000;

@@ -1,26 +1,82 @@
 {% extends 'base.html' %}
 {% load static %}
+{% block extra_css %}
+    {{ block.super }}
+    <link rel="stylesheet" href="{% static '/profiles/css/profiles.css' %}">
+{% endblock %}
 
 
 {% block content %}
 <div class="row">
-    <div class="col-10 offset-1 col-md-4 offset-1">
-        <h1 class="white-text center-align mt-5">Your Profile</h1>
+    <div class="col-8 offset-2 col-lg-3 offset-lg-1">
+        <h2 class="white-text center-align mt-5">Your Profile</h2>
         <div class="white-text">
-            {{ form|crispy }}
+            <form action="{% url 'profile_page' %}" method="POST">
+                {% csrf_token %}
+                <div class="profile-info">Username: {{ profile.user.username }}</div>
+                <div class="profile-info">Email Address: {{ profile.user.email }}</div>
+                <h4>Your delivery information:</h4>
+                {{ form|crispy }}
+                <div class="center-align">
+                    <button type="submit" class="btn yellow-btn mb-5">Update Your Delivery Info</button>
+                </div>
+            </form>
         </div>
     </div>
-    <div class="col-10 offset-1 col-md-6 offset-0">
-        <h1 class="white-text center-align mt-5">Your Orders</h1>
+    <div class="col-12 col-lg-8">
         <div class="white-text">
-            <p></p>{% for order in orders %}
-            <p></p>{{ order.order_number }}
-            <p></p>{{ order.order_date }}
-            <p></p>{{ order.grand_total }}
-            <p></p>{{ order.order_number }}
-            <p></p>{{ order.image}}
+            <h3 class="yellow-text center-align mt-5 mb-5">Your Orders ( {{ order_count }} )</h3> 
+            <hr class="hr-trolley">
+            {% for order in orders %}
+                <div class="order-container text-white">
+                    <div class="row">
+                        <div class="col-12 col-md-4">
+                            <p class="ml-3">Order Number:<br>{{ order.order_number|truncatechars:6 }}</p>
+                        </div>
+                        <div class="col-12 col-md-4">
+                            <p class="ml-3">Date:<br>{{ order.order_date }}</p>
+                        </div>
+                        <div class="col-12 col-md-4">
+                            <p class="ml-3">Order Total:<br>€{{ order.grand_total }}</p>
+                        </div>
+                    </div>
+                    <hr class="hr-order-history">
+                    {% for item in order.lineitems.all %}
+                    <div class="row">
+                        <div class="col-12 col-md-6">
+                            <div class="mb-3 center-align">
+                                {% if item.product.image %}
+                                    <img src="{{ item.product.image.url }}" alt="{{ item.product.name }}" class="trolley-image">
+                                {% else %}
+                                    <img src="{{ MEDIA_URL }}noimage.png" alt="{{ item.product.name }}" class="trolley-image">
+                                {% endif %}
+                            </div>
+                        </div>
+                        <div class="col-12 col-md-6 center-align">
+                            Name: {{ item.product.name|title }}
+                            <hr class="hr-trolley">
+                            Category: {{ item.product.category|title }}
+                            <hr class="hr-trolley">
+                            Quantity: {{ item.quantity }}
+                            <hr class="hr-trolley">
+                            Price:
+                            {% if item.product.special_price %}
+                                <span class="text-red ml-1"> SALE</span>
+                                <br>
+                                <del class="white-text">€{{ item.product.price}}</del>
+                                <span class="white-text ml-1">€{{ item.product.special_price }}</span>
+                            {% else %}
+                                <span class="white-text ml-1">€{{ item.product.price }}</span>
+                            {% endif %}
+                        </div>
+                        <div class="mx-auto review-btn-container">
+                            <a href="#" class="btn  btn-sm yellow-btn">Leave a Review</a>
+                        </div> 
+                        <hr class="hr-order-history">
+                    </div>
+                    {% endfor%}
+                </div>
             {% endfor %}
-            
         </div>
     </div>
 </div>

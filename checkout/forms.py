@@ -28,8 +28,8 @@ class CheckoutForm(ModelForm):
             'zip_postcode': 'Postcode',
         }
 
-        for field in self.fields:
-            if self.fields[field].required:
-                placeholder = f'{placeholders[field]} *'
-            else:
-                placeholder = placeholders[field]
+        # for field in self.fields:
+        #     if self.fields[field].required:
+        #         placeholder = f'{placeholders[field]} *'
+        #     else:
+        #         placeholder = placeholders[field]
