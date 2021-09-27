@@ -80,6 +80,7 @@
                 <div class="col-10 offset-1">
                     {{ form.full_name | as_crispy_field }}
                     {{ form.email_address | as_crispy_field }}
+                    {{ form.phone_number | as_crispy_field }}
                     <hr class="hr-trolley">
                     <hr class="hr-trolley">
                     {{ form.street_address | as_crispy_field }}
@@ -89,21 +90,12 @@
                     {{ form.country | as_crispy_field }}
                     <hr class="hr-trolley">
                     {% if user.is_authenticated %}
-                        {% if user.delivery_info %}
-                            <div class="form-check center_align">
-                                <input class="save-address-details" type="checkbox" name="save-address-details" id="save-address-details">
-                                <label class="form-check-label" for="save-address-details">
-                                    Save Address Details
-                                </label>
-                            </div>
-                        {% else %}
-                            <div class="form-check center-align">
-                                <input class="save-address-details" type="checkbox" name="save-address-details" id="save-address-details" checked>
-                                <label class="form-check-label" for="save-address-details">
-                                    Save Address Details
-                                </label>
-                            </div>
-                        {% endif %}
+                        <div class="form-check center-align">
+                            <input class="save-address-details" type="checkbox" name="save-address-details" id="save-address-details" checked>
+                            <label class="form-check-label" for="save-address-details">
+                                Save Address Details
+                            </label>
+                        </div>
                     {% else %}
                         <div class="row">
                             <div class="col center-align">

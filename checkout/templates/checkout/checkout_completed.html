@@ -48,7 +48,11 @@
             <p>A Confirmation email was sent at <strong>{{ order.email_address }}</strong></p>
             <p>Thank You</p>
             <p>For any information you can contact us <strong><a class="" href="#">here</a></strong></p>
-            <a href="{% url 'home' %}" class="btn yellow-inverse-btn  mb-5">Back to Homepage</a>
+            {% if from_profile_page %}
+                <a href="{% url 'profile_page' %}" class="btn yellow-inverse-btn  mb-5">Back to Profile Page</a>
+            {% else %}
+                <a href="{% url 'home' %}" class="btn yellow-inverse-btn  mb-5">Back to Homepage</a>
+            {% endif %}
         </div>
     </div>
 </div>

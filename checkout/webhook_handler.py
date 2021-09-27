@@ -41,6 +41,7 @@ class WebhookHandler():
                 checkout_order = CheckoutOrder.objects.get(
                     full_name__iexact=billing_details.name,
                     email_address__iexact=billing_details.email,
+                    phone_number__iexact=billing_details.phone_number,
                     street_address__iexact=billing_details.address.line1,
                     town_or_city__iexact=billing_details.address.city,
                     county__iexact=billing_details.address.state,
@@ -69,6 +70,7 @@ class WebhookHandler():
                 checkout_order = CheckoutOrder.objects.create(
                     full_name=billing_details.name,
                     email_address=billing_details.email,
+                    phone_number=billing_details.phone_number,
                     street_address=billing_details.address.line1,
                     town_or_city=billing_details.address.city,
                     county=billing_details.address.state,

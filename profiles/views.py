@@ -6,7 +6,6 @@ from .forms import ProfileForm
 from django.contrib import messages
 
 
-
 @login_required
 def profile_page(request):
     profile = get_object_or_404(Profile, user=request.user)
@@ -17,7 +16,6 @@ def profile_page(request):
             messages.success(request, 'Your info were successfully updated')
 
     orders = profile.profile_orders.all()
-    product_count = 0
     order_count = 0
     for order in orders:
         order_count += 1
@@ -30,5 +28,16 @@ def profile_page(request):
         'form': form,
         'profile': profile,
         'orders': orders,
+    }
+    return render(request, template, context)
+
+
+def profile_order_history(request, order_number):
+    order = get_object_or_404(CheckoutOrder, order_number=order_number)
+    from_profile_page = True
+    template = 'checkout/checkout_completed.html'
+    context = {
+        'order': order,
+        'from_profile_page': from_profile_page,
     }
     return render(request, template, context)

@@ -31,7 +31,9 @@
                 <div class="order-container text-white">
                     <div class="row">
                         <div class="col-12 col-md-4">
-                            <p class="ml-3">Order Number:<br>{{ order.order_number|truncatechars:6 }}</p>
+                            <a href="{% url 'profile_order_history' order.order_number %}">
+                                <p class="ml-3">Order Number:<br>{{ order.order_number|truncatechars:6 }}</p>
+                            </a>
                         </div>
                         <div class="col-12 col-md-4">
                             <p class="ml-3">Date:<br>{{ order.order_date }}</p>

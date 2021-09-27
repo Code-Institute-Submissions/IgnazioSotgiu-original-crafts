@@ -5,7 +5,7 @@ from django.views.decorators.http import require_POST
 from django.contrib import messages
 from django.conf import settings
 from .forms import CheckoutForm
-from django.contrib.auth import get_user_model
+from profiles.forms import ProfileForm
 from store.models import Product
 from profiles.models import Profile
 from trolley.context import trolley_contents
@@ -44,6 +44,7 @@ def view_checkout_page(request):
         form_info = {
             'full_name': request.POST['full_name'],
             'email_address': request.POST['email_address'],
+            'phone_number': request.POST['phone_number'],
             'street_address': request.POST['street_address'],
             'town_or_city': request.POST['town_or_city'],
             'county': request.POST['county'],
@@ -69,6 +70,8 @@ def view_checkout_page(request):
                     quantity=quantity,
                 )
                 order_line_item.save()
+
+            request.session['save_address_details'] = 'save-address-details' in request.POST
             return redirect(reverse(
                 'checkout_completed', args=[order.order_number]),)
 
@@ -111,6 +114,24 @@ def view_checkout_page(request):
 def checkout_completed(request, order_number):
     template = 'checkout/checkout_completed.html'
     order = get_object_or_404(CheckoutOrder, order_number=order_number)
+
+    profile = Profile.objects.get(user=request.user)
+    save_address_details = request.session.get('save_address_details')
+    print(save_address_details)
+    if save_address_details:
+        updated_profile_address = {
+            'phone_number': order.phone_number,
+            'street_address': order.street_address,
+            'town_or_city': order.town_or_city,
+            'county': order.county,
+            'country': order.country,
+            'zip_postcode': order.zip_postcode,
+        }
+        profile_form = ProfileForm(updated_profile_address, instance=profile)
+        if profile_form.is_valid():
+            profile_form.save()
+            messages.success(
+                request, 'Your Address info were successfully updated')
 
     # Update number in stock after products are successfully purchased
     trolley = request.session.get('trolley', {})
