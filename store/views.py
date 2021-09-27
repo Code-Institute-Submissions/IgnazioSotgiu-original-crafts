@@ -90,6 +90,21 @@ def hidden_products(request):
 
 
 @login_required
+def out_of_stock_products(request):
+    """ display out of stock products to the admin """
+    out_of_stock_products = []
+    products = Product.objects.all()
+    for product in products:
+        if product.number_in_stock == 0:
+            out_of_stock_products.append(product) 
+    template = 'store/out_of_stock_products.html'
+    context = {
+        'products': out_of_stock_products,
+    }
+    return render(request, template, context)
+
+
+@login_required
 def add_product(request):
     form = ProductForm()
 

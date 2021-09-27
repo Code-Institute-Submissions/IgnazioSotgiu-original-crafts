@@ -15,4 +15,6 @@ urlpatterns = [
          views.delete_product, name='delete_product'),
     path('store/hidden_products/',
          views.hidden_products, name='hidden_products'),
+     path('store/out_of_stock_products/',
+         views.out_of_stock_products, name='out_of_stock_products'),
 ]
