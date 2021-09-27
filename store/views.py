@@ -96,7 +96,7 @@ def out_of_stock_products(request):
     products = Product.objects.all()
     for product in products:
         if product.number_in_stock == 0:
-            out_of_stock_products.append(product) 
+            out_of_stock_products.append(product)
     template = 'store/out_of_stock_products.html'
     context = {
         'products': out_of_stock_products,

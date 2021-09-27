@@ -12,7 +12,6 @@
     {% if request.user.is_superuser %}
         <div class="row bg-black">
             {% for product in products %}
-                {% if product.hide_product %}
                 <div class="col-12 col-sm-6 col-lg-4 popular-products-div">
                     <a href="{% url 'single_product' product.id %}">
                         <div class="card">
@@ -50,8 +49,12 @@
                         </div>
                     </div>
                 </div>
-                {% endif %}
             {% endfor %}
+        </div>
+    {% else %}
+        <div class="center-align">
+            <h3>Only Administrator can access tis content</h3>
+            <a href="{% url 'home' %}" class="btn btn-yellow">Back to Homepage</a>
         </div>
     {% endif %}
 {% endif %}
