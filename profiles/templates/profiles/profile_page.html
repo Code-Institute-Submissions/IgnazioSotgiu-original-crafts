@@ -75,21 +75,14 @@
                     </div>
                     <div class="row">
                         <div class="col-12">
-                            {% if not reviews %}
-                                <div class="center-align">
-                                    <p>You didn't review this product yet!</p>
-                                </div>
-                                <div class="center-align review-btn-container">
-                                    <a href="{% url 'add_review' item.product.id %}" class="btn btn-sm yellow-btn">Leave a Review</a>
-                                </div>
-                            {% else %}
+                            {% if reviews %}
                                 {% for review in reviews %}
                                     {% if review.product.id == item.product.id %}
                                         <div class="center-align mt-5">
                                             <p>You reviewed this product on the {{ review.review_date }}</p>
                                         </div>
                                         <div class="review-btn-container center-align">
-                                            <a href="{% url 'add_review' item.product.id %}" class="btn  btn-sm btn-success">Edit Review</a>
+                                            <a href="{% url 'edit_review' review.id %}" class="btn  btn-sm btn-success">Edit Review</a>
                                             <a href="{% url 'add_review' item.product.id %}" class="btn  btn-sm btn-danger">Delete Review</a>
                                         </div>
                                         <div class="review-title center-align">{{ review.review_title|title }}</div>

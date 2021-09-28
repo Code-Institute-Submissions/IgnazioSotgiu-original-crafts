@@ -21,6 +21,7 @@
         <p class="mt-5">Order Number : {{ order.order_number }}</p>
         <p>Customer : {{ order.full_name }}</p>
         <p>Email address : {{ order.email_address }}</p>
+        <p>Phone Number : {{ order.phone_number }}</p>
         <p>Date  : {{ order.order_date }}</p>
         <p>Items Total  : €{{ order.order_total }}</p>
         <p>Delivery  : €{{ order.delivery }}</p>
@@ -30,6 +31,7 @@
         <p class="center-align">Delivery Details:</p>
         <hr class="hr-trolley">
         <p class="mt-5">{{ order.full_name }}</p>
+        <p>{{ order.phone_number }}</p>
         <p>{{ order.street_address }}</p>
         <p>{{ order.city_or_town|title }}</p>
         {% if order.county %}
