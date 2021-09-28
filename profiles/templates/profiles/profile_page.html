@@ -83,7 +83,7 @@
                                         </div>
                                         <div class="review-btn-container center-align">
                                             <a href="{% url 'edit_review' review.id %}" class="btn  btn-sm btn-success">Edit Review</a>
-                                            <a href="{% url 'add_review' item.product.id %}" class="btn  btn-sm btn-danger">Delete Review</a>
+                                            <a href="{% url 'delete_review_warning' review.id %}" class="btn  btn-sm btn-danger">Delete Review</a>
                                         </div>
                                         <div class="review-title center-align">{{ review.review_title|title }}</div>
                                         <hr class="hr-trolley">

@@ -370,6 +370,9 @@ a:hover {
     width: auto;
     height: fit-content;
 }
+.review-container-text {
+    font-size: 15px;
+}
 /**************media queries*********************/
 @media screen and (max-width: 900px){
     /*top banner - header */

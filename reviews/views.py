@@ -70,3 +70,28 @@ def edit_review(request, review_id):
 
     return render(request, template, context)
 
+
+@login_required
+def delete_review_warning(request, review_id):
+    review = Review.objects.get(id=review_id)
+
+    template = 'reviews/delete_review_warning.html'
+    context = {
+        'review': review,
+    }
+
+    return render(request, template, context)
+
+
+@login_required
+def delete_review(request, review_id):
+    review = Review.objects.get(id=review_id)
+    try:
+        review.delete()
+        messages.success(request, 'The review was successfully deleted')
+        return redirect('profile_page')
+
+    except ValueError:
+        messages.error(request, 'Request denied! \
+            Was not possible to delete this review from the database')
+        return redirect('profile_page')
