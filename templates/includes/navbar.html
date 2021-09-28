@@ -29,8 +29,10 @@
               {% if request.user.is_superuser %}
                 <span class="text-danger">Admin</span>
               {% else %}
-                User
+                Your Account
               {% endif %}
+            {% else %}
+            Register / Login
             {% endif %}
           </a>
           <ul class="dropdown-menu" aria-labelledby="navbarDropdown">

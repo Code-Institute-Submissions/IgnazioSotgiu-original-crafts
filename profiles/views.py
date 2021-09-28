@@ -4,6 +4,7 @@ from checkout.models import CheckoutOrder
 from django.contrib.auth.decorators import login_required
 from .forms import ProfileForm
 from django.contrib import messages
+from reviews.models import Review
 
 
 @login_required
@@ -17,9 +18,12 @@ def profile_page(request):
 
     orders = profile.profile_orders.all()
     order_count = 0
+    all_review_product_ids = []
     for order in orders:
         order_count += 1
-
+    reviews = Review.objects.all().filter(author=request.user)
+    for review in reviews:
+        all_review_product_ids.append(review.product.id)
     form = ProfileForm(instance=profile)
 
     template = 'profiles/profile_page.html'
@@ -28,6 +32,8 @@ def profile_page(request):
         'form': form,
         'profile': profile,
         'orders': orders,
+        'reviews': reviews,
+        'all_review_product_ids': all_review_product_ids,
     }
     return render(request, template, context)
 

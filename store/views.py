@@ -4,6 +4,7 @@ from django.views.generic import ListView
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from django.db.models import Q
+from reviews.models import Review
 from .models import Product, Category
 from .forms import ProductForm
 
@@ -30,9 +31,11 @@ def products(request):
 
 def single_product(request, product_id):
     product = get_object_or_404(Product, pk=product_id)
+    reviews = Review.objects.all().filter(product=product_id)
     template = 'store/single_product.html'
     context = {
         'product': product,
+        'reviews': reviews,
     }
     return render(request, template, context)
 

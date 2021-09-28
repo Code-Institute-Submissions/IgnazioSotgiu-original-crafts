@@ -62,21 +62,35 @@
             </div>
         </div>
     </div>
-    <!--
-        {% if session.user.is_autenticated %}
-            {% if product.id in user.purchase_history %}
-                <a href="" class="center-align btn btn-success">
-                    Write a review of this product!
-                </a>
-            {% endif %}
-        {% endif %}
-        {% if products.reviews %}
-        {% else %}
-            <div class="row">
-                <div class="col-12 center-align white-text">
-                    There are not reviews of this product yet!
-                </div>
-            </div>
-        {% endif%}-->
 </div>
+{% if reviews %}
+    <div class="row">
+        <div class="col-10 offset-1 center-align white-text mt-5 mb-5">
+            <h2>Product Reviews</h2>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-10 offset-1 col-md-8 offset-md-2 col-lg-6 offset-lg-3 white-text">
+            {% for review in reviews %}
+                <div class="review-container text-white">
+                    <div class="review-header">
+                        {{ review.author }}  review this product on the  {{ review.review_date }}
+                    </div>
+                    <div class="review-title">
+                        {{ review.review_title|capfirst }}
+                    </div>
+                    <div class="review-body">
+                        {{ review.review_text|capfirst }}
+                    </div>
+                </div>
+            {% endfor%}
+        </div>
+    </div>
+{% else %}
+    <div class="row">
+        <div class="col-10 offset-1 center-align white-text">
+            <h2>There are not reviews of this product yet!</h2>
+        </div>
+    </div>
+{% endif %}
 {% endblock %}
