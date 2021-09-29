@@ -1,7 +1,6 @@
 from django.shortcuts import (
     render, redirect, reverse, get_object_or_404, HttpResponseRedirect)
-from django.views.generic import ListView
-from django.contrib.auth.decorators import login_required
+from django.contrib.auth.decorators import login_required, user_passes_test
 from django.contrib import messages
 from django.db.models import Q
 from reviews.models import Review
@@ -81,7 +80,7 @@ def search_result(request):
     return render(request, template, context)
 
 
-@login_required
+@user_passes_test(lambda u: u.is_superuser)
 def hidden_products(request):
     """ display hidden products to the admin """
     products = Product.objects.filter(hide_product=True)
@@ -92,7 +91,7 @@ def hidden_products(request):
     return render(request, template, context)
 
 
-@login_required
+@user_passes_test(lambda u: u.is_superuser)
 def out_of_stock_products(request):
     """ display out of stock products to the admin """
     out_of_stock_products = []
@@ -107,7 +106,7 @@ def out_of_stock_products(request):
     return render(request, template, context)
 
 
-@login_required
+@user_passes_test(lambda u: u.is_superuser)
 def add_product(request):
     form = ProductForm()
 
@@ -127,7 +126,7 @@ def add_product(request):
     return render(request, template, context)
 
 
-@login_required
+@user_passes_test(lambda u: u.is_superuser)
 def update_product(request, product_id):
     product = Product.objects.get(id=product_id)
     form = ProductForm(instance=product)
@@ -153,7 +152,7 @@ def update_product(request, product_id):
     return render(request, template, context)
 
 
-@login_required
+@user_passes_test(lambda u: u.is_superuser)
 def delete_warning(request, product_id):
     product = Product.objects.get(id=product_id)
 
@@ -165,7 +164,7 @@ def delete_warning(request, product_id):
     return render(request, template, context)
 
 
-@login_required
+@user_passes_test(lambda u: u.is_superuser)
 def delete_product(request, product_id):
     product = Product.objects.get(id=product_id)
     try:

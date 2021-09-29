@@ -22,13 +22,12 @@ def add_review(request, product_id):
             'author': request.user
         }
         review_form = ReviewForm(form_data)
-        next = request.POST.get('next')
         if review_form.is_valid:
             user = request.user
             review_form.save()
             messages.success(request, f'Review successfully \
                 created. Thank You { user }')
-            return HttpResponseRedirect(next)
+            return redirect(reverse('profile_page'))
 
     template = 'reviews/add_review.html'
     context = {

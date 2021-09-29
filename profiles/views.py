@@ -38,6 +38,7 @@ def profile_page(request):
     return render(request, template, context)
 
 
+@login_required
 def profile_order_history(request, order_number):
     order = get_object_or_404(CheckoutOrder, order_number=order_number)
     from_profile_page = True
