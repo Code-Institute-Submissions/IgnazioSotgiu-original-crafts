@@ -159,7 +159,7 @@ if 'USE_AWS' in os.environ:
 
     STATICFILES_STORAGE = 'custom_storages.StaticStorage'
     STATICFILES_LOCATION = 'static'
-    DEFAULT_FILES_STORAGE = 'custom_storages.StaticMediaStorage'
+    DEFAULT_FILE_STORAGE = 'custom_storages.StaticMediaStorage'
     MEDIAFILES_LOCATION = 'media'
 
     # override default urls with the bucket
