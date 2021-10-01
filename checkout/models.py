@@ -20,7 +20,7 @@ class CheckoutOrder(models.Model):
     full_name = models.CharField(max_length=60, null=False, blank=False)
     email_address = models.EmailField(max_length=254, null=False, blank=False)
     phone_number = models.CharField(
-        max_length=254, null=False, blank=False, default='0')
+        max_length=254, null=False, blank=False, default='')
     street_address = models.CharField(max_length=254, null=False, blank=False)
     town_or_city = models.CharField(max_length=254, null=False, blank=False)
     county = models.CharField(max_length=254, null=True, blank=True)

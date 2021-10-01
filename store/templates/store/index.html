@@ -4,32 +4,29 @@
 
 {% block content %}
 {% if request.user.is_authenticated or request.user.is_superuser %}
-    <div class="bg-black text-white center-align welcome-message">
-      Welcome {{ request.user.username }}
+  <div class="bg-black text-white center-align welcome-message">
+    Welcome {{ request.user.username }}
+  </div>
+  <div class="container-fluid sunset-bg">
+    <div class="home-message-container contrainer-fluid">
+      <a href="{% url 'products' %}">
+        <button class="btn go-to-store-btn">Check Our Products</button>
+      </a>
     </div>
-<div class="container-fluid sunset-bg">
-  <div class="home-message-container contrainer-fluid">
-    <a href="{% url 'products' %}">
-      <button class="btn go-to-store-btn">Check Our Products</button>
-    </a>
   </div>
-        
-    {% else %}
-      <div class="col-10 offset-1 col-sm-6 offset-sm-4 col-md-6 offset-md-4 col-lg-4 offset-lg-6 home-message white-overlay">
-        Welcome to our site!!!
-        <br>
-        <a href="{% url 'account_signup' %}">
-          <button class="btn register-now-btn">Register Now!</button>
-        </a>
-        Get free delivery on orders over 50 euro!!!
-        <br>
-        <a href="{% url 'products' %}">
-          <button class="btn go-to-store-btn">Go to the store</button>
-        </a>
-      </div>
-    {% endif %}
+{% else %}
+  <div class="bg-black text-white center-align welcome-message">
+    You are not logged in! <br>
+    <a class="yellow-text" href="{% url 'account_login' %}">Login</a> or <a class="yellow-text" href="{% url 'account_signup' %}">Signup</a> or continue as guest!
   </div>
-</div>
+  <div class="container-fluid sunset-bg">
+    <div class="home-message-container contrainer-fluid">
+      <a href="{% url 'products' %}">
+        <button class="btn go-to-store-btn">Check Our Products</button>
+      </a>
+    </div>
+  </div>
+{% endif %}
 <div class="row">
   <div class="col-12 promotion-section">
     <i class="fas fa-arrow-down"></i>

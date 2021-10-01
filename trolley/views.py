@@ -14,7 +14,7 @@ def view_trolley(request):
 def add_to_trolley(request, product_id):
 
     quantity = int(request.POST.get('quantity'))
-
+    product = get_object_or_404(Product, id=product_id)
     trolley = request.session.get('trolley', {})
 
     if product_id in list(trolley.keys()):
@@ -23,6 +23,7 @@ def add_to_trolley(request, product_id):
         trolley[product_id] = quantity
 
     request.session['trolley'] = trolley
+    messages.success(request, f'{product.name} has been successfully added to your trolley')
 
     return redirect('view_trolley')
 

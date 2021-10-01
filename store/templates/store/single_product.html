@@ -39,13 +39,13 @@
                     </div>
                     <div class="row">
                         <div class="col-12 center-align mt-5">
-                            <a href="{% url 'products' %}" class="btn yellow-inverse-btn">
+                            <a href="{% url 'products' %}" class="btn btn-sm yellow-inverse-btn">
                                 <span class="icon">
                                     <i class="fas fa-search"></i>
                                     Check more products
                                 </span>
                             </a>
-                            <input type="submit" class="btn yellow-btn" value="Add to Trolley">
+                            <input type="submit" class="btn yellow-btn btn-sm" value="Add to Trolley">
                         </div>
                     </div>
                 </form>
@@ -89,7 +89,7 @@
 {% else %}
     <div class="row">
         <div class="col-10 offset-1 center-align white-text">
-            <h2>There are not reviews of this product yet!</h2>
+            <p>There are not reviews of this product yet!</p>
         </div>
     </div>
 {% endif %}

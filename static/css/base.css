@@ -63,7 +63,12 @@ label.required-field {
 }
 .bg-jumbotron-dark {
     background-color: #695c5c;
-
+}
+.float-left {
+    float: left;
+}
+.float-right {
+    float: right;
 }
 /* back to top link */
 .back-to-top-container {
@@ -428,7 +433,10 @@ a:hover {
     .top-banner-message {
         font-size: 15px;
         top: 0;
-        padding-top: 2px;
+        padding: 10px 0;
+    }
+    .cart-container {
+        padding: 10px 0;
     }
     .fa-shopping-cart:before {
         font-size: 15px;
@@ -531,6 +539,10 @@ a:hover {
     }
     .go-to-store-btn {
         margin-top: 10px;
+    }
+    /* search result */
+    .search-result-text {
+        font-size: 15px;
     }
     /* footer*/
     .footer-container {

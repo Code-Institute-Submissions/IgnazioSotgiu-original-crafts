@@ -4,27 +4,26 @@
 
 {% block content %}
 <div class="row">
-    <div class="col-12 search-result-title-container"> 
-        {% if query %}
-          <span class="search-result-title">Found {{total_items }} result for "{{ query }}"
-        {% elif selected_categories %}
-          
-            <span class="search-result-title">
-              Found {{total_items }} result for: 
-              {% for c in selected_categories %} 
-                {{ c.friendly_name }}
-                <br>  
-              {% endfor %}
-            </span>
-          
-        {% else %}
-          <span class="search-result-title text-red">No Products were found try a new search!
-        {% endif %}
-        </span>
-    </div>
+  <div class="col-12 search-result-title-container"> 
+    {% if query %}
+      <span class="search-result-text">Found {{total_items }} result for "{{ query }}"</span>
+    {% elif selected_categories %}
+      <div class="row">
+        <div class="col-6 search-result-text float-right">Found {{total_items }} result for:</div>
+        <div class="col-6">
+          {% for c in selected_categories %} 
+            <span class="float-left search-result-text"><a class="text-white" href="{% url 'search_result' %}?category={{ c }}">{{ c.friendly_name }}</a></span><br>
+          {% endfor %}
+        </div>
+      </div>
+    {% else %}
+      <span class="search-result-title text-red">No Products were found try a new search!</span>
+    {% endif %}
   </div>
-  <div class="row bg-black">
-    {% for product in products %}
+  <hr class="hr-trolley">
+</div>
+<div class="row bg-black">
+  {% for product in products %}
       {% if product.number_in_stock > 0 and not product.hide_product %}
         <div class="col-12 col-sm-6 col-lg-4 popular-products-div">
           <a href="{% url 'single_product' product.id %}">
@@ -38,14 +37,14 @@
                         <img src="{{ MEDIA_URL }}noimage.png" class="card-img-top" alt="{{ product.name }}">
                     </a>
                 {% endif %}
-              <div class="card-body">
-                <p class="card-text">{{ product.name | title }}.</p>
+              <div class="card-body white-text">
+                <p class="card-text">Title:<br>{{ product.name | title }}</p>
                 {% if product.special_price %}
                   <p class="card-text"><span class="text-red">SALE   </span><del>€{{ product.price}}</del><span>   €{{ product.special_price }}</span></p>
                 {% else %}
                   <p class="card-text">€{{ product.price }}</p>
                 {% endif %}
-                <p class="card-text">{{ product.category | title }}</p>
+                <p class="card-text">Category:<br>{{ product.category.friendly_name | title }}</p>
                 {% if product.original_tag %}
                   <p class="card-text">Original Design</p>
                 {% endif %}
@@ -55,8 +54,14 @@
               </div>
             </div>
           </a>
+          <div class="row">
+            <div class="col-12 center-align">
+              <a href="{% url 'single_product' product.id %}" class="btn yellow-btn btn-sm">View</a>
+            </div>
+          </div>
+          <hr class="hr-trolley">
         </div>
       {% endif %}
     {% endfor %}
-  </div>
-  {% endblock %}
+</div>
+{% endblock %}

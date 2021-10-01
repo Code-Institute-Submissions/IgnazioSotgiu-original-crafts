@@ -117,15 +117,15 @@ def checkout_completed(request, order_number):
     if user.is_authenticated:
         profile = Profile.objects.get(user=request.user)
         save_address_details = request.session.get('save_address_details')
-    if save_address_details:
-        updated_profile_address = {
-            'phone_number': order.phone_number,
-            'street_address': order.street_address,
-            'town_or_city': order.town_or_city,
-            'county': order.county,
-            'country': order.country,
-            'zip_postcode': order.zip_postcode,
-        }
+        if save_address_details:
+            updated_profile_address = {
+                'phone_number': order.phone_number,
+                'street_address': order.street_address,
+                'town_or_city': order.town_or_city,
+                'county': order.county,
+                'country': order.country,
+                'zip_postcode': order.zip_postcode,
+            }
         profile_form = ProfileForm(updated_profile_address, instance=profile)
         if profile_form.is_valid():
             profile_form.save()
