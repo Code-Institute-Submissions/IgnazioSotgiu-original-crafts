@@ -38,9 +38,9 @@
           <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
             {% if request.user.is_authenticated %}
               {% if request.user.is_superuser %}
-                <li><a class="dropdown-item" href="{% url 'add_product' %}">Admin Add Product</a></li>
-                <li><a class="dropdown-item" href="{% url 'hidden_products' %}">Admin Hidden Products</a></li>
-                <li><a class="dropdown-item" href="{% url 'out_of_stock_products' %}">Admin Out of Stock Products</a></li>
+                <li><a class="dropdown-item text-danger" href="{% url 'add_product' %}">Admin Add Product</a></li>
+                <li><a class="dropdown-item text-danger" href="{% url 'hidden_products' %}">Admin Hidden Products</a></li>
+                <li><a class="dropdown-item text-danger" href="{% url 'out_of_stock_products' %}">Out of Stock Products</a></li>
               {% endif%}
               <li><a class="dropdown-item" href="{% url 'profile_page' %}">My Account</a></li>
               <li><a class="dropdown-item" href="{% url 'account_logout' %}">Logout</a></li>

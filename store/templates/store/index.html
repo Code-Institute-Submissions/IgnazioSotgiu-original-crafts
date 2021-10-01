@@ -3,20 +3,17 @@
 
 
 {% block content %}
+{% if request.user.is_authenticated or request.user.is_superuser %}
+    <div class="bg-black text-white center-align welcome-message">
+      Welcome {{ request.user.username }}
+    </div>
 <div class="container-fluid sunset-bg">
-  <div class="row home-message-container">
-    {% if request.user.is_authenticated or request.user.is_superuser %}
-      <div class="col-10 offset-1 col-sm-6 offset-sm-4 col-md-6 offset-md-4 col-lg-4 offset-lg-6 home-message white-overlay">
-        Welcome {{ request.user.username }},
-        <br>
-        Check out our new products in the store!!!
-        <br>
-        Free delivery on orders over 50 euro!!!
-        <br>
-        <a href="{% url 'products' %}">
-          <button class="btn go-to-store-btn">Go to the store</button>
-        </a>
-      </div>
+  <div class="home-message-container contrainer-fluid">
+    <a href="{% url 'products' %}">
+      <button class="btn go-to-store-btn">Check Our Products</button>
+    </a>
+  </div>
+        
     {% else %}
       <div class="col-10 offset-1 col-sm-6 offset-sm-4 col-md-6 offset-md-4 col-lg-4 offset-lg-6 home-message white-overlay">
         Welcome to our site!!!
@@ -77,9 +74,11 @@
   {% endfor %}
 </div>
 <div class="row bg-black m-1">
-  <div class="col-12 col-md-6 col-lg-3 col-xl-3 image-container">
-    <img class="cover" src="{{ MEDIA_URL }}oc-logo-small.png" alt="">
-  </div>
+  <a href="#" class="col-12 col-md-6 col-lg-3 col-xl-3 image-container bg-oc-logo-small">
+    <div class="about-us">
+      <h1 class="about-us-title center-align">About Us</h1>
+    </div>
+  </a>
   <div class="col-12 col-md-6 col-lg-3 col-xl-3 image-container">
     <img class="cover" src="{{ MEDIA_URL }}jigsaw-puzzle-1-small.jpg" alt="">
   </div>

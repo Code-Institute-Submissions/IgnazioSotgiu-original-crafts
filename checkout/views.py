@@ -94,13 +94,12 @@ def view_checkout_page(request):
             amount=stripe_grand_total,
             currency=settings.STRIPE_CURRENCY,
         )
-        print(intent)
     user = request.user
     if user.is_authenticated:
         profile = get_object_or_404(Profile, user=request.user)
-
-    form = CheckoutForm(instance=profile)
-
+        form = CheckoutForm(instance=profile)
+    else:
+        form = CheckoutForm()
     template = 'checkout/checkout_page.html'
     context = {
         'form': form,
@@ -114,10 +113,10 @@ def view_checkout_page(request):
 def checkout_completed(request, order_number):
     template = 'checkout/checkout_completed.html'
     order = get_object_or_404(CheckoutOrder, order_number=order_number)
-
-    profile = Profile.objects.get(user=request.user)
-    save_address_details = request.session.get('save_address_details')
-    print(save_address_details)
+    user = request.user
+    if user.is_authenticated:
+        profile = Profile.objects.get(user=request.user)
+        save_address_details = request.session.get('save_address_details')
     if save_address_details:
         updated_profile_address = {
             'phone_number': order.phone_number,
