@@ -1,6 +1,6 @@
 from django.shortcuts import (
     render, redirect, reverse, get_object_or_404, HttpResponseRedirect)
-from django.contrib.auth.decorators import login_required, user_passes_test
+from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from django.db.models import Q
 from reviews.models import Review
@@ -11,7 +11,7 @@ from .forms import ProductForm
 def display_homepage(request):
     """ Display the homepage """
     template = 'store/index.html'
-    products = Product.objects.all()
+    products = Product.objects.all().filter(add_to_popular_products=True)
     context = {
         'products': products,
     }
@@ -20,7 +20,7 @@ def display_homepage(request):
 
 def products(request):
     """ display all products in e store - all products page """
-    products = Product.objects.all()
+    products = Product.objects.order_by('-updated')
     template = 'store/products.html'
     context = {
         'products': products,
@@ -80,92 +80,126 @@ def search_result(request):
     return render(request, template, context)
 
 
-@user_passes_test(lambda u: u.is_superuser)
+@login_required
 def hidden_products(request):
     """ display hidden products to the admin """
-    products = Product.objects.filter(hide_product=True)
-    template = 'store/hidden_products.html'
-    context = {
-        'products': products,
-    }
-    return render(request, template, context)
+    if request.user.is_superuser:
+        products = Product.objects.filter(hide_product=True)
+        template = 'store/hidden_products.html'
+        context = {
+            'products': products,
+        }
+        return render(request, template, context)
+
+    else:
+        messages.error(request, 'Only Admin can access this link')
+        return redirect('home')
 
 
-@user_passes_test(lambda u: u.is_superuser)
+@login_required
 def out_of_stock_products(request):
     """ display out of stock products to the admin """
-    out_of_stock_products = []
-    products = Product.objects.all()
-    for product in products:
-        if product.number_in_stock == 0:
-            out_of_stock_products.append(product)
-    template = 'store/out_of_stock_products.html'
-    context = {
-        'products': out_of_stock_products,
-    }
-    return render(request, template, context)
+    if request.user.is_superuser:
+        out_of_stock_products = []
+        products = Product.objects.all()
+        for product in products:
+            if product.number_in_stock == 0:
+                out_of_stock_products.append(product)
+        template = 'store/out_of_stock_products.html'
+        context = {
+            'products': out_of_stock_products,
+        }
+        return render(request, template, context)
+    else:
+        messages.error(request, 'Only Admin can access this link')
+        return redirect('home')
 
 
-@user_passes_test(lambda u: u.is_superuser)
+@login_required
 def add_product(request):
-    form = ProductForm()
+    """
+    add product to the database
+    """
+    if request.user.is_superuser:
+        form = ProductForm()
 
-    if request.method == 'POST':
-        form = ProductForm(request.POST, request.FILES)
-        next = request.POST.get('next')
-        if form.is_valid:
-            form.save()
-            messages.success(request, 'Product successfully added to store')
-            return HttpResponseRedirect(next)
-
-    template = 'store/add_product.html'
-    context = {
-        'form': form,
-    }
-
-    return render(request, template, context)
-
-
-@user_passes_test(lambda u: u.is_superuser)
-def update_product(request, product_id):
-    product = Product.objects.get(id=product_id)
-    form = ProductForm(instance=product)
-
-    if request.method == 'POST':
-        next = request.POST.get('next')
-        try:
-            form = ProductForm(request.POST, request.FILES, instance=product)
+        if request.method == 'POST':
+            form = ProductForm(request.POST, request.FILES)
+            next = request.POST.get('next')
             if form.is_valid:
                 form.save()
-                messages.success(request, 'Product successfully updated')
+                messages.success(request, 'Product successfully added to store')
                 return HttpResponseRedirect(next)
-        except ValueError:
-            messages.error(request, 'The form submitted \
-                was invalid. Please enter valid data')
-            return HttpResponseRedirect(next)
 
-    template = 'store/update_product.html'
-    context = {
-        'form': form,
-    }
+        template = 'store/add_product.html'
+        context = {
+            'form': form,
+        }
 
-    return render(request, template, context)
+        return render(request, template, context)
+    else:
+        messages.error(request, 'Only Admin can access this link')
+        return redirect('home')
 
 
-@user_passes_test(lambda u: u.is_superuser)
+@login_required
+def update_product(request, product_id):
+    """
+    update product already in the database
+    """
+    if request.user.is_superuser:
+        product = Product.objects.get(id=product_id)
+        form = ProductForm(instance=product)
+
+        if request.method == 'POST':
+            next = request.POST.get('next')
+            try:
+                form = ProductForm(request.POST, request.FILES, instance=product)
+                if form.is_valid:
+                    form.save()
+                    messages.success(request, 'Product successfully updated')
+                    return Redirect('products')
+            except ValueError:
+                messages.error(request, 'The form submitted \
+                    was invalid. Please enter valid data')
+                return HttpResponseRedirect(next)
+
+        template = 'store/update_product.html'
+        context = {
+            'form': form,
+        }
+
+        return render(request, template, context)
+    else:
+        messages.error(request, 'Only Admin can access this link')
+        return redirect('home')
+
+
+@login_required
 def delete_warning(request, product_id):
-    product = Product.objects.get(id=product_id)
+    """
+    A view make sure the admin is deleting the right product
+    Last step before deleting product
+    """
+    if request.user.is_superuser:
+        product = Product.objects.get(id=product_id)
 
-    template = 'store/delete_product_warning.html'
-    context = {
-        'product': product,
-    }
+        template = 'store/delete_product_warning.html'
+        context = {
+            'product': product,
+        }
 
-    return render(request, template, context)
+        return render(request, template, context)
+    else:
+        messages.error(request, 'Only Admin can access this function')
+        return redirect('home')
 
 
-@user_passes_test(lambda u: u.is_superuser)
+@login_required
 def delete_product(request, product_id):
+    """
+    Delete product from the database
+    """
     product = Product.objects.get(id=product_id)
     try:
         product.delete()

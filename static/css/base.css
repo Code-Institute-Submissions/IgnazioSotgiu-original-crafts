@@ -36,6 +36,9 @@ a:hover {
     border: #000 1px solid;
     border-radius: 5px;
 }
+.btn-secondary {
+    background-color: #c1eb04;
+}
 .yellow-btn:hover {
     margin-top: 10px;
     background-color: #e2d407;
@@ -211,6 +214,9 @@ footer {
     letter-spacing: 2px;
     text-align: center;
     color: #000;
+}
+.welcome-message {
+    margin: 10px;
 }
 .white-overlay {
     background-color: rgba(255, 255, 255, 0.6);
@@ -391,6 +397,33 @@ a:hover {
 .review-container-text {
     font-size: 15px;
 }
+/***********profile page ************************/
+.order-container {
+    margin: 50px;
+    padding: 50px;
+    background-color: rgb(68, 65, 65);
+    border: 1px solid #fff;
+    border-radius: 20px;
+    width: auto;
+    height: fit-content;
+}
+.review-btn-container {
+    margin-bottom: 50px;
+}
+.hr-order-history {
+    margin-bottom: 50px;
+    background-color: #fff;
+    width: 80%;
+    margin-left: 10%;
+}
+.profile-info {
+    font-size: 15px;
+    margin: 20px 5px;
+}
+
+@media screen and (max-width: 575px){
+
+}
 /**************media queries*********************/
 @media screen and (max-width: 900px){
     /*top banner - header */
@@ -493,7 +526,7 @@ a:hover {
         padding-top: 3px;
     }
     .bg-dark {
-        background: url('/media/ms4-header-bg.jpg') no-repeat center center;
+        background: url('/media/ms4-header2.jpg') no-repeat center center;
         background-size: cover;
     }
     .navbar-dark .navbar-toggler {
@@ -530,7 +563,6 @@ a:hover {
     }
     .navbar-container {
         padding-left: 56px;
-        padding-top: 40px;
     }
     .navbar-dark .navbar-brand {
         color: #000;
