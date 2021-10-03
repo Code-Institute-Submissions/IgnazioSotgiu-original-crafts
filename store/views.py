@@ -28,6 +28,16 @@ def products(request):
     return render(request, template, context)
 
 
+def best_sellers(request):
+    """ display Best sellers - Fast selling products """
+    products = Product.objects.filter(selling_fast_tag=True).order_by('-updated', '-created')
+    template = 'store/best_sellers.html'
+    context = {
+        'products': products,
+    }
+    return render(request, template, context)
+
+
 def single_product(request, product_id):
     product = get_object_or_404(Product, pk=product_id)
     reviews = Review.objects.all().filter(

@@ -29,63 +29,66 @@
       {% endif %}
     </div>
   </div>
-<div class="row">
-  <div class="col-12 promotion-section">
-    <i class="fas fa-arrow-down"></i>
-     <span class="promotion-section-title">Popular Products</span>
-    <i class="fas fa-arrow-down"></i>
-  </div>
-</div>
-<div class="row bg-black">
-  {% for product in products %}
-    {% if product.number_in_stock > 0 and not product.hide_product and product.add_to_popular_products %}
-      <div class="col-12 col-sm-6 col-lg-4 popular-products-div">
-        <a href="{% url 'single_product' product.id %}">
-          <div class="card">
-            {% if product.image %}
-                <a href="{% url 'single_product' product.id %}">
-                    <img src="{{ product.image.url }}" class="card-img-top" alt="{{ product.name }}">
-                </a>
-            {% else %}
-                <a href="{% url 'single_product' product.id %}">
-                    <img src="{{ MEDIA_URL }}noimage.png" class="card-img-top" alt="{{ product.name }}">
-                </a>
-            {% endif %}
-            <div class="card-body">
-              <p class="card-text">{{ product.name | title }}.</p>
-              {% if product.special_price %}
-                <p class="card-text"><span class="text-red">SALE   </span><del>€{{ product.price}}</del><span>   €{{ product.special_price }}</span></p>
-              {% else %}
-                <p class="card-text">€{{ product.price }}</p>
-              {% endif %}
-              <p class="card-text">{{ product.category | title }}.</p>
-              {% if product.original_tag %}
-                <p class="card-text">Original Design</p>
-              {% endif %}
-              {% if product.selling_fast %}
-                <p class="card-text">Selling Fast !!!</p>
-              {% endif %}
-            </div>
-          </div>
-        </a>
-      </div>
-    {% endif %}
-  {% endfor %}
-</div>
-<div class="row bg-black m-1">
-  <a href="#" class="col-12 col-md-6 col-lg-3 col-xl-3 image-container bg-oc-logo-small">
-    <div class="about-us">
-      <h1 class="about-us-title center-align">About Us</h1>
+  {% block store_links %}
+    {% include 'includes/product_links.html' %}
+  {% endblock %}
+  <div class="row">
+    <div class="col-12 promotion-section">
+      <i class="fas fa-arrow-down"></i>
+      <span class="promotion-section-title">Popular Products</span>
+      <i class="fas fa-arrow-down"></i>
     </div>
-  </a>
-  <div class="col-12 col-md-6 col-lg-3 col-xl-3 image-container">
-    <img class="cover" src="{{ MEDIA_URL }}jigsaw-puzzle-1-small.jpg" alt="">
   </div>
-  <div class="col-12 col-md-6 col-lg-3 col-xl-3 image-container">
-    <img class="cover" src="{{ MEDIA_URL }}Paintbynumbers-2-small.jpg" alt="">
+  <div class="row bg-black">
+    {% for product in products %}
+      {% if product.number_in_stock > 0 and not product.hide_product and product.add_to_popular_products %}
+        <div class="col-12 col-sm-6 col-lg-4 popular-products-div">
+          <a href="{% url 'single_product' product.id %}">
+            <div class="card">
+              {% if product.image %}
+                  <a href="{% url 'single_product' product.id %}">
+                      <img src="{{ product.image.url }}" class="card-img-top" alt="{{ product.name }}">
+                  </a>
+              {% else %}
+                  <a href="{% url 'single_product' product.id %}">
+                      <img src="{{ MEDIA_URL }}noimage.png" class="card-img-top" alt="{{ product.name }}">
+                  </a>
+              {% endif %}
+              <div class="card-body">
+                <p class="card-text">{{ product.name | title }}.</p>
+                {% if product.special_price %}
+                  <p class="card-text"><span class="text-red">SALE   </span><del>€{{ product.price}}</del><span>   €{{ product.special_price }}</span></p>
+                {% else %}
+                  <p class="card-text">€{{ product.price }}</p>
+                {% endif %}
+                <p class="card-text">{{ product.category | title }}.</p>
+                {% if product.original_tag %}
+                  <p class="card-text">Original Design</p>
+                {% endif %}
+                {% if product.selling_fast %}
+                  <p class="card-text">Selling Fast !!!</p>
+                {% endif %}
+              </div>
+            </div>
+          </a>
+        </div>
+      {% endif %}
+    {% endfor %}
   </div>
-  <div class="col-12 col-md-6 col-lg-3 col-xl-3 image-container">
-    <img class="cover" src="{{ MEDIA_URL }}paint-by-numbers-history-1-small.jpg" alt="">
+  <div class="row bg-black m-1">
+    <a href="#" class="col-12 col-md-6 col-lg-3 col-xl-3 image-container bg-oc-logo-small">
+      <div class="about-us">
+        <h1 class="about-us-title center-align">About Us</h1>
+      </div>
+    </a>
+    <div class="col-12 col-md-6 col-lg-3 col-xl-3 image-container">
+      <img class="cover" src="{{ MEDIA_URL }}jigsaw-puzzle-1-small.jpg" alt="">
+    </div>
+    <div class="col-12 col-md-6 col-lg-3 col-xl-3 image-container">
+      <img class="cover" src="{{ MEDIA_URL }}Paintbynumbers-2-small.jpg" alt="">
+    </div>
+    <div class="col-12 col-md-6 col-lg-3 col-xl-3 image-container">
+      <img class="cover" src="{{ MEDIA_URL }}paint-by-numbers-history-1-small.jpg" alt="">
+    </div>
   </div>
-</div>
 {% endblock %}

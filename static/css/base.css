@@ -169,6 +169,9 @@ label.required-field {
     padding: 5px;
     background-color: #c1eb04;
 }
+.product-links {
+    background-color: #695c5c;
+}
 /*****************************footer***************************/
 footer {
     width: 100%;

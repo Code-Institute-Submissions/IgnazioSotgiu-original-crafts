@@ -17,4 +17,6 @@ urlpatterns = [
           views.hidden_products, name='hidden_products'),
      path('store/out_of_stock_products/',
           views.out_of_stock_products, name='out_of_stock_products'),
+     path('store/best_sellers/',
+          views.best_sellers, name='best_sellers'),
      ]
