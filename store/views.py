@@ -20,7 +20,7 @@ def display_homepage(request):
 
 def products(request):
     """ display all products in e store - all products page """
-    products = Product.objects.order_by('-updated')
+    products = Product.objects.order_by('-updated', '-created')
     template = 'store/products.html'
     context = {
         'products': products,
@@ -30,11 +30,16 @@ def products(request):
 
 def single_product(request, product_id):
     product = get_object_or_404(Product, pk=product_id)
-    reviews = Review.objects.all().filter(product=product_id)
+    reviews = Review.objects.all().filter(
+        product=product_id).order_by('-review_date')
+    reviews_count = 0
+    for review in reviews:
+        reviews_count += 1
     template = 'store/single_product.html'
     context = {
         'product': product,
         'reviews': reviews,
+        'reviews_count': reviews_count,
     }
     return render(request, template, context)
 
@@ -44,7 +49,7 @@ def single_product(request, product_id):
 def search_result(request):
 
     """ display search result - search result page """
-    products = Product.objects.all()
+    products = Product.objects.order_by('-updated', '-created')
     categories = None
     query = None
     total_items = 0
@@ -67,7 +72,7 @@ def search_result(request):
                 messages.warning(request, 'Enter a valid search parameter')
                 return redirect(reverse('home'))
 
-            products = products.filter(search_terms)
+            products = products.filter(search_terms).order_by('-updated', '-created')
 
     total_items = len(products)
     template = 'store/search_result.html'
@@ -158,7 +163,7 @@ def update_product(request, product_id):
                 if form.is_valid:
                     form.save()
                     messages.success(request, 'Product successfully updated')
-                    return Redirect('products')
+                    return redirect('products')
             except ValueError:
                 messages.error(request, 'The form submitted \
                     was invalid. Please enter valid data')

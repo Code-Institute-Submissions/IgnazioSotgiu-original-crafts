@@ -18,9 +18,8 @@
             <li><a class="dropdown-item" href="{% url 'search_result' %}?category=paint_by_numbers">Paint by Numbers</a></li>
             <li><a class="dropdown-item" href="{% url 'search_result' %}?category=jigsaw">Jigsaw Puzzle</a></li>
             <li><a class="dropdown-item" href="{% url 'search_result' %}?category=prints">Prints</a></li>
-            <li><a class="dropdown-item" href="{% url 'search_result' %}?category=kids">Kids Section</a></li>
             <li><a class="dropdown-item" href="{% url 'search_result' %}?category=accessories">Accessories</a></li>
-            <li><a class="dropdown-item" href="{% url 'search_result' %}?category=paint_by_numbers,jigsaw,prints,kids,accessories">All Products</a></li>
+            <li><a class="dropdown-item" href="{% url 'search_result' %}?category=paint_by_numbers,jigsaw,prints,accessories">All Products</a></li>
           </ul>
         </li>
         <li class="nav-item dropdown">
@@ -39,8 +38,8 @@
             {% if request.user.is_authenticated %}
               {% if request.user.is_superuser %}
                 <li><a class="dropdown-item text-danger" href="{% url 'products' %}">Manage Products</a></li>
-                <li><a class="dropdown-item text-danger" href="{% url 'add_product' %}">Admin Add Product</a></li>
-                <li><a class="dropdown-item text-danger" href="{% url 'hidden_products' %}">Admin Hidden Products</a></li>
+                <li><a class="dropdown-item text-danger" href="{% url 'add_product' %}">Add Product</a></li>
+                <li><a class="dropdown-item text-danger" href="{% url 'hidden_products' %}">Hidden Products</a></li>
                 <li><a class="dropdown-item text-danger" href="{% url 'out_of_stock_products' %}">Out of Stock Products</a></li>
               {% endif%}
               <li><a class="dropdown-item" href="{% url 'profile_page' %}">My Account</a></li>

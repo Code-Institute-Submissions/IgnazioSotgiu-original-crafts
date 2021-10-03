@@ -14,6 +14,7 @@ body {
 }
 a:hover {
     text-decoration: none;
+    color: wheat;
 }
 .white-text {
     color: #fff;
@@ -199,9 +200,19 @@ footer {
     -o-background-size: contain;
     background-size: 100% 100%;
 }
+.homepage-message-container {
+    padding: 10px;
+}
 .home-message-container {
     padding: 20px;
     height: 300px;
+    width: fit-content;
+    color: white;
+    font-size: 20px;
+    background-color: #383435ab;
+    text-align: center;
+    margin-left: 50%;
+    border-radius: 5px;
 }
 .home-message {
     display: flex;
@@ -291,14 +302,23 @@ a:hover {
     top: 0;
 }
 .jumbotron {
+    background-color: transparent;
     padding: 4rem 2rem;
     margin: 50px;
+    padding: 20px;
     border: 1px #fff solid;
 }
 .single-product-img {
     padding: 10px;
     background-color: #796363;
-    max-width: 100%;
+    max-width: 300px;
+}
+.single-product-container {
+    padding: 20px 10px;
+}
+.product-title {
+    font-size: 25px;
+
 }
 /**************contact us section ***************/
 .bg-oc-logo-small {
@@ -511,11 +531,14 @@ a:hover {
     }
     .home-message-container {
         height: 200px;
+        background-color: transparent;
     }
     .go-to-store-btn {
         float: right;
     }
-
+    .user-welcome-message{
+        display: none;
+    }
     .logo-container {
         height: 50px;
         color: rgb(17, 7, 7);
@@ -590,5 +613,17 @@ a:hover {
         max-width: 150px;
         height: auto;
         border: 1px solid #695c5c;
+    }
+    .review-container {
+        margin: 20px 30px;
+        padding: 20px 30px;
+        background-color: rgb(68, 65, 65);
+        border: 1px solid #fff;
+        border-radius: 5px;
+        width: auto;
+        height: fit-content;
+    }
+    .review-container-text {
+        font-size: 15px;
     }
 }

@@ -3,30 +3,32 @@
 
 
 {% block content %}
-{% if request.user.is_authenticated or request.user.is_superuser %}
-  <div class="bg-black text-white center-align welcome-message">
-    Welcome {{ request.user.username }}
-  </div>
-  <div class="container-fluid sunset-bg">
-    <div class="home-message-container contrainer-fluid">
-      <a href="{% url 'products' %}">
-        <button class="btn go-to-store-btn">Check Our Products</button>
-      </a>
+  {% if request.user.is_authenticated or request.user.is_superuser %}
+    <div class="bg-black text-white center-align welcome-message">
+      Welcome {{ request.user.username }}
+    </div>
+  {% else %}
+    <div class="bg-black text-white center-align welcome-message">
+      You are not logged in! <br>
+      <a class="yellow-text" href="{% url 'account_login' %}">Login</a> or <a class="yellow-text" href="{% url 'account_signup' %}">Signup</a> or continue as guest!
+    </div>
+  {% endif %}
+  <div class="container-fluid homepage-message-container sunset-bg">
+    <div class="home-message-container">
+      {% if request.user.is_authenticated or request.user.is_superuser %}
+        <div class="user-welcome-message">
+          <p>Welcome back {{ request.user.username }}!!</p>
+          <p>We have free delivery on orders over €50!!</p>
+          <p>Check our new products now</p>
+        </div>
+        <div class="">
+          <a href="{% url 'products' %}">
+            <button class="btn go-to-store-btn">Check Our Products</button>
+          </a>
+        </div>
+      {% endif %}
     </div>
   </div>
-{% else %}
-  <div class="bg-black text-white center-align welcome-message">
-    You are not logged in! <br>
-    <a class="yellow-text" href="{% url 'account_login' %}">Login</a> or <a class="yellow-text" href="{% url 'account_signup' %}">Signup</a> or continue as guest!
-  </div>
-  <div class="container-fluid sunset-bg">
-    <div class="home-message-container contrainer-fluid">
-      <a href="{% url 'products' %}">
-        <button class="btn go-to-store-btn">Check Our Products</button>
-      </a>
-    </div>
-  </div>
-{% endif %}
 <div class="row">
   <div class="col-12 promotion-section">
     <i class="fas fa-arrow-down"></i>
