@@ -252,7 +252,7 @@ footer {
 .image-container {
     width: 90%;
     height: auto;
-    background-color: #695c5c;
+    background-color: #000;
     padding: 10px;
     height: 300px;
     overflow: hidden;
@@ -335,6 +335,40 @@ a:hover {
     margin-top: 20px;
     color: #000;
     font-weight: 600;
+    background-color: #f0f8ff9e;
+}
+.jigsaw-puzzle-1-small {
+    background: url('/media/jigsaw-puzzle-1-small.jpg') no-repeat center center;
+    -webkit-background-size: contain;
+    -moz-background-size: contain;
+    -o-background-size: contain;
+    background-size: 100% 100%;
+}
+.jigsaw-title {
+    margin-top: 20px;
+    color: #000;
+    font-weight: 600;
+    background-color: #f0f8ff9e;
+}
+.paintbynumbers-2-small {
+    background: url('/media/Paintbynumbers-2-small.jpg') no-repeat center center;
+    -webkit-background-size: contain;
+    -moz-background-size: contain;
+    -o-background-size: contain;
+    background-size: 100% 100%;
+}
+.paint-by-numbers-history-1-small {
+    background: url('/media/paint-by-numbers-history-1-small.jpg') no-repeat center center;
+    -webkit-background-size: contain;
+    -moz-background-size: contain;
+    -o-background-size: contain;
+    background-size: 100% 100%;
+}
+.paint-by-numbers-title {
+    margin-top: 20px;
+    color: #000;
+    font-weight: 600;
+    background-color: #f0f8ff9e;
 }
 /***************search result page **************/
 .search-result-title-container {
@@ -381,7 +415,7 @@ a:hover {
 /**********messages****************/
 .message-container {
     position: fixed;
-    top: 100px;
+    top: 200px;
     right: 50px;
     z-index: 99999999;
 }
@@ -612,9 +646,6 @@ a:hover {
         padding-top: 10px;
     }
     .trolley-image {
-        margin-top: 30px;
-        max-width: 150px;
-        height: auto;
         border: 1px solid #695c5c;
     }
     .review-container {
@@ -628,5 +659,18 @@ a:hover {
     }
     .review-container-text {
         font-size: 15px;
+    }
+    .order-container {
+        margin: 20px;
+        padding: 10px;
+    }
+    .hr-order-history {
+        margin-bottom: 10px;
+    }
+    .message-container {
+        top: 120px;
+    }
+    .toast.show {
+        max-width: 300px;
     }
 }

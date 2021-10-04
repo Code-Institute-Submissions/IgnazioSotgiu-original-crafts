@@ -38,6 +38,13 @@ def best_sellers(request):
     return render(request, template, context)
 
 
+def contact_page(request):
+    """ a view to display the contact page """
+
+    template = 'store/contact_page.html'
+    return render(request, template)
+
+
 def single_product(request, product_id):
     product = get_object_or_404(Product, pk=product_id)
     reviews = Review.objects.all().filter(

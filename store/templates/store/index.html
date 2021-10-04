@@ -55,13 +55,13 @@
                   </a>
               {% endif %}
               <div class="card-body">
-                <p class="card-text">{{ product.name | title }}.</p>
+                <p class="card-text">{{ product.name | title }}</p>
                 {% if product.special_price %}
                   <p class="card-text"><span class="text-red">SALE   </span><del>€{{ product.price}}</del><span>   €{{ product.special_price }}</span></p>
                 {% else %}
                   <p class="card-text">€{{ product.price }}</p>
                 {% endif %}
-                <p class="card-text">{{ product.category | title }}.</p>
+                <p class="card-text">{{ product.category | title }}</p>
                 {% if product.original_tag %}
                   <p class="card-text">Original Design</p>
                 {% endif %}
@@ -76,19 +76,25 @@
     {% endfor %}
   </div>
   <div class="row bg-black m-1">
-    <a href="#" class="col-12 col-md-6 col-lg-3 col-xl-3 image-container bg-oc-logo-small">
+    <a href="#" class="col-12 col-md-6 col-lg-3 col-xl-3 bg-oc-logo-small image-container">
       <div class="about-us">
-        <h1 class="about-us-title center-align">About Us</h1>
+        <h2 class="about-us-title center-align">About Us</h2>
       </div>
     </a>
-    <div class="col-12 col-md-6 col-lg-3 col-xl-3 image-container">
-      <img class="cover" src="{{ MEDIA_URL }}jigsaw-puzzle-1-small.jpg" alt="">
-    </div>
-    <div class="col-12 col-md-6 col-lg-3 col-xl-3 image-container">
-      <img class="cover" src="{{ MEDIA_URL }}Paintbynumbers-2-small.jpg" alt="">
-    </div>
-    <div class="col-12 col-md-6 col-lg-3 col-xl-3 image-container">
-      <img class="cover" src="{{ MEDIA_URL }}paint-by-numbers-history-1-small.jpg" alt="">
-    </div>
+    <a href="" class="col-12 col-md-6 col-lg-3 col-xl-3 jigsaw-puzzle-1-small image-container">
+      <div class="jigsaw">
+        <h2 class="jigsaw-title center-align">Puzzle Jigsaw <br> Original Gallery</h2>
+      </div>
+    </a>
+    <a href="#" class="col-12 col-md-6 col-lg-3 col-xl-3 paintbynumbers-2-small image-container">
+      <div class="paint-by-numbers">
+        <h2 class="paint-by-numbers-title center-align">Accessories</h2>
+      </div>
+    </a>
+    <a href="" class="col-12 col-md-6 col-lg-3 col-xl-3 paint-by-numbers-history-1-small image-container">
+      <div class="paint-by-numbers">
+        <h2 class="paint-by-numbers-title center-align">Paint by Numbers <br> Original Gallery</h2>
+      </div>
+    </a>
   </div>
 {% endblock %}
