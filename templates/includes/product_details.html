@@ -1,0 +1,47 @@
+
+<div class="col-12 col-sm-6 col-lg-4 col-xl-3 popular-products-div">
+    <a href="{% url 'single_product' product.id %}">
+    <div class="card">
+        {% if product.image %}
+            <a href="{% url 'single_product' product.id %}" class="product-image-container">
+                <img src="{{ product.image.url }}" class="card-img-top" alt="{{ product.name }}">
+            </a>
+        {% else %}
+            <a href="{% url 'single_product' product.id %}" class="product-image-container">
+                <img src="{{ MEDIA_URL }}noimage.png" class="card-img-top" alt="{{ product.name }}">
+            </a>
+        {% endif %}
+        <div class="card-body white-text">
+        <p class="card-text">Title:<br>{{ product.name | title }}</p>
+        {% if product.special_price %}
+            <p class="card-text"><span class="text-red">SALE   </span><del>€{{ product.price}}</del><span>   €{{ product.special_price }}</span></p>
+        {% else %}
+            <p class="card-text">€{{ product.price }}</p>
+        {% endif %}
+        <p class="card-text">Category:<br>{{ product.category.friendly_name | title }}</p>
+        {% if product.original_tag %}
+            <p class="card-text original-tag center-align">Original Design</p>
+        {% endif %}
+        {% if product.selling_fast_tag %}
+            <p class="card-text selling-fast-tag center-align">Selling Fast !!!</p>
+        {% endif %}
+        {% if product.new_tag %}
+            <p class="card-text new-tag center-align">New Arrival !!!</p>
+        {% endif %}
+
+        </div>
+    </div>
+    </a>
+    <div class="row">
+    <div class="col-12 center-align">
+        <a href="{% url 'single_product' product.id %}" class="btn btn-secondary btn-sm mr-2">View</a>
+        {% if user.is_authenticated %}
+        {% if user.is_superuser %}
+            <a class="btn btn-info btn-sm mr-2" href="{% url 'update_product' product.id %}">Update</a>
+            <a class="btn btn-danger btn-sm" href="{% url 'delete_warning' product.id %}">Delete</a>
+        {% endif %}
+        {% endif %}
+    </div>
+    </div>
+    <hr class="hr-trolley">
+</div>

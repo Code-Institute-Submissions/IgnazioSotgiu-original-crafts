@@ -38,6 +38,16 @@ def best_sellers(request):
     return render(request, template, context)
 
 
+def original_gallery(request):
+    """ display Best sellers - Fast selling products """
+    products = Product.objects.filter(
+        original_tag=True).order_by('-updated', '-created')
+    template = 'store/original_gallery.html'
+    context = {
+        'products': products,
+    }
+    return render(request, template, context)
+
 def contact_page(request):
     """ a view to display the contact page """
 
@@ -89,9 +99,13 @@ def search_result(request):
                 messages.warning(request, 'Enter a valid search parameter')
                 return redirect(reverse('home'))
 
-            products = products.filter(search_terms).order_by('-updated', '-created')
+            products = products.filter(
+                search_terms).order_by('-updated', '-created')
 
-    total_items = len(products)
+    for product in products:
+        if product.number_in_stock > 0 and not product.hide_product:
+            total_items += 1
+
     template = 'store/search_result.html'
     context = {
         'products': products,

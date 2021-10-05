@@ -283,9 +283,7 @@ footer {
 }
 .card-img-top {
     width: 100%;
-    height: 200px;
     padding: 10px;
-    background-color: #796363;
 }
 .card-body {
     background-color: rgb(51, 45, 35);
@@ -380,6 +378,20 @@ a:hover {
 }
 .search-result-title {
     padding: 20px;
+}
+.product-image-container {
+    background-color: #332d23;
+}
+.original-tag {
+    background-color: red;
+}
+.selling-fast-tag {
+    background-color: #e2d407;
+    color: #000;
+}
+.new-tag {
+    background-color: aqua;
+    color: #000;
 }
 /***************add to trolley page****************/
 .qty-button, .qty-input {
@@ -545,7 +557,6 @@ a:hover {
     }
     .card-img-top {
         width: 150px;
-        height: 100%;
     }
     .back-to-the-top {
         display: none;

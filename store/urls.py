@@ -21,4 +21,6 @@ urlpatterns = [
           views.best_sellers, name='best_sellers'),
      path('store/contact_page/',
           views.contact_page, name='contact_page'),
+     path('store/original_gallery/',
+          views.original_gallery, name='original_gallery'),
      ]

@@ -13,43 +13,9 @@
         <div class="row bg-black">
             {% for product in products %}
                 {% if product.hide_product %}
-                <div class="col-12 col-sm-6 col-lg-4 popular-products-div">
-                    <a href="{% url 'single_product' product.id %}">
-                        <div class="card">
-                            {% if product.image %}
-                            <a href="{% url 'single_product' product.id %}">
-                                <img src="{{ product.image.url }}" class="card-img-top" alt="{{ product.name }}">
-                            </a>
-                            {% else %}
-                            <a href="{% url 'single_product' product.id %}">
-                                <img src="{{ MEDIA_URL }}noimage.png" class="card-img-top" alt="{{ product.name }}">
-                            </a>
-                            {% endif %}
-                            <div class="card-body">
-                                <p class="card-text">{{ product.name | title }}.</p>
-                                {% if product.special_price %}
-                                <p class="card-text"><span class="text-red">SALE </span><del>€{{ product.price}}</del><span>
-                                        €{{ product.special_price }}</span></p>
-                                {% else %}
-                                <p class="card-text">€{{ product.price }}</p>
-                                {% endif %}
-                                <p class="card-text">{{ product.category | title }}</p>
-                                {% if product.original_tag %}
-                                <p class="card-text">Original Design</p>
-                                {% endif %}
-                                {% if product.selling_fast %}
-                                <p class="card-text">Selling Fast !!!</p>
-                                {% endif %}
-                            </div>
-                        </div>
-                    </a>
-                    <div class="row mt-5">
-                        <div class="col center-align mt-5">
-                            <a class="btn btn-info btn-sm mr-5" href="{% url 'update_product' product.id %}">Update</a>
-                            <a class="btn btn-danger btn-sm ml-5" href="{% url 'delete_warning' product.id %}">Delete</a>
-                        </div>
-                    </div>
-                </div>
+                    {% block product_details %}
+                        {% include 'includes/product_details.html' %}
+                    {% endblock %}
                 {% endif %}
             {% endfor %}
         </div>
