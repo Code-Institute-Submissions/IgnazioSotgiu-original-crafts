@@ -4,8 +4,22 @@
 
 {% block content %}
   <div class="row">
-    <div class="col-12 center-align promotion-section">
-      <span class="promotion-section-title">Contact Us</span>
+    <div class="col-10 offset-1 col-lg-4 offset-lg-4 center-align email-success-message mt-5">
+      <span class="promotion-section-title">Thank You</span><br>
+      <div>Your email was successfully sent. <br> We will respond shortly</div>
+      <br>
+      <br>
+      <div class="text-right">Original Crafts Team</div>
     </div>
   </div>
+  <div class="row">
+    <div class="col-12 center-align mt-5">
+        <a href="{% url 'home' %}" class="btn btn-sm yellow-inverse-btn">
+            <span class="icon">
+                Back to Homepage
+            </span>
+        </a>
+    </div>
+</div>
+
   {% endblock %}

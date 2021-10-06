@@ -4,8 +4,6 @@ Admin panel settings
 from django.contrib import admin
 from .models import Review
 
-# code from code institute lecture
-
 
 class ReviewAdmin(admin.ModelAdmin):
     readonly_fields = ('review_date',)

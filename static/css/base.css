@@ -502,9 +502,10 @@ a:hover {
     font-size: 15px;
     margin: 20px 5px;
 }
-
-@media screen and (max-width: 575px){
-
+.email-success-message{
+    color: #fff;
+    font-weight: 400;
+    font-size: 20px;
 }
 /**************media queries*********************/
 @media screen and (max-width: 900px){

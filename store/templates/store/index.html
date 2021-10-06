@@ -26,6 +26,17 @@
             <button class="btn go-to-store-btn">Check Our Products</button>
           </a>
         </div>
+      {% else %}
+        <div class="user-welcome-message">
+          <p>Welcome to Original Craft</p>
+          <p>We sell top quality products to</p>
+          <p>Enjoy your favorite hobbies...</p>
+        </div>
+        <div class="">
+          <a href="{% url 'products' %}">
+            <button class="btn go-to-store-btn">Explore the Shop</button>
+          </a>
+        </div>
       {% endif %}
     </div>
   </div>

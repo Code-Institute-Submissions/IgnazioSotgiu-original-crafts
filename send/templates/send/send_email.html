@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+{% load static %}
+
+
+{% block content %}
+<div class="row">
+    <div class="col-12 promotion-section">
+       <span class="promotion-section-title">Contact Us</span>
+    </div>
+</div>
+<div class="row">
+    <div class="col-10 offset-1 col-md-8 offset-md-2 col-lg-6 offset-lg-3 white-text">
+        <form action="" method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class="row">
+                <div class="col-10 offset-1 col-md-8 offset-md-2 col-lg-6 offset-lg-3">
+                    {{ contact_form.from_email | as_crispy_field }}
+                    {{ contact_form.email_subject | as_crispy_field }}
+                    <hr class="hr-trolley">
+                    {{ contact_form.message | as_crispy_field }}
+                    </div>
+                </div>
+            </div>
+            <div class="container center-align">
+                <button type="submit" class="btn yellow-btn mb-5 center-align" name="submit">Send</button>
+            </div>
+            <input type="hidden" name="next" value="{{ request.path }}">
+        </form>
+    </div>
+</div>
+  
+{% endblock %}
