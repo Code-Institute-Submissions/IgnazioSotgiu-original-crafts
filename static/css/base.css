@@ -19,6 +19,9 @@ a:hover {
 .white-text {
     color: #fff;
 }
+.black_text {
+    color: #000;
+}
 .grey-text {
     color: #695c5c;
 }
@@ -39,6 +42,11 @@ a:hover {
 }
 .btn-secondary {
     background-color: #c1eb04;
+    color: #000;
+}
+.btn-secondary:hover {
+    background-color: #e2d407;
+    color: #796363;
 }
 .yellow-btn:hover {
     margin-top: 10px;
@@ -70,9 +78,6 @@ label.required-field {
 }
 .float-left {
     float: left;
-}
-.float-right {
-    float: right;
 }
 /* back to top link */
 .back-to-top-container {
@@ -372,7 +377,6 @@ a:hover {
 .search-result-title-container {
     padding: 20px 0;
     background-color: #000;
-    text-align: center;
     color: #fff;
     font-size: 20px;
 }
@@ -384,14 +388,23 @@ a:hover {
 }
 .original-tag {
     background-color: red;
+    width: fit-content;
+    padding: 5px;
+    border-radius: 5px;
 }
 .selling-fast-tag {
     background-color: #e2d407;
     color: #000;
+    width: fit-content;
+    padding: 5px;
+    border-radius: 5px;
 }
 .new-tag {
     background-color: aqua;
     color: #000;
+    width: fit-content;
+    padding: 5px;
+    border-radius: 5px;
 }
 /***************add to trolley page****************/
 .qty-button, .qty-input {
@@ -683,5 +696,8 @@ a:hover {
     }
     .toast.show {
         max-width: 300px;
+    }
+    .product-links {
+        font-size: 12px;
     }
 }

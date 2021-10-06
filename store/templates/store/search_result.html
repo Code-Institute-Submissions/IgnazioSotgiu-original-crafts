@@ -3,16 +3,16 @@
 
 
 {% block content %}
-{% block store_links %}
-  {% include 'includes/product_links.html' %}
-{% endblock %}
+  {% block store_links %}
+    {% include 'includes/product_links.html' %}
+  {% endblock %}
   <div class="row">
-    <div class="col-12 search-result-title-container"> 
+    <div class="col-12 search-result-title-container center-align"> 
       {% if query %}
         <span class="search-result-text">Found {{total_items }} result for "{{ query }}"</span>
       {% elif selected_categories %}
         <div class="row">
-          <div class="col-6 search-result-text float-right">Found {{total_items }} result for:</div>
+          <div class="col-6 search-result-text text-right">Found {{total_items }} result for:</div>
           <div class="col-6">
             {% for c in selected_categories %} 
               <span class="float-left search-result-text"><a class="text-white" href="{% url 'search_result' %}?category={{ c }}">{{ c.friendly_name }}</a></span><br>
@@ -20,18 +20,28 @@
           </div>
         </div>
       {% else %}
-        <span class="search-result-title text-red">No Products were found try a new search!</span>
+      <div class="row">
+        <div class="col-12 container-fluid center-align search-result-title">
+            Please enter a valid search!
+        </div>
+      </div>
       {% endif %}
     </div>
     <hr class="hr-trolley">
   </div>
   <div class="row bg-black">
-    {% for product in products %}
+    {% if products and total_items > 0 %}
+      {% for product in products %}
         {% if product.number_in_stock > 0 and not product.hide_product %}
           {% block product_details %}
             {% include 'includes/product_details.html' %}
           {% endblock %}
         {% endif %}
       {% endfor %}
+    {% else %}
+      <div class="mx-auto text-red search-result-title">
+          No Products were found try a new search!
+      </div>
+    {% endif %}
   </div>
 {% endblock %}
