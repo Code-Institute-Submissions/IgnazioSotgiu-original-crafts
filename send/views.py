@@ -11,24 +11,25 @@ def send_email(request):
     recipient_list = []
 
     if request.method == 'POST':
-        from_email = request.POST.get('from_email')
-        recipient_list = [settings.DEFAULT_FROM_EMAIL, ]
-        email_subject = request.POST.get('email_subject')
-        message = request.POST.get('message')
+        from_email = request.POST['from_email']
+        recipient_list = settings.DEFAULT_FROM_EMAIL
+        email_subject = request.POST['email_subject']
+        message = request.POST['message']
 
         form_data = {
             'from_email': from_email,
-            'recipient_list': [recipient_list],
+            'recipient_list': recipient_list,
             'email_subject': email_subject,
             'message': message,
         }
 
         contact_form = ContactForm(form_data)
+        print(contact_form)
         if contact_form.is_valid():
             contact_form.save()
 
-            send_mail(email_subject, from_email, message,
-                      [recipient_list], fail_silently=False)
+            send_mail(email_subject, message, from_email, [recipient_list],
+                      fail_silently=False)
 
             messages.success(request, 'Thank You to get in touch, \
                 your email was successfully sent')
