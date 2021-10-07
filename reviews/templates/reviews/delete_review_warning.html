@@ -1,38 +1,38 @@
 {% extends 'base.html' %}
 {% load static %}
-
+{% block extra_title %} - Delete Review Warning {% endblock %}
 
 {% block content %}
-<div class="row">
-    <div class="col-8 offset-2 center-align white-text mt-4">
-        <span class="text-alert">
-            <strong class="text-uppercase text-red">warning!</strong>
+    <div class="row">
+        <div class="col-8 offset-2 center-align white-text mt-4">
+            <span class="text-alert">
+                <strong class="text-uppercase text-red">warning!</strong>
+                <br>
+                Are you sure that you want to delete This review?
+                </span>
             <br>
-            Are you sure that you want to delete This review?
-            </span>
-        <br>
-        <br>
-        <div class="review-container review-container-text center-align white-text">
-            <div>
-                Product Name:{{ review.product.name|title }}
-            </div>
-            <div>
-                {% if review.product.image %}
-                        <img src="{{ review.product.image.url }}" alt="{{ review.product.name }}" class="trolley-image">
-                    {% else %}
-                        <img src="{{ MEDIA_URL }}noimage.png" alt="{{ review.product.name }}" class="trolley-image">
-                    {% endif %}
+            <br>
+            <div class="review-container review-container-text center-align white-text">
+                <div>
+                    Product Name:{{ review.product.name|title }}
                 </div>
-            <div class="">Title: {{ review.review_title|title }}</div>
-            <div>
+                <div>
+                    {% if review.product.image %}
+                            <img src="{{ review.product.image.url }}" alt="{{ review.product.name }}" class="trolley-image">
+                        {% else %}
+                            <img src="{{ MEDIA_URL }}noimage.png" alt="{{ review.product.name }}" class="trolley-image">
+                        {% endif %}
+                    </div>
+                <div class="">Title: {{ review.review_title|title }}</div>
+                <div>
 
-               {{ review.review_text|capfirst }}
-            </div>
-           
-           
-       </div>
+                {{ review.review_text|capfirst }}
+                </div>
+            
+            
+        </div>
+        </div>
     </div>
-</div>
     {% if user.is_authenticated %}
         {% if review.author == user %}
             <div class="row mt-3 mb-5">
@@ -51,7 +51,4 @@
             </div>
         {% endif %}
     {% endif %}
-</div>
-
-  
 {% endblock %}

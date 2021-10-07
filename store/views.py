@@ -30,7 +30,8 @@ def products(request):
 
 def best_sellers(request):
     """ display Best sellers - Fast selling products """
-    products = Product.objects.filter(selling_fast_tag=True).order_by('-updated', '-created')
+    products = Product.objects.filter(
+        selling_fast_tag=True).order_by('-updated', '-created')
     template = 'store/best_sellers.html'
     context = {
         'products': products,
@@ -47,6 +48,7 @@ def original_gallery(request):
         'products': products,
     }
     return render(request, template, context)
+
 
 def contact_page(request):
     """ a view to display the contact page """
@@ -190,7 +192,8 @@ def update_product(request, product_id):
         if request.method == 'POST':
             next = request.POST.get('next')
             try:
-                form = ProductForm(request.POST, request.FILES, instance=product)
+                form = ProductForm(
+                    request.POST, request.FILES, instance=product)
                 if form.is_valid:
                     form.save()
                     messages.success(request, 'Product successfully updated')

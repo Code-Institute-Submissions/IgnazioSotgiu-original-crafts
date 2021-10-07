@@ -1,9 +1,7 @@
 from django.db import models
 from django.db.models import Sum
 from django_countries.fields import CountryField
-from django.shortcuts import get_object_or_404
 import uuid
-from django.contrib.auth.models import User
 from django.conf import settings
 from store.models import Product
 from profiles.models import Profile

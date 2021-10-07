@@ -1,3 +1,4 @@
+/*code taken from code institute / stripe docs */
 .StripeElement {
   box-sizing: border-box;
   height: 40px;
@@ -18,17 +19,7 @@
   background-color: #fefde5 !important;
 }
 
-#payment-form .form-control,
 #card-element {
     color: #000;
     border: 1px solid #fff;
-}
-
-select,
-select option {
-  color: #000;
-}
-select:invalid,
-select option[value=''] {
-  color: #222527 !important;
 }

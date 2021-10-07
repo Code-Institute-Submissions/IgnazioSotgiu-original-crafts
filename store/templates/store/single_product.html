@@ -1,115 +1,115 @@
 {% extends 'base.html' %}
 {% load static %}
-
+{% block extra_title %} - Store - Single Product {% endblock %}
 
 {% block content %}
-<div class="bg-black jumbotron-container">
-    <div class="bg-black single-product-container">
-    <hr class="hr-trolley mb-5">
-        <p class="white-text center-align mt-3"><strong class="product-title">{{ product.name|title }}</strong></p>
-        {% if reviews %}
-        <div class="center-align">
-            <a href="#reviews-section" class="white-text center-align mt-2">Reviews ( {{ reviews_count }} )</a>
-        </div>
-        {% endif %}
+    <div class="bg-black jumbotron-container">
+        <div class="bg-black single-product-container">
         <hr class="hr-trolley mb-5">
-        <div class="row">
-            <div class="col-12 col-md-6 center-align">
-                {% if product.image %}
-                <a href="{% url 'single_product' product.id %}">
-                    <img src="{{ product.image.url }}" class="single-product-img" alt="{{ product.name }}">
-                </a>
-                {% else %}
-                <a href="{% url 'single_product' product.id %}">
-                    <img src="{{ MEDIA_URL }}noimage.png" class="single-product-img" alt="{{ product.name }}">
-                </a>
-                {% endif %}
+            <p class="white-text center-align mt-3"><strong class="product-title">{{ product.name|title }}</strong></p>
+            {% if reviews %}
+            <div class="center-align">
+                <a href="#reviews-section" class="white-text center-align mt-2">Reviews ( {{ reviews_count }} )</a>
             </div>
-            <div class="col-12 col-md-6">
-                <p class="white-text center-align mt-4">Category: {{ product.category.friendly_name }}</p>
-                {% if product.special_price %}
-                <p class="center-align"><span class="text-red">SALE </span><del class="grey-text">€{{ product.price}}</del><span
-                        class="white-text"> €{{ product.special_price }}</span></p>
-                {% else %}
-                <p class="white-text center-align">Price €{{ product.price }}</p>
-                {% endif %}
-                <p class="white-text center-align">Description:</p>
-                <div class="row">
-                    <div class="col-10 offset-1 col-lg-8 offset-lg-2">
-                        <p class="white-text">{{ product.description|capfirst }}</p>
-                    </div>
+            {% endif %}
+            <hr class="hr-trolley mb-5">
+            <div class="row">
+                <div class="col-12 col-md-6 center-align">
+                    {% if product.image %}
+                    <a href="{% url 'single_product' product.id %}">
+                        <img src="{{ product.image.url }}" class="single-product-img" alt="{{ product.name }}">
+                    </a>
+                    {% else %}
+                    <a href="{% url 'single_product' product.id %}">
+                        <img src="{{ MEDIA_URL }}noimage.png" class="single-product-img" alt="{{ product.name }}">
+                    </a>
+                    {% endif %}
                 </div>
-                <form class="form" action="{% url 'add_to_trolley' product.id %}" method="POST">
-                    {% csrf_token %}
-                    <div class="row form-row">
-                        <div class="col-12">
-                            <p class="center-align mt-3 ml-2">
-                                <strong class="white-text">Quantity:</strong>
-                                <input class="qty-selector ml-3" type="number" name="quantity" value="1" min="1" max="{{ product.number_in_stock }}" data-item_id="{{ product.id }}" id="id_qty_{{ product.id }}" required>
-                            </p>
-                        </div>
-                    </div>
+                <div class="col-12 col-md-6">
+                    <p class="white-text center-align mt-4">Category: {{ product.category.friendly_name }}</p>
+                    {% if product.special_price %}
+                    <p class="center-align"><span class="text-red">SALE </span><del class="grey-text">€{{ product.price}}</del><span
+                            class="white-text"> €{{ product.special_price }}</span></p>
+                    {% else %}
+                    <p class="white-text center-align">Price €{{ product.price }}</p>
+                    {% endif %}
+                    <p class="white-text center-align">Description:</p>
                     <div class="row">
-                        <div class="col-12 center-align mt-5">
-                            <a href="{% url 'products' %}" class="btn btn-sm yellow-inverse-btn">
-                                <span class="icon">
-                                    <i class="fas fa-search"></i>
-                                    Check more products
-                                </span>
-                            </a>
-                            <input type="submit" class="btn yellow-btn btn-sm" value="Add to Cart">
+                        <div class="col-10 offset-1 col-lg-8 offset-lg-2">
+                            <p class="white-text">{{ product.description|capfirst }}</p>
                         </div>
                     </div>
-                </form>
-                {% if user.is_authenticated %}
-                    {% if user.is_superuser %}
-                    <div class="jumbotron">
-                        <div class="row">
-                            <div class="col center-align white-text">Admin <br> Manage Product</div>
-                        </div>
-                        <div class="row mt-1">
-                            <div class="col center-align">
-                                <a class="btn btn-info btn-sm mr-1" href="{% url 'update_product' product.id %}">Update</a>
-                                <a class="btn btn-danger btn-sm ml-1" href="{% url 'delete_warning' product.id %}">Delete</a>
+                    <form class="form" action="{% url 'add_to_trolley' product.id %}" method="POST">
+                        {% csrf_token %}
+                        <div class="row form-row">
+                            <div class="col-12">
+                                <p class="center-align mt-3 ml-2">
+                                    <strong class="white-text">Quantity:</strong>
+                                    <input class="qty-selector ml-3" type="number" name="quantity" value="1" min="1" max="{{ product.number_in_stock }}" data-item_id="{{ product.id }}" id="id_qty_{{ product.id }}" required>
+                                </p>
                             </div>
                         </div>
-                    </div>
+                        <div class="row">
+                            <div class="col-12 center-align mt-5">
+                                <a href="{% url 'products' %}" class="btn btn-sm yellow-inverse-btn">
+                                    <span class="icon">
+                                        <i class="fas fa-search"></i>
+                                        Check more products
+                                    </span>
+                                </a>
+                                <input type="submit" class="btn yellow-btn btn-sm" value="Add to Cart">
+                            </div>
+                        </div>
+                    </form>
+                    {% if user.is_authenticated %}
+                        {% if user.is_superuser %}
+                        <div class="jumbotron">
+                            <div class="row">
+                                <div class="col center-align white-text">Admin <br> Manage Product</div>
+                            </div>
+                            <div class="row mt-1">
+                                <div class="col center-align">
+                                    <a class="btn btn-info btn-sm mr-1" href="{% url 'update_product' product.id %}">Update</a>
+                                    <a class="btn btn-danger btn-sm ml-1" href="{% url 'delete_warning' product.id %}">Delete</a>
+                                </div>
+                            </div>
+                        </div>
+                        {% endif %}
                     {% endif %}
-                {% endif %}
+                </div>
             </div>
         </div>
     </div>
-</div>
-{% if reviews %}
-    <div class="row">
-        <div class="col-10 offset-1 center-align white-text mt-5 mb-5">
-            <h2 id="reviews-section">Product Reviews</h2>
+    {% if reviews %}
+        <div class="row">
+            <div class="col-10 offset-1 center-align white-text mt-5 mb-5">
+                <h2 id="reviews-section">Product Reviews</h2>
+            </div>
         </div>
-    </div>
-    <div class="row">
-        <div class="col-10 offset-1 col-md-8 offset-md-2 col-lg-6 offset-lg-3 white-text">
-            {% for review in reviews %}
-                <div class="review-container text-white">
-                    <div class="review-header mb-2">
-                        <strong>{{ review.author }}</strong> <br>
-                        {{ review.review_date }}
+        <div class="row">
+            <div class="col-10 offset-1 col-md-8 offset-md-2 col-lg-6 offset-lg-3 white-text">
+                {% for review in reviews %}
+                    <div class="review-container text-white">
+                        <div class="review-header mb-2">
+                            <strong>{{ review.author }}</strong> <br>
+                            {{ review.review_date }}
+                        </div>
+                        <hr class="hr-trolley">
+                        <div class="review-title">
+                            <strong>{{ review.review_title|capfirst }}</strong>
+                        </div>
+                        <div class="review-body mt-4">
+                            {{ review.review_text|capfirst }}
+                        </div>
                     </div>
-                    <hr class="hr-trolley">
-                    <div class="review-title">
-                        <strong>{{ review.review_title|capfirst }}</strong>
-                    </div>
-                    <div class="review-body mt-4">
-                        {{ review.review_text|capfirst }}
-                    </div>
-                </div>
-            {% endfor%}
+                {% endfor%}
+            </div>
         </div>
-    </div>
-{% else %}
-    <div class="row">
-        <div class="col-10 offset-1 center-align white-text">
-            <p>There are not reviews of this product yet!</p>
+    {% else %}
+        <div class="row">
+            <div class="col-10 offset-1 center-align white-text">
+                <p>There are not reviews of this product yet!</p>
+            </div>
         </div>
-    </div>
-{% endif %}
+    {% endif %}
 {% endblock %}

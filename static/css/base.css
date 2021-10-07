@@ -437,6 +437,10 @@ a:hover {
     font-weight: 600;
     font-size: 20px;
 }
+.order-details-container {
+    border: 1px solid #fff;
+    border-radius: 5px;
+}
 /**********messages****************/
 .message-container {
     position: fixed;
@@ -458,7 +462,7 @@ a:hover {
 }
 /**************checkout page ********************/
 .checkout-image {
-    width: 100px;
+    width: 250px;
     height: auto;
     padding: 3px;
     background-color: #695c5c;
@@ -700,5 +704,14 @@ a:hover {
     }
     .product-links {
         font-size: 12px;
+    }
+    .order-details-container {
+        margin-top: 10px;
+    }
+    .checkout-image {
+        width: 150px;
+        height: auto;
+        padding: 2px;
+        background-color: #695c5c;
     }
 }

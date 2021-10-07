@@ -1,24 +1,24 @@
 {% extends 'base.html' %}
 {% load static %}
+{% block extra_title %} - Admin - Update Product {% endblock %}
 
 
 {% block content %}
-<div class="row">
-    <div class="col-12 promotion-section">
-       <span class="promotion-section-title">Admin Update Product</span>
+    <div class="row">
+        <div class="col-12 promotion-section">
+        <span class="promotion-section-title">Admin Update Product</span>
+        </div>
     </div>
-</div>
-<div class="row">
-    <div class="col-10 offset-1 col-md-8 offset-md-2 col-lg-6 offset-lg-3 white-text">
-        <form action="" method="POST" enctype="multipart/form-data">
-            {% csrf_token %}
-            {{ form|crispy }}
-            <div class="container center-align">
-                <button type="submit" class="btn btn-info mb-5 center-align" name="submit">Update Product</button>
-            </div>
-            <input type="hidden" name="next" value="{{ request.path }}">
-        </form>
+    <div class="row">
+        <div class="col-10 offset-1 col-md-8 offset-md-2 col-lg-6 offset-lg-3 white-text">
+            <form action="" method="POST" enctype="multipart/form-data">
+                {% csrf_token %}
+                {{ form|crispy }}
+                <div class="container center-align">
+                    <button type="submit" class="btn btn-info mb-5 center-align" name="submit">Update Product</button>
+                </div>
+                <input type="hidden" name="next" value="{{ request.path }}">
+            </form>
+        </div>
     </div>
-</div>
-  
 {% endblock %}

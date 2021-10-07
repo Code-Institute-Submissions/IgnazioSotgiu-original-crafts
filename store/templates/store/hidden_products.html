@@ -1,24 +1,25 @@
 {% extends 'base.html' %}
 {% load static %}
+{% block extra_title %} - Admin - Hidden Products {% endblock %}
 
 
 {% block content %}
-<div class="row">
-    <div class="col-12 promotion-section">
-       <span class="promotion-section-title">Hidden Products</span>
-    </div>
-</div>
-{% if request.user.is_authenticated %}
-    {% if request.user.is_superuser %}
-        <div class="row bg-black">
-            {% for product in products %}
-                {% if product.hide_product %}
-                    {% block product_details %}
-                        {% include 'includes/product_details.html' %}
-                    {% endblock %}
-                {% endif %}
-            {% endfor %}
+    <div class="row">
+        <div class="col-12 promotion-section">
+        <span class="promotion-section-title">Hidden Products</span>
         </div>
+    </div>
+    {% if request.user.is_authenticated %}
+        {% if request.user.is_superuser %}
+            <div class="row bg-black">
+                {% for product in products %}
+                    {% if product.hide_product %}
+                        {% block product_details %}
+                            {% include 'includes/product_details.html' %}
+                        {% endblock %}
+                    {% endif %}
+                {% endfor %}
+            </div>
+        {% endif %}
     {% endif %}
-{% endif %}
 {% endblock %}

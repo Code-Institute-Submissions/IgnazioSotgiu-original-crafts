@@ -28,9 +28,7 @@ class WebhookHandler():
         intent = event.data.object
         trolley = intent.metadata.trolley
         pid = intent.id
-        save_address_details = intent.metadata.save_address_details
         billing_details = intent.charges.data[0].billing_details
-        grand_total = round(intent.charges.data[0].amount / 100, 2)
 
         checkout_order_exists = False
         checkout_order = None

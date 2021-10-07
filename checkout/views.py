@@ -2,6 +2,7 @@ from django.shortcuts import (
     render, redirect, get_object_or_404, reverse,
     HttpResponse)
 from django.views.decorators.http import require_POST
+from django.core.mail import send_mail
 from django.contrib import messages
 from django.conf import settings
 from .forms import CheckoutForm
@@ -114,6 +115,25 @@ def checkout_completed(request, order_number):
     template = 'checkout/checkout_completed.html'
     order = get_object_or_404(CheckoutOrder, order_number=order_number)
     user = request.user
+
+    # send email to user with order details
+    from_email = settings.DEFAULT_FROM_EMAIL
+    recipient_list = order.email_address
+    email_subject = f'Order Confirmation { order.order_number}'
+    message = f'Thank you { order.full_name }.\
+        Your order was sucessfully completed'
+    try:
+        send_mail(email_subject, message, from_email, [recipient_list],
+                  fail_silently=False)
+        messages.success(
+            request, f'An email was sent to { order.email_address }.')
+
+    except ValueError:
+        messages.error(request, 'There was a problem with the confirmation email.\
+            No email was sent. Please take your order number and contact the\
+            Original Craft team with the contact page.\
+            Apologies for the inconvenience')
+
     if user.is_authenticated:
         profile = Profile.objects.get(user=request.user)
         save_address_details = request.session.get('save_address_details')

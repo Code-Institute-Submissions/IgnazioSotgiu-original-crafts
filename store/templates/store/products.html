@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
 {% load static %}
-
+{% block extra_title %} - Store - All Products {% endblock %}
 
 {% block content %}
   {% block store_links %}
@@ -11,13 +11,13 @@
       <span class="promotion-section-title">All Products</span>
     </div>
   </div>
-    <div class="row bg-black">
-      {% for product in products %}
-        {% if product.number_in_stock > 0 and not product.hide_product %}
-          {% block product_details %}
-            {% include 'includes/product_details.html' %}
-          {% endblock %}
-        {% endif %}
-      {% endfor %}
-    </div>
-  {% endblock %}
+  <div class="row bg-black">
+    {% for product in products %}
+      {% if product.number_in_stock > 0 and not product.hide_product %}
+        {% block product_details %}
+          {% include 'includes/product_details.html' %}
+        {% endblock %}
+      {% endif %}
+    {% endfor %}
+  </div>
+{% endblock %}

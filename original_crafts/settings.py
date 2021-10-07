@@ -237,13 +237,13 @@ STRIPE_SECRET_KEY = os.getenv('STRIPE_SECRET_KEY', '')
 WEBHOOK_ENDPOINT_SECRET = os.getenv('WEBHOOK_ENDPOINT_SECRET', '')
 
 
-# email
+# send email
 if 'DEVELOPMENT' in os.environ:
     """
-    email in console to confirm subscription in development
+    email in console to confirm checkout success in development
+    email in console from contact page
     """
     EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
-    # DEFAULT_FROM_EMAIL = 'original_crafts@example.com'
     EMAIL_HOST = 'smtp.gmail.com'
     EMAIL_HOST_USER = os.environ.get('EMAIL_HOST_USER')
     EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_HOST_PASSWORD')

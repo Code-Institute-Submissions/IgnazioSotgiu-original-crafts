@@ -9,7 +9,7 @@ from .models import CheckoutOrder, OrderLineItem
 
 class CheckoutOrderLineItemAdmin(admin.TabularInline):
     """
-    class for ever line of items
+    class for every product type
     """
     model = OrderLineItem
     readonly_fields = ('lineitem_total',)

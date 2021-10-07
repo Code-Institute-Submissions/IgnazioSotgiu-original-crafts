@@ -7,6 +7,8 @@ from django.views.decorators.csrf import csrf_exempt
 
 from checkout.webhook_handler import WebhookHandler
 
+# code taken from code institute lecture
+
 
 @require_POST
 @csrf_exempt

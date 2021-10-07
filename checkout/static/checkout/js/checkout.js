@@ -45,7 +45,6 @@ document.addEventListener("DOMContentLoaded", function() {
         
         card.update({'disabled': true});
         $('#form-post-button').attr('disabled', true);
-        // var saveAddressDetails = Boolean($('#save-address-details').attr('checked'));
         var saveAddressDetails = true;
         var csrfToken = $('input[name="csrfmiddlewaretoken"]').val();
         var postData = {

@@ -1,5 +1,5 @@
 from django.shortcuts import (
-    render, HttpResponseRedirect, get_object_or_404, reverse, redirect)
+    render, HttpResponseRedirect, reverse, redirect)
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from store.models import Product

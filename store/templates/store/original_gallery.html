@@ -1,23 +1,23 @@
 {% extends 'base.html' %}
 {% load static %}
-
+{% block extra_title %} - Store - Original Products {% endblock %}
 
 {% block content %}
-{% block store_links %}
-{% include 'includes/product_links.html' %}
-{% endblock %}
-<div class="row">
-    <div class="col-12 center-align promotion-section">
-        <span class="promotion-section-title">Original Gallery</span>
+    {% block store_links %}
+        {% include 'includes/product_links.html' %}
+    {% endblock %}
+    <div class="row">
+        <div class="col-12 center-align promotion-section">
+            <span class="promotion-section-title">Original Gallery</span>
+        </div>
     </div>
-</div>
-<div class="row bg-black">
-    {% for product in products %}
-        {% if product.number_in_stock > 0 and not product.hide_product and product.original_tag %}
-            {% block product_details %}
-                {% include 'includes/product_details.html' %}
-            {% endblock %}
-        {% endif %}
-    {% endfor %}
-</div>
+    <div class="row bg-black">
+        {% for product in products %}
+            {% if product.number_in_stock > 0 and not product.hide_product and product.original_tag %}
+                {% block product_details %}
+                    {% include 'includes/product_details.html' %}
+                {% endblock %}
+            {% endif %}
+        {% endfor %}
+    </div>
 {% endblock %}

@@ -1,27 +1,28 @@
 {% extends 'base.html' %}
 {% load static %}
+{% block extra_title %} - Admin - Out of Stock Products {% endblock %}
 
 
 {% block content %}
-<div class="row">
-    <div class="col-12 promotion-section">
-       <span class="promotion-section-title">Out of Stock Products</span>
+    <div class="row">
+        <div class="col-12 promotion-section">
+        <span class="promotion-section-title">Out of Stock Products</span>
+        </div>
     </div>
-</div>
-{% if request.user.is_authenticated %}
-    {% if request.user.is_superuser %}
-        <div class="row bg-black">
-            {% for product in products %}
-                {% block product_details %}
-                    {% include 'includes/product_details.html' %}
-                {% endblock %}
-            {% endfor %}
-        </div>
-    {% else %}
-        <div class="center-align">
-            <h3>Only Administrator can access this content</h3>
-            <a href="{% url 'home' %}" class="btn btn-yellow">Back to Homepage</a>
-        </div>
+    {% if request.user.is_authenticated %}
+        {% if request.user.is_superuser %}
+            <div class="row bg-black">
+                {% for product in products %}
+                    {% block product_details %}
+                        {% include 'includes/product_details.html' %}
+                    {% endblock %}
+                {% endfor %}
+            </div>
+        {% else %}
+            <div class="center-align">
+                <h3>Only Administrator can access this content</h3>
+                <a href="{% url 'home' %}" class="btn btn-yellow">Back to Homepage</a>
+            </div>
+        {% endif %}
     {% endif %}
-{% endif %}
 {% endblock %}

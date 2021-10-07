@@ -24,7 +24,6 @@ def send_email(request):
         }
 
         contact_form = ContactForm(form_data)
-        print(contact_form)
         if contact_form.is_valid():
             contact_form.save()
 
