@@ -61,7 +61,7 @@
     {% endfor %}
   </div>
   <div class="row bg-black m-1">
-    <a href="#" class="col-12 col-md-6 col-lg-3 col-xl-3 bg-oc-logo-small image-container">
+    <a href="{% url 'about_page' %}" class="col-12 col-md-6 col-lg-3 col-xl-3 bg-oc-logo-small image-container">
       <div class="about-us">
         <h2 class="about-us-title center-align">About Us</h2>
       </div>
@@ -71,12 +71,12 @@
         <h2 class="jigsaw-title center-align">Original Gallery</h2>
       </div>
     </a>
-    <a href="#" class="col-12 col-md-6 col-lg-3 col-xl-3 paintbynumbers-2-small image-container">
+    <a href="{% url 'accessories' %}" class="col-12 col-md-6 col-lg-3 col-xl-3 paintbynumbers-2-small image-container">
       <div class="paint-by-numbers">
         <h2 class="paint-by-numbers-title center-align">Accessories</h2>
       </div>
     </a>
-    <a href="" class="col-12 col-md-6 col-lg-3 col-xl-3 paint-by-numbers-history-1-small image-container">
+    <a href="{% url 'paint_by_numbers' %}" class="col-12 col-md-6 col-lg-3 col-xl-3 paint-by-numbers-history-1-small image-container">
       <div class="paint-by-numbers">
         <h2 class="paint-by-numbers-title center-align">Paint by Numbers <br> Original Gallery</h2>
       </div>

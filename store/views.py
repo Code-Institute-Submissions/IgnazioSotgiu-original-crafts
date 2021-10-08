@@ -50,6 +50,38 @@ def original_gallery(request):
     return render(request, template, context)
 
 
+def accessories(request):
+    """ display Accessories - Accessories page """
+    accessories = Category.objects.get(name='accessories')
+    products = Product.objects.filter(
+        category=accessories).order_by('-updated', '-created')
+    template = 'store/accessories.html'
+    context = {
+        'products': products,
+    }
+    return render(request, template, context)
+
+
+def paint_by_numbers(request):
+    """ display Paint by Numbers - Paint by Numbers page """
+    paint_by_numbers = Category.objects.get(name='paint_by_numbers')
+    products = Product.objects.filter(
+        category=paint_by_numbers).order_by('-updated', '-created')
+    template = 'store/paint_by_numbers.html'
+    context = {
+        'products': products,
+    }
+    return render(request, template, context)
+
+
+def about_page(request):
+    """
+    A view to display the about page
+    """
+    template = 'store/about_page.html'
+    return render(request, template)
+
+
 def contact_page(request):
     """ a view to display the contact page """
 

@@ -23,4 +23,10 @@ urlpatterns = [
           views.contact_page, name='contact_page'),
      path('store/original_gallery/',
           views.original_gallery, name='original_gallery'),
+     path('store/accessories/',
+          views.accessories, name='accessories'),
+     path('store/paint_by_numbers/',
+          views.paint_by_numbers, name='paint_by_numbers'),
+     path('store/about_page/',
+          views.about_page, name='about_page'),
      ]

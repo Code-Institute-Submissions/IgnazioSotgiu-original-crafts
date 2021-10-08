@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block extra_title %} - Store - Paint By Numbers {% endblock %}
+
+{% block content %}
+    {% block store_links %}
+        {% include 'includes/product_links.html' %}
+    {% endblock %}
+    <div class="row">
+        <div class="col-12 center-align promotion-section">
+            <span class="promotion-section-title">Paint By Numbers</span>
+        </div>
+    </div>
+    <div class="row bg-black">
+        {% for product in products %}
+            {% if product.number_in_stock > 0 and not product.hide_product %}
+                {% block product_details %}
+                    {% include 'includes/product_details.html' %}
+                {% endblock %}
+            {% endif %}
+        {% endfor %}
+    </div>
+{% endblock %}
