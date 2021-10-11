@@ -677,6 +677,7 @@ a:hover {
     }
     .trolley-image {
         border: 1px solid #695c5c;
+        width: 150px;
     }
     .review-container {
         margin: 20px 30px;
@@ -714,5 +715,17 @@ a:hover {
         height: auto;
         padding: 2px;
         background-color: #695c5c;
+    }
+}
+@media screen and (max-width: 350px){
+    .navbar-dark .navbar-brand {
+        padding-left: 0px;
+        color: #000;
+        font-size: 25px;
+        font-family: loto;
+    }
+    .trolley-image {
+        border: 1px solid #695c5c;
+        width: 100px;
     }
 }
