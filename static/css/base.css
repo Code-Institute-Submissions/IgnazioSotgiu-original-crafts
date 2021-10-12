@@ -657,7 +657,6 @@ a:hover {
     .navbar-dark .navbar-brand {
         color: #000;
         font-size: 30px;
-        font-family: loto;
     }
     .go-to-store-btn {
         margin-top: 10px;
@@ -722,7 +721,6 @@ a:hover {
         padding-left: 0px;
         color: #000;
         font-size: 25px;
-        font-family: loto;
     }
     .trolley-image {
         border: 1px solid #695c5c;
