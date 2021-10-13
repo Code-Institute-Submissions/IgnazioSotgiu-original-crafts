@@ -150,7 +150,6 @@ def search_result(request):
     return render(request, template, context)
 
 
-@login_required
 def hidden_products(request):
     """ display hidden products to the admin """
     if request.user.is_superuser:
@@ -166,7 +165,6 @@ def hidden_products(request):
         return redirect('home')
 
 
-@login_required
 def out_of_stock_products(request):
     """ display out of stock products to the admin """
     if request.user.is_superuser:
@@ -185,7 +183,6 @@ def out_of_stock_products(request):
         return redirect('home')
 
 
-@login_required
 def add_product(request):
     """
     add product to the database
@@ -212,7 +209,6 @@ def add_product(request):
         return redirect('home')
 
 
-@login_required
 def update_product(request, product_id):
     """
     update product already in the database
@@ -246,7 +242,6 @@ def update_product(request, product_id):
         return redirect('home')
 
 
-@login_required
 def delete_warning(request, product_id):
     """
     A view make sure the admin is deleting the right product
@@ -266,18 +261,21 @@ def delete_warning(request, product_id):
         return redirect('home')
 
 
-@login_required
 def delete_product(request, product_id):
     """
     Delete product from the database
     """
-    product = Product.objects.get(id=product_id)
-    try:
-        product.delete()
-        messages.success(request, f'{product.name} was successfully deleted')
-        return redirect('products')
+    if request.user.is_superuser:
+        product = Product.objects.get(id=product_id)
+        try:
+            product.delete()
+            messages.success(request, f'{product.name} was successfully deleted')
+            return redirect('products')
 
-    except ValueError:
-        messages.error(request, f'Request denied! \
-            Was not possible to delete {product.name} from the database')
-        return redirect('products')
+        except ValueError:
+            messages.error(request, f'Request denied! \
+                Was not possible to delete {product.name} from the database')
+            return redirect('products')
+    else:
+        messages.error(request, 'Only Admin can access this function')
+        return redirect('home')
