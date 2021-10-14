@@ -4,7 +4,7 @@ from django.urls import reverse
 from store.models import Category, Product
 
 
-class TestCheckoutViews(TestCase):
+class TestProfileViews(TestCase):
 
     def setUp(self):
         # store the password to login later
@@ -25,11 +25,7 @@ class TestCheckoutViews(TestCase):
         self.product = Product.objects.create(
             category_id=1, name='product', price=19.99, selling_fast_tag=True)
 
-        self.trolley = {
-            'product': self.product
-        }
-
-    def test_display_checkout_no_trolley_redirect_to_right_template(self):
-        response = self.client.get(reverse('view_checkout_page'))
+    def test_profile_page_redirect_not_authenticated_user_to_correct_template(self):
+        response = self.client.get(reverse('profile_page'))
         self.assertEqual(response.status_code, 302)
-        self.assertRedirects(response, (reverse('products')))
+        self.assertRedirects(response, (reverse('home')))

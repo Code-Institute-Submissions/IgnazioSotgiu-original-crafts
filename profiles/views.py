@@ -1,13 +1,11 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from .models import Profile
 from checkout.models import CheckoutOrder
-from django.contrib.auth.decorators import login_required
 from .forms import ProfileForm
 from django.contrib import messages
 from reviews.models import Review
 
 
-@login_required
 def profile_page(request):
     user = request.user
     if user.is_authenticated:
@@ -45,13 +43,17 @@ def profile_page(request):
         return redirect('home')
 
 
-@login_required
 def profile_order_history(request, order_number):
-    order = get_object_or_404(CheckoutOrder, order_number=order_number)
-    from_profile_page = True
-    template = 'checkout/checkout_completed.html'
-    context = {
-        'order': order,
-        'from_profile_page': from_profile_page,
-    }
-    return render(request, template, context)
+    if request.user.is_authenticated:
+        order = get_object_or_404(CheckoutOrder, order_number=order_number)
+        from_profile_page = True
+        template = 'checkout/checkout_completed.html'
+        context = {
+            'order': order,
+            'from_profile_page': from_profile_page,
+        }
+        return render(request, template, context)
+    else:
+        messages.warning(
+            request, 'You need to be logged in to access this information')
+        return redirect('home')

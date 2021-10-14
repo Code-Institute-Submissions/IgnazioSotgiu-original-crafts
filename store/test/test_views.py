@@ -5,8 +5,6 @@ from store.models import Category, Product
 from reviews.models import Review
 
 
-
-
 class TestHomepageView(TestCase):
 
     def test_display_homepage_render_right_template(self):
@@ -62,15 +60,18 @@ class TestSearchResultView(TestCase):
         # store the password to login later
         password = 'mypassword'
 
-        my_admin = User.objects.create_superuser('myuser', 'myemail@test.com', password)
+        my_admin = User.objects.create_superuser(
+            'myuser', 'myemail@test.com', password)
 
         self.c = Client()
         self.c.login(username=my_admin.username, password=password)
 
         self.client = Client()
         self.category = Category.objects.create(name='test', slug='slugtest')
-        self.category1 = Category.objects.create(name='paint_by_numbers', slug='pby_test')
-        self.category2 = Category.objects.create(name='accessories', slug='acc_test')
+        self.category1 = Category.objects.create(
+            name='paint_by_numbers', slug='pby_test')
+        self.category2 = Category.objects.create(
+            name='accessories', slug='acc_test')
         self.product = Product.objects.create(
             category_id=1, name='product', price=19.99, selling_fast_tag=True)
 
@@ -184,40 +185,8 @@ class TestSearchResultView(TestCase):
         self.assertEqual(response.status_code, 302)
         self.assertRedirects(response, (reverse('products')))
 
-    # def test_admin_delete_product_value_error_redirect_right_template(self):
-    #     product = self.product
-    #     self.assertRaises(ValueError, product, id='0')
-    #     response = self.c.get(f'/store/delete_product/{product.id}/')
-    #     self.assertEqual(response.status_code, 404)
-    #     self.assertRedirects(response, (reverse('products')))
-
     def test_no_admin_delete_product_redirect_right_template(self):
         product = self.product
         response = self.client.get(f'/store/delete_product/{product.id}/')
         self.assertEqual(response.status_code, 302)
         self.assertRedirects(response, (reverse('home')))
-
-
-
-
-# class TestAdminCrudFunction(TestCase):
-
-#     def setUp(self):
-#         self.client = Client()
-#         self.category = Category.objects.create(name='test', slug='slugtest')
-#         self.product = Product.objects.create(
-#             category_id=1, name='product', price=19.99)
-
-#     def test_admin_can_add_product(self):
-#         product2 = Product.objects.create(
-#             category_id=1, name='product2', price=19.99)
-#         response = self.client.post('/add_product', product2)
-#         self.assertRedirects(response, '/products')
-
-#     def test_admin_can_update_product(self):
-#         product = self.product
-#         response = self.client.get(f'/store/update/{product.id}/')
-#         self.assertEqual(response.status_code, 200)
-#         self.assertTemplateUsed(response, 'store/update_product.html')
-
-#     # def test_admin_can_delete_product(self):
