@@ -17,7 +17,7 @@ def profile_page(request):
                 messages.success(
                     request, 'Your info were successfully updated')
 
-        orders = profile.profile_orders.all()
+        orders = profile.profile_orders.all().order_by('-order_date')
         order_count = 0
         all_review_product_ids = []
         for order in orders:

@@ -16,3 +16,5 @@ urlpatterns = [
     path('reviews/', include('reviews.urls')),
     path('send/', include('send.urls')),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+handler404 = 'store.views.error_404'
+handler500 = 'store.views.error_500'

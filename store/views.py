@@ -1,6 +1,5 @@
 from django.shortcuts import (
     render, redirect, reverse, get_object_or_404, HttpResponseRedirect)
-from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from django.db.models import Q
 from reviews.models import Review
@@ -279,3 +278,15 @@ def delete_product(request, product_id):
     else:
         messages.error(request, 'Only Admin can access this function')
         return redirect('home')
+
+# handle the error 404 and 500
+
+
+def error_404(request, exception, template_name="store/404.html"):
+    response = render(template_name)
+    response.status_code = 404
+    return response
+
+
+def error_500(request, *args, **argv):
+    return render(request, 'store/500.html', status=500)

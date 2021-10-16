@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block extra_title %} - 500 Page {% endblock %}
+
+
+{% block content %}
+    <div class="black-overlay">
+        <div class="container-error-message white-text">
+            <div class="message-error">
+                <h2 class="text-red center-align">500 Unexpected Error</h2>
+                <h2 class="mt-3 center-align">Go back to safety</h2>
+                <div class="container-fluid center-align">
+                    <a href="{% url 'home' %}" class="btn btn-lg yellow-btn back-to-safety-button mt-5 mb-5">Back to homepage</a>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
