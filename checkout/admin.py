@@ -23,10 +23,11 @@ class CheckoutOrderAdmin(admin.ModelAdmin):
     fields = ('profile', 'order_number', 'full_name', 'phone_number',
               'email_address', 'town_or_city', 'county', 'country',
               'zip_postcode', 'order_date', 'delivery', 'order_total',
-              'grand_total', 'order_trolley', 'order_pid',)
+              'grand_total', 'order_trolley', 'order_pid', 'email_sent')
 
     list_display = ('order_number', 'full_name', 'phone_number',
-                    'email_address', 'order_date', 'grand_total',)
+                    'email_address', 'order_date', 'grand_total',
+                    'email_sent')
 
     ordering = ('-order_date',)
 

@@ -283,7 +283,7 @@ def delete_product(request, product_id):
 
 
 def error_404(request, exception, template_name="store/404.html"):
-    response = render(template_name)
+    response = render(request, template_name)
     response.status_code = 404
     return response
 

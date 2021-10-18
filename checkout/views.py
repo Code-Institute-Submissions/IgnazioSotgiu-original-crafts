@@ -115,59 +115,118 @@ def checkout_completed(request, order_number):
     template = 'checkout/checkout_completed.html'
     order = get_object_or_404(CheckoutOrder, order_number=order_number)
     user = request.user
-
-    # send email to user with order details
-    from_email = settings.DEFAULT_FROM_EMAIL
-    recipient_list = order.email_address
-    email_subject = f'Order Confirmation { order.order_number}'
-    message = f'Thank you { order.full_name }.\
-        Your order number { order.order_number } was sucessfully completed\
-        Thank you. If you need any help please contact us\
-        at { settings.DEFAULT_FROM_EMAIL }'
-    try:
-        send_mail(email_subject, message, from_email, [recipient_list],
-                  fail_silently=False)
-        messages.success(
-            request, f'An email was sent to { order.email_address }.')
-
-    except ValueError:
-        messages.error(request, 'There was a problem with the confirmation email.\
-            No email was sent. Please take your order number and contact the\
-            Original Craft team with the contact page.\
-            Apologies for the inconvenience')
-
-    if user.is_authenticated:
-        profile = Profile.objects.get(user=request.user)
-        save_address_details = request.session.get('save_address_details')
-        if save_address_details:
-            updated_profile_address = {
-                'phone_number': order.phone_number,
-                'street_address': order.street_address,
-                'town_or_city': order.town_or_city,
-                'county': order.county,
-                'country': order.country,
-                'zip_postcode': order.zip_postcode,
+    if user.is_authenticated and user == order.profile.user:
+        # if the order was done and the email sent already
+        # just view the order without submitting it again and
+        # send email
+        if order.email_sent:
+            context = {
+                'order': order,
             }
-        profile_form = ProfileForm(updated_profile_address, instance=profile)
-        if profile_form.is_valid():
-            profile_form.save()
+            messages.info(request, f'The email for this order was\
+                          sent on {order.order_date}')
+
+            return render(request, template, context)
+
+        else:
+            # send email to user with order details
+            order.email_sent = True
+            order.save()
+            from_email = settings.DEFAULT_FROM_EMAIL
+            recipient_list = order.email_address
+            email_subject = f'Order Confirmation { order.order_number}'
+            message = f'Thank you { order.full_name }.\
+                Your order number { order.order_number } was sucessfully\
+                completed. Thank you. If you need any help please contact us\
+                at { settings.DEFAULT_FROM_EMAIL }'
+            try:
+                send_mail(email_subject, message, from_email, [recipient_list],
+                        fail_silently=False)
+                messages.success(
+                    request, f'An email was sent to { order.email_address }.')
+
+            except ValueError:
+                messages.error(
+                    request, 'There was a problem with the confirmation email.\
+                    No email was sent. Please take your order number and contact the\
+                    Original Craft team with the contact page.\
+                    Apologies for the inconvenience')
+
+            if user.is_authenticated:
+                profile = Profile.objects.get(user=request.user)
+                save_address_details = request.session.get('save_address_details')
+                if save_address_details:
+                    updated_profile_address = {
+                        'phone_number': order.phone_number,
+                        'street_address': order.street_address,
+                        'town_or_city': order.town_or_city,
+                        'county': order.county,
+                        'country': order.country,
+                        'zip_postcode': order.zip_postcode,
+                    }
+                profile_form = ProfileForm(updated_profile_address, instance=profile)
+                if profile_form.is_valid():
+                    profile_form.save()
+                    messages.success(
+                        request, 'Your Address info were successfully updated')
+
+            # Update number in stock after products are successfully purchased
+            trolley = request.session.get('trolley', {})
+
+            for product_id, quantity in trolley.items():
+                product = Product.objects.get(id=product_id)
+                product.number_in_stock -= quantity
+                product.save()
+            context = {
+                'order': order,
+            }
+            messages.success(request, f'Your order number {order_number} \
+                was completed successfully')
+
+            if 'trolley' in request.session:
+                del request.session['trolley']
+
+            return render(request, template, context)
+
+    else:
+        if order.email_sent:
+            messages.error(request, 'You must log in to access this page')
+            return redirect('home')
+
+        # send email to user with order details
+        order.email_sent = True
+        order.save()
+        from_email = settings.DEFAULT_FROM_EMAIL
+        recipient_list = order.email_address
+        email_subject = f'Order Confirmation { order.order_number}'
+        message = f'Thank you { order.full_name }.\
+            Your order number { order.order_number } was sucessfully completed\
+            Thank you. If you need any help please contact us\
+            at { settings.DEFAULT_FROM_EMAIL }'
+        try:
+            send_mail(email_subject, message, from_email, [recipient_list],
+                      fail_silently=False)
             messages.success(
-                request, 'Your Address info were successfully updated')
+                request, f'An email was sent to { order.email_address }.')
 
-    # Update number in stock after products are successfully purchased
-    trolley = request.session.get('trolley', {})
+        except ValueError:
+            messages.error(request, 'There was a problem with the confirmation email.\
+                No email was sent. Please take your order number and contact the\
+                Original Craft team with the contact page.\
+                Apologies for the inconvenience')
+        trolley = request.session.get('trolley', {})
 
-    for product_id, quantity in trolley.items():
-        product = Product.objects.get(id=product_id)
-        product.number_in_stock -= quantity
-        product.save()
-    context = {
-        'order': order,
-    }
-    messages.success(request, f'Your order number {order_number} \
-        was completed successfully')
+        for product_id, quantity in trolley.items():
+            product = Product.objects.get(id=product_id)
+            product.number_in_stock -= quantity
+            product.save()
+        context = {
+            'order': order,
+        }
+        messages.success(request, f'Your order number {order_number} \
+            was completed successfully')
 
-    if 'trolley' in request.session:
-        del request.session['trolley']
+        if 'trolley' in request.session:
+            del request.session['trolley']
 
-    return render(request, template, context)
+        return render(request, template, context)

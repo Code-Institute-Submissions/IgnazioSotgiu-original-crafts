@@ -36,6 +36,7 @@ class CheckoutOrder(models.Model):
         null=False, blank=False, default='')
     order_pid = models.CharField(
         max_length=254, null=False, blank=False, default='')
+    email_sent = models.BooleanField(default=False)
 
     # Create an order number
     def _generate_order_number(self):
