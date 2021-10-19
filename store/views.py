@@ -194,9 +194,8 @@ def add_product(request):
             next = request.POST.get('next')
             if form.is_valid:
                 form.save()
-                messages.success(request, 'Product\
-                    successfully added to store')
-                return HttpResponseRedirect(next)
+                messages.success(request, 'Product successfully added to store')
+                return redirect('add_product')
 
         template = 'store/add_product.html'
         context = {
