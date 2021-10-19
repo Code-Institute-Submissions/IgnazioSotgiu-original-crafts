@@ -19,7 +19,6 @@ class TestReviewsViews(TestCase):
         # create guest
         self.client = Client()
 
-        reviews_count = 0
         Category.objects.create(name='test', slug='slugtest')
         self.product = Product.objects.create(
             category_id=1, name='product', price=19.99)
@@ -30,9 +29,6 @@ class TestReviewsViews(TestCase):
             review_text='test_text_review',
             author=self.my_admin,
         )
-        reviews = Review.objects.all().filter(product=self.product)
-        for review in reviews:
-            reviews_count += 1
 
     def test_add_review_render_correct_template(self):
         product = self.product

@@ -1,9 +1,9 @@
 from django.test import TestCase, Client
 from django.contrib.auth.models import User
 from django.urls import reverse
-from django.shortcuts import render
 from store.models import Category, Product
 from checkout.models import CheckoutOrder
+from django.contrib.auth import get_user_model
 
 
 class TestProfileViews(TestCase):
@@ -12,11 +12,11 @@ class TestProfileViews(TestCase):
         # store the password to login later
         password = 'mypassword'
 
-        my_admin = User.objects.create_superuser(
+        self.my_admin = User.objects.create_superuser(
             'myuser', 'myemail@test.com', password)
 
         self.c = Client()
-        self.c.login(username=my_admin.username, password=password)
+        self.c.login(username=self.my_admin.username, password=password)
 
         self.client = Client()
         self.category = Category.objects.create(name='test', slug='slugtest')
@@ -49,8 +49,38 @@ class TestProfileViews(TestCase):
         self.assertEqual(response.status_code, 302)
         self.assertRedirects(response, (reverse('home')))
 
-    def test_profile_order_history_not_auth_user_redirect_correct_template(self):
+    def test_profile_order_history_not_auth_use_correct_template(self):
         order = self.checkout_order
-        response = self.client.get(f'/checkout_completed/{order.order_number}/')
+        response = self.client.get(
+            f'/checkout/checkout_completed/{order.order_number}/')
+        self.assertEqual(response.status_code, 200)
+        self.assertTemplateUsed(response, 'checkout/checkout_completed.html')
+
+    def test_profile_order_history_not_auth_user_email_sent_use_correct_template(self):
+        order = self.checkout_order
+        order.email_sent = True
+        order.save()
+        response = self.client.get(
+            f'/checkout/checkout_completed/{order.order_number}/')
         self.assertEqual(response.status_code, 302)
         self.assertRedirects(response, (reverse('home')))
+
+    def test_profile_order_history_auth_use_correct_template(self):
+        order = self.checkout_order
+        order.profile = get_user_model().objects.last().profile
+        order.save()
+        response = self.c.get(
+            f'/checkout/checkout_completed/{order.order_number}/')
+        self.assertEqual(response.status_code, 200)
+        self.assertTemplateUsed(response, 'checkout/checkout_completed.html')
+
+    def test_profile_order_history_auth_user_email_sent_use_correct_template(self):
+        order = self.checkout_order
+        order.profile = get_user_model().objects.last().profile
+        order.email_sent = True
+        order.save()
+        response = self.c.get(
+            f'/checkout/checkout_completed/{order.order_number}/')
+        self.assertEqual(response.status_code, 200)
+        self.assertTemplateUsed(
+            response, 'checkout/checkout_completed.html')

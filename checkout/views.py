@@ -141,20 +141,21 @@ def checkout_completed(request, order_number):
                 at { settings.DEFAULT_FROM_EMAIL }'
             try:
                 send_mail(email_subject, message, from_email, [recipient_list],
-                        fail_silently=False)
+                          fail_silently=False)
                 messages.success(
                     request, f'An email was sent to { order.email_address }.')
 
             except ValueError:
                 messages.error(
                     request, 'There was a problem with the confirmation email.\
-                    No email was sent. Please take your order number and contact the\
-                    Original Craft team with the contact page.\
+                    No email was sent. Please take your order number and\
+                    contact the Original Craft team with the contact page.\
                     Apologies for the inconvenience')
 
             if user.is_authenticated:
                 profile = Profile.objects.get(user=request.user)
-                save_address_details = request.session.get('save_address_details')
+                save_address_details = request.session.get(
+                    'save_address_details')
                 if save_address_details:
                     updated_profile_address = {
                         'phone_number': order.phone_number,
@@ -164,11 +165,13 @@ def checkout_completed(request, order_number):
                         'country': order.country,
                         'zip_postcode': order.zip_postcode,
                     }
-                profile_form = ProfileForm(updated_profile_address, instance=profile)
-                if profile_form.is_valid():
-                    profile_form.save()
-                    messages.success(
-                        request, 'Your Address info were successfully updated')
+                    profile_form = ProfileForm(
+                        updated_profile_address, instance=profile)
+                    if profile_form.is_valid():
+                        profile_form.save()
+                        messages.success(
+                            request, 'Your Address info\
+                            were successfully updated')
 
             # Update number in stock after products are successfully purchased
             trolley = request.session.get('trolley', {})
@@ -210,12 +213,12 @@ def checkout_completed(request, order_number):
                 request, f'An email was sent to { order.email_address }.')
 
         except ValueError:
-            messages.error(request, 'There was a problem with the confirmation email.\
-                No email was sent. Please take your order number and contact the\
+            messages.error(request, 'There was a problem with the\
+                confirmation email. No email was sent.\
+                Please take your order number and contact the\
                 Original Craft team with the contact page.\
                 Apologies for the inconvenience')
         trolley = request.session.get('trolley', {})
-
         for product_id, quantity in trolley.items():
             product = Product.objects.get(id=product_id)
             product.number_in_stock -= quantity
