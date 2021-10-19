@@ -56,7 +56,7 @@ class TestProfileViews(TestCase):
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, 'checkout/checkout_completed.html')
 
-    def test_profile_order_history_not_auth_user_email_sent_use_correct_template(self):
+    def test_profile_order_not_auth_user_email_sent_use_correct_template(self):
         order = self.checkout_order
         order.email_sent = True
         order.save()
@@ -74,7 +74,7 @@ class TestProfileViews(TestCase):
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, 'checkout/checkout_completed.html')
 
-    def test_profile_order_history_auth_user_email_sent_use_correct_template(self):
+    def test_profile_order_history_auth_user_email_sent_correct_template(self):
         order = self.checkout_order
         order.profile = get_user_model().objects.last().profile
         order.email_sent = True
@@ -84,3 +84,19 @@ class TestProfileViews(TestCase):
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(
             response, 'checkout/checkout_completed.html')
+
+    # def test_auth_user_can_save_form(self):
+    #     user = self.my_admin
+    #     profile = {
+    #         'user': user,
+    #         'phone_number': '136545479',
+    #         'street_address': '123 main st',
+    #         'town_or_city': 'city',
+    #         'zip_postcode': '12',
+    #         'county': 'county',
+    #     }
+    #     form = ProfileForm(instance=profile)
+    #     form.save()
+    #     self.assertEqual(profile.user, user)
+    #     self.assertEqual(user.profile.town_or_city, 'city')
+    #     self.assertEqual(user.profile.county, 'county')

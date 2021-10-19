@@ -1,5 +1,5 @@
 from django import forms
-from .models import Product, Category
+from .models import Product
 
 
 # Code taken form code institute lecture

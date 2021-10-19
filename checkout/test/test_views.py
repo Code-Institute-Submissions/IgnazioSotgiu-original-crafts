@@ -3,7 +3,7 @@ from django.contrib.auth.models import User
 from django.urls import reverse
 from store.models import Category, Product
 from checkout.forms import CheckoutForm
-from checkout.models import CheckoutOrder, OrderLineItem
+from checkout.models import CheckoutOrder
 
 
 class TestCheckoutViews(TestCase):
@@ -63,63 +63,3 @@ class TestCheckoutViews(TestCase):
         response = self.client.get(reverse('view_checkout_page'))
         self.assertEqual(response.status_code, 302)
         self.assertRedirects(response, (reverse('products')))
-
-    # def test_checkout_page_display_correct_template(self):
-    #     # form = self.checkout_form
-    #     order = self.checkout_order
-    #     # order.order_trolley = {"1": 1, "2": 1}
-    #     self.session = self.client.session
-    #     self.session['trolley.items'] = {"1": 1, "2": 1}
-    #     order.order_trolley = self.session
-    #     order.save()
-    #     response = self.client.post(
-    #         reverse('checkout_completed', args=[order.order_number]),
-    #         # form,
-    #     )
-    #     self.assertEqual(order.order_total, 2000)
-    #     self.assertEquals(order.delivery, 0)
-    #     self.assertEqual(response.status_code, 200)
-    #     self.assertRedirects(response, (reverse(f'checkout_completed/{order.order_number}')))
-
-    def test_update_total_calculate_right_total(self):
-        order = self.checkout_order
-        order_line_item = OrderLineItem.objects.create(
-            order=order,
-            product=self.product,
-            quantity=1,
-        )
-        order_line_item.save()
-        order.save()
-        self.assertEqual(round(float(order.order_total), 2), 19.99)
-
-    def test_delivery_charges_calculated_correctly(self):
-        order = self.checkout_order
-        order_line_item = OrderLineItem.objects.create(
-            order=order,
-            product=self.product,
-            quantity=1,
-        )
-        order_line_item.save()
-        order.save()
-        
-    def test_free_delivery_calculated_correctly(self):
-        order = self.checkout_order
-        order_line_item = OrderLineItem.objects.create(
-            order=order,
-            product=self.product,
-            quantity=3,
-        )
-        order_line_item.save()
-        order.save()
-        self.assertEqual(round(float(order.delivery), 2), 0.00)
-
-    def test_grand_total_calculated_correctly(self):
-        order = self.checkout_order
-        order_line_item = OrderLineItem.objects.create(
-            order=order,
-            product=self.product,
-            quantity=1,
-        )
-        order_line_item.save()
-        order.save()
-        self.assertEqual(round(float(order.grand_total), 2), 22.99)

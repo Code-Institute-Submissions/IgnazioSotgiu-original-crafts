@@ -194,7 +194,8 @@ def add_product(request):
             next = request.POST.get('next')
             if form.is_valid:
                 form.save()
-                messages.success(request, 'Product successfully added to store')
+                messages.success(request, 'Product\
+                    successfully added to store')
                 return HttpResponseRedirect(next)
 
         template = 'store/add_product.html'
@@ -268,7 +269,8 @@ def delete_product(request, product_id):
         product = Product.objects.get(id=product_id)
         try:
             product.delete()
-            messages.success(request, f'{product.name} was successfully deleted')
+            messages.success(request, f'{product.name} was\
+                successfully deleted')
             return redirect('products')
 
         except ValueError:

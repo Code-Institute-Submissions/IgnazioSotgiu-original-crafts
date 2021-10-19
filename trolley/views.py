@@ -1,8 +1,8 @@
 from django.shortcuts import (
-    render, redirect, get_object_or_404, reverse, HttpResponse,
+    render, redirect, get_object_or_404,
     HttpResponseRedirect)
 from django.contrib import messages
-from store.models import Product, Category
+from store.models import Product
 
 
 def view_trolley(request):
@@ -23,7 +23,8 @@ def add_to_trolley(request, product_id):
         trolley[product_id] = quantity
 
     request.session['trolley'] = trolley
-    messages.success(request, f'{product.name} has been successfully added to your trolley')
+    messages.success(request, f'{product.name} has been\
+        successfully added to your trolley')
 
     return redirect('view_trolley')
 

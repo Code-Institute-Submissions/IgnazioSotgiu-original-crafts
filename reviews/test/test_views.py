@@ -63,7 +63,7 @@ class TestReviewsViews(TestCase):
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, 'reviews/delete_review_warning.html')
 
-    def test_delete_review_warning_not_registered_user_redirect_correct_template(self):
+    def test_delete_review_warning_not_auth_user_redirect_template(self):
         product = self.product
         response = self.client.get(
             f'/reviews/reviews/delete_review_warning/{product.id}/')
@@ -84,7 +84,7 @@ class TestReviewsViews(TestCase):
         self.assertEqual(response.status_code, 302)
         self.assertRedirects(response, (reverse('profile_page')))
 
-    def test_registered_user_no_author_delete_review_redirect_right_template(self):
+    def test_registered_user_no_author_delete_review_redirect_template(self):
         user = get_user_model().objects.create_user(
             username='test_user',
             email='test@gmail.com',
@@ -98,7 +98,7 @@ class TestReviewsViews(TestCase):
         self.assertEqual(response.status_code, 302)
         self.assertRedirects(response, (reverse('profile_page')))
 
-    def test_registered_user_no_author_delete_review_warning_redirect_right_template(self):
+    def test_auth_user_no_author_delete_review_warning_redirect_template(self):
         user = get_user_model().objects.create_user(
             username='test_user',
             email='test@gmail.com',
