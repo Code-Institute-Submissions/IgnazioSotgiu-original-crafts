@@ -310,8 +310,11 @@ footer {
     margin: 5px;
 }
 .card-img-top {
-    width: 100%;
+    margin-top: 5px;
+    width: 230px;
+    height: auto;
     padding: 10px;
+    border: #e2d407 0.5px solid;
 }
 .card-body {
     background-color: rgb(51, 45, 35);
@@ -597,7 +600,12 @@ a:hover {
         flex-direction: row;
     }
     .card-img-top {
+        margin-top: 5px;
+        margin-left: 5px;
         width: 150px;
+        height: auto;
+        padding: 10px;
+        border: #e2d407 0.5px solid;
     }
     .back-to-the-top {
         display: none;
