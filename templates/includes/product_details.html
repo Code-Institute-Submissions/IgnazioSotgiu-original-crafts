@@ -3,13 +3,13 @@
     <a href="{% url 'single_product' product.id %}">
         <div class="card center-align">
             {% if product.image %}
-                <a href="{% url 'single_product' product.id %}" class="product-image-container">
+                <span class="product-image-container">
                     <img src="{{ product.image.url }}" class="card-img-top" alt="{{ product.name }}">
-                </a>
+                </span>
             {% else %}
-                <a href="{% url 'single_product' product.id %}" class="product-image-container">
+                <span class="product-image-container">
                     <img src="{{ MEDIA_URL }}noimage.png" class="card-img-top" alt="{{ product.name }}">
-                </a>
+                </span>
             {% endif %}
             <div class="card-body white-text">
                 <p class="card-text">Title:<br>{{ product.name | title }}</p>

@@ -53,14 +53,14 @@
                             <input class="qty-selector ml-3" type="number" name="quantity" value="{{ item.quantity }}" min="1" max="{{ item.product.number_in_stock }}" data-item_id="{{ item.product.id }}" id="id_qty_{{ item.product.id }}" required>
                         </p>
                         <button class="hidden-btn float-left" type="submit" formaction="{% url 'update_trolley' item.product.id  %}">
-                            <a class="update-trolley-product text-success " href="" >
+                            <span class="update-trolley-product text-success">
                                 <small>Update</small>
-                            </a>
+                            </span>
                         </button>
                         <button class="hidden-btn float-right" type="submit" formaction="{% url 'delete_trolley_product' item.product.id  %}">
-                            <a class="delete-trolley-product text-danger " href="" id="remove_{{ item.product.id }}">
+                            <span class="delete-trolley-product text-danger" id="remove_{{ item.product.id }}">
                                 <small>Delete</small>
-                            </a>
+                            </span>
                         </button>
                         <input type="hidden" name="next" value="{{ request.path }}">
                     </form>
@@ -102,12 +102,8 @@
                 </div>
             </div>
             <div class="col-12 center-align white-text mt-3 mb-5">
-                <a href="{% url 'products' %}">
-                    <button class="btn yellow-inverse-btn center-align">Back to Store</button>
-                </a> 
-                <a href="{% url 'view_checkout_page' %}">
-                    <button class="btn yellow-btn center-align">Checkout</button>
-                </a> 
+                <a href="{% url 'products' %}" class="btn yellow-inverse-btn center-align">Back to Store</a> 
+                <a href="{% url 'view_checkout_page' %}" class="btn yellow-btn center-align">Checkout</a> 
             </div>
         </div>
     </div>
@@ -116,9 +112,7 @@
     <div class="col-10 offset-1 center-align text-red">
         Your Trolley is empty!
         <br>
-        <a href="{% url 'products' %}">
-            <button class="btn yellow-btn center-align">Go Shopping!</button>
-        </a> 
+        <a href="{% url 'products' %}" class="btn yellow-btn center-align">Go Shopping!</a> 
     </div>
 {% endif %}
 {% endblock %}

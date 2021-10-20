@@ -84,19 +84,3 @@ class TestProfileViews(TestCase):
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(
             response, 'checkout/checkout_completed.html')
-
-    # def test_auth_user_can_save_form(self):
-    #     user = self.my_admin
-    #     profile = {
-    #         'user': user,
-    #         'phone_number': '136545479',
-    #         'street_address': '123 main st',
-    #         'town_or_city': 'city',
-    #         'zip_postcode': '12',
-    #         'county': 'county',
-    #     }
-    #     form = ProfileForm(instance=profile)
-    #     form.save()
-    #     self.assertEqual(profile.user, user)
-    #     self.assertEqual(user.profile.town_or_city, 'city')
-    #     self.assertEqual(user.profile.county, 'county')
