@@ -128,13 +128,13 @@ label.required-field {
     top: 3px;
 }
 .text-red {
-    color: red;
+    color: rgb(255, 0, 0);
 }
 .text-green {
     color: green;
 }
 .save-tag {
-    background-color: red;
+    background-color: rgb(255, 0, 0);
     border-radius: 20px;
     color: black;
     padding: 5px;
@@ -317,12 +317,11 @@ footer {
     border: #e2d407 0.5px solid;
 }
 .card-body {
-    background-color: rgb(51, 45, 35);
+    background-color: #000;
 }
 .card-text  {
     color: #fafafa;
     text-decoration: none;
-    padding-right: 20px;
     margin-bottom: 5px;
 
 }
@@ -410,7 +409,7 @@ a:hover {
     padding: 20px;
 }
 .product-image-container {
-    background-color: #332d23;
+    background-color: #000;
 }
 .original-tag {
     background-color: red;

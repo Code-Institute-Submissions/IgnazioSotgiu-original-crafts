@@ -55,14 +55,14 @@
                             <input class="qty-selector mt-2" type="number" name="quantity" value="{{ item.quantity }}" min="1" max="{{ item.product.number_in_stock }}" data-item_id="{{ item.product.id }}" id="id_qty_{{ item.product.id }}" required>
                         </p>
                         <button class="hidden-btn float-left" type="submit" formaction="{% url 'update_trolley' item.product.id  %}">
-                            <a class="update-trolley-product text-success " href="" >
+                            <span class="update-trolley-product text-success">
                                 <small>Update</small>
-                            </a>
+                            </span>
                         </button>
                         <button class="hidden-btn float-right" type="submit" formaction="{% url 'delete_trolley_product' item.product.id  %}">
-                            <a class="delete-trolley-product text-danger " href="" id="remove_{{ item.product.id }}">
+                            <span class="delete-trolley-product text-danger" id="remove_{{ item.product.id }}">
                                 <small>Delete</small>
-                            </a>
+                            </span>
                         </button>
                         <input type="hidden" name="next" value="{{ request.path }}">
                     </form>
@@ -137,16 +137,15 @@
                     <label for="card-element">
                         Credit or Debit Card
                     </label>
-                    <div id="card-element">
-                    </div>
+                    <div id="card-element"></div>
                     <div id="card-errors" role="alert" class='mt-1'></div>
-                    </div>
-                    <input type="hidden" value="{{ client_secret }}" name="client_secret">
+                </div>
+                <input type="hidden" value="{{ client_secret }}" name="client_secret">
             </div>
             <div class="row">
                 <div class="col-10 offset-1 center-align white-text mt-5 mb-5">
                     <a href="{% url 'products' %}" class="btn btn-sm yellow-inverse-btn float-left">Back to Store</a>
-                    <button id="form-post-button"class="btn btn-sm yellow-btn float-right">Complete Order</button>
+                    <button id="form-post-button" class="btn btn-sm yellow-btn float-right">Complete Order</button>
                 </div>
             </div>
         </form>
@@ -156,9 +155,7 @@
     <div class="col-10 offset-1 center-align text-red">
         Your trolley is empty!
         <br>
-        <a href="{% url 'products' %}">
-            <button class="btn yellow-btn center-align">Go Shopping!</button>
-        </a> 
+        <a href="{% url 'products' %}" class="btn yellow-btn center-align">Go Shopping!</a> 
     </div>
 {% endif %}
 {% endblock %}

@@ -32,7 +32,7 @@ document.addEventListener("DOMContentLoaded", function() {
             html = `
             <span class="text-danger">
             ${event.error.message}
-            </span>`
+            </span>`;
             $(displayError).html(html);
         } else {
             displayError.textContent = ''; 
@@ -76,18 +76,18 @@ document.addEventListener("DOMContentLoaded", function() {
                     html = `
                         <span class="text-danger">
                         ${result.error.message}
-                        </span>`
+                        </span>`;
                     $(displayError).html(html);
                     card.update({ 'disabled': false});
                     $('#form-post-button').attr('disabled', false);
                 } else {
                     if (result.paymentIntent.status === 'succeeded') {
-                        form.submit()
+                        form.submit();
                     }
                 }
             });
         }).fail(function() {
             location.reload();
-        })
+        });
     });
 });

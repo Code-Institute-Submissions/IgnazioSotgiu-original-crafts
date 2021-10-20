@@ -72,7 +72,8 @@ def view_checkout_page(request):
                 )
                 order_line_item.save()
 
-            request.session['save_address_details'] = 'save-address-details' in request.POST
+            request.session['save_address_details'] = (
+                'save-address-details') in request.POST
             return redirect(reverse(
                 'checkout_completed', args=[order.order_number]),)
 
