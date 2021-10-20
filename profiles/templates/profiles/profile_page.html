@@ -24,11 +24,14 @@
             <hr class="hr-trolley">
             {% for order in orders %}
                 <div class="order-container text-white">
+                    <div class="center-align">
+                        <a href="{% url 'profile_order_history' order.order_number %}" class="btn yellow-inverse-btn mb-5">
+                            View Order Details
+                        </a>
+                    </div>
                     <div class="row">
                         <div class="col-12 col-md-4">
-                            <a href="{% url 'profile_order_history' order.order_number %}">
-                                <p class="ml-3 white-text">Order Number:<br>{{ order.order_number|truncatechars:6 }}</p>
-                            </a>
+                            <p class="ml-3 white-text">Order Number:<br>{{ order.order_number|truncatechars:6 }}</p>
                         </div>
                         <div class="col-12 col-md-4">
                             <p class="ml-3">Date:<br>{{ order.order_date }}</p>

@@ -10,7 +10,7 @@
     </div>
 </div>
 <div class="row">
-    <div class="col-8 offset-2 center-align mt-3 mb-5">
+    <div class="col offset-0 col-md-8 offset-md-2 center-align mt-3 mb-5">
         <span class="center-align yellow-text mt-2 mb-5 checkout-complated-header">Thank You</span>
         <p class="center-align white-text">Your order was successfully completed</p>
         <hr class="hr-trolley">
@@ -54,7 +54,7 @@
             {% if from_profile_page %}
                 <a href="{% url 'profile_page' %}" class="btn yellow-inverse-btn  mb-5">Back to Profile Page</a>
             {% else %}
-                <a href="{% url 'home' %}" class="btn yellow-inverse-btn  mb-5">Back to Homepage</a>
+                <a href="{% url 'home' %}" class="btn yellow-inverse-btn mb-5">Back to Homepage</a>
             {% endif %}
         </div>
     </div>
