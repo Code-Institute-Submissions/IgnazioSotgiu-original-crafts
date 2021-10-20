@@ -161,8 +161,11 @@ Used django full stack framework to build the ecommerce website
 
 PEP8 online, JSHint, W3C Markup Validation Service and CSS Validation Service were used to validate all project pages.
 
-Find the testing information in a separate file:
-[User Acceptance Test]((./static/docs/user_acceptance_test.md))
+Find the testing information in a separate file:  
+[User Acceptance Test](./static/docs/user-acceptance-test-original-crafts.pdf)
+
+Testing was also done in the applications with django test covering 84% of the code
+
 ## Bugs  
 
 Here the bugs found during the development and testing of the website:  
@@ -264,13 +267,16 @@ Other product images where taken with Google search
 * [Visiture](https://www.visiture.com/blog/10-features-your-ecommerce-store-must-have-to-succeed/) - Important to have in ecommerce website  
 * [Python Django Project - Ecommerce Store (2021) - Part 1 - Building models, views and testing](https://www.youtube.com/watch?v=UqSJCVePEWU)  
 * [Build an Ecommerce Website with Django // Part 5 - The checkout process](https://www.youtube.com/watch?v=UyML8q-8B1s)
-* Book - Django for Beginners: Build Websites with Python and Django  -  William S. Vincent 
-* Book - Django for Professionals: Production websites with Python & Django - William S. Vincent  
-
 * For the testing: https://usersnap.com/blog/user-acceptance-testing-example/ https://usersnap.com/blog/user-acceptance-testing-right/  
 * The user acceptance testing template was taken from:
     - [usersnap website](https://usersnap.com/)
     - [Tutorial Example](https://usersnap.com/blog/user-acceptance-testing-right/)
+
+* Stack Overflow page
+### books  
+* Book - Django for Beginners: Build Websites with Python and Django  -  William S. Vincent 
+* Book - Django for Professionals: Production websites with Python & Django - William S. Vincent  
+
 
 ## Acknowledgements
 
