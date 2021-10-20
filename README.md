@@ -157,8 +157,12 @@ Used django full stack framework to build the ecommerce website
 1. Allow users to rate products and add rating to products  
 1. Allow users to register to  the website via social media accounts or Google account
 
-## Testing  
+## Testing 
 
+PEP8 online, JSHint, W3C Markup Validation Service and CSS Validation Service were used to validate all project pages.
+
+Find the testing information in a separate file:
+[User Acceptance Test]((./static/docs/user_acceptance_test.md))
 ## Bugs  
 
 Here the bugs found during the development and testing of the website:  
@@ -241,6 +245,19 @@ To clone the repository input this command: git clone https://github.com/Ignazio
 ## Credits 
 
 ### Images
+
+Stag's head - Photo by <a href="https://unsplash.com/@chrishcush?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Christian Bowen</a> on <a href="https://unsplash.com/s/photos/ireland?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Unsplash</a>
+County Kerry - Photo by <a href="https://unsplash.com/@anikinearthwalker?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Dimitry Anikin</a> on <a href="https://unsplash.com/s/photos/ireland?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Unsplash</a>
+Rock of Cashel - Photo by <a href="https://unsplash.com/@kmitchhodge?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">K. Mitch Hodge</a> on <a href="https://unsplash.com/s/photos/ireland?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Unsplash</a>
+Dingle Peninsula - Photo by <a href="https://unsplash.com/@proine?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Proinsias Mac an Bheatha</a> on <a href="https://unsplash.com/s/photos/ireland?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Unsplash</a>
+Killarney National Park - Photo by <a href="https://unsplash.com/@mrmarkdejong?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Mark de Jong</a> on <a href="https://unsplash.com/s/photos/ireland?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Unsplash</a>
+Dublin - Photo by <a href="https://unsplash.com/@saturday_sun?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">.</a> on <a href="https://unsplash.com/s/photos/ireland?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Unsplash</a>
+Cobh - Photo by <a href="https://unsplash.com/@camila_waz?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">camila waz</a> on <a href="https://unsplash.com/s/photos/ireland?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Unsplash</a>
+Doolin Doonagore Castle - Photo by <a href="https://unsplash.com/@plasticmind?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Jesse Gardner</a> on <a href="https://unsplash.com/s/photos/ireland?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Unsplash</a>
+Kylemore Abbey - Photo by <a href="https://unsplash.com/@jamiesongordon?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Jamieson Gordon</a> on <a href="https://unsplash.com/s/photos/ireland?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Unsplash</a>
+Cliffs of Moher - Photo by <a href="https://unsplash.com/@anikinearthwalker?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Dimitry Anikin</a> on <a href="https://unsplash.com/s/photos/ireland?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Unsplash</a>
+
+Other product images where taken with Google search
 
 ### Tutorials
 * [How to Build an E-commerce Website with Django and Python](https://www.youtube.com/watch?v=YZvRrldjf1Y)  
