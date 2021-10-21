@@ -187,8 +187,11 @@ List of bugs found in separate file [bugs.md](./static/docs/bugs.md)
 
 ## Deployment
 Original Crafts app was developed using gitpod.io workspace, using git push to push changes to the GitHub repository.  
-The website is live in Heroku and automatic deployment from github is enabled.  
-This is the procedure to follow to deploy Original Crafts to Heroku:  
+The website is live in Heroku and automatic deployment from github is enabled.   
+The static files and the media files are stored in AWS s3 bucket.  
+Find the procedure to set up the AWS s3 bucket [here](./static/docs/s3_bucket_setup.md)
+
+### This is the procedure to follow to deploy Original Crafts to Heroku:  
 1. Go to gitpod.io original-crafts workspace and create a requirement.txt file. This contains the applications and dependencies required to run original-crafts. In the terminal enter the following command:  
 pip3 freeze --local > requirements.txt 
 1. Create a Procfile to tell Heroku which file runs the app, Enter in the terminal the following command:  
