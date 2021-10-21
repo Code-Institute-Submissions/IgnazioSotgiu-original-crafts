@@ -46,7 +46,9 @@
                         <div class="col-12 col-md-6">
                             <div class="mb-3 center-align">
                                 {% if item.product.image %}
-                                    <img src="{{ item.product.image.url }}" alt="{{ item.product.name }}" class="trolley-image">
+                                    <a href="{{ item.product.image.url }}" target="_blank">
+                                        <img src="{{ item.product.image.url }}" alt="{{ item.product.name }}" class="trolley-image">
+                                    </a>
                                 {% else %}
                                     <img src="{{ MEDIA_URL }}noimage.png" alt="{{ item.product.name }}" class="trolley-image">
                                 {% endif %}

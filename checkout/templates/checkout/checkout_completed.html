@@ -34,7 +34,7 @@
         <p class="mt-5">Deliver to: <strong class="float-right">{{ order.full_name|title }}</strong></p>
         <p>Contact phone number: <strong class="float-right">{{ order.phone_number }}</strong></p>
         <p>Street address: <strong class="float-right">{{ order.street_address }}</strong></p>
-        <p>City: <strong class="float-right">{{ order.city_or_town|title }}</strong></p>
+        <p>City: <strong class="float-right">{{ order.town_or_city|title }}</strong></p>
         {% if order.county %}
             <p>County: <strong class="float-right">{{ order.county|title }}</strong></p>
         {% endif %}
