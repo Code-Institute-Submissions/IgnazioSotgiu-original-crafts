@@ -55,7 +55,7 @@
                         <div class="col-12 col-md-6 center-align">
                             Name: {{ item.product.name|title }}
                             <hr class="hr-trolley">
-                            Category: {{ item.product.category|title }}
+                            Category: {{ item.product.category.friendly_name|title }}
                             <hr class="hr-trolley">
                             Quantity: {{ item.quantity }}
                             <hr class="hr-trolley">
