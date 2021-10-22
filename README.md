@@ -3,7 +3,9 @@
 ***
 
 ### Project Description  
-Original Craft is an e-commerce website that sells Art and Crafts products: jigsaw, prints, paint-by-number kits and art and crafts accessories (brushes, colors, frames...). The website also has original designs from a private gallery. The products are divided into different categories and Original sections. The Original section contains prints, jigsaw and paint-by-numbers kits from the original gallery. The user can click on a product on the list to see the details, add the product to the trolley, check his/her profile page. The user can leave edit delete reviews about the products in his/her purchase history.  
+Original Craft is an e-commerce website that sells Art and Crafts products: jigsaw, prints, paint-by-number kits and art and crafts accessories (brushes, colors, frames...).  The products are divided into different categories Prints, Jigsaw Puzzle, Pint by Numbers and Accessories. The user can purchase products and pay securely with credit card. The user can register to the site to avail of special services like review items in the order history, check the order history, save delivery address for a smoother user experience. The anonymous user can still buy products off the website but he cannot review them.  
+Both registered and unregistered users will receive a confirmation email to the email address provided at the checkout form with order references in case of any problem.  
+The owner can control the website from the admin panel, which include a stock count for the products, a review, users, orders, review and emails panels.
 
 ---
 ![](./static/docs/original-crafts-mockup.png)  
@@ -31,7 +33,7 @@ The website is composed of a homepage that allows the user to register or log in
 The navigation bar is present on all pages across the website for a consistent and smooth user experience.  
 After the user performs the search is possible to click on the products to see the product details, add them to the trolley and complete the purchase on the checkout page.  
 Is possible to complete a purchase even for not registered users.  
-Messages are displayed across the website following different user actions to inform customers of their action's results improving the user experience.  The payment is allowed using credit cards and stripe.  
+Messages are displayed across the website following different user actions to inform customers of their action's results improving the user experience.  The payment is allowed using credit cards and secured by stripe.  
 Registered customers can also check their purchase history and leave reviews on products they bought.  
 See the [Website Map](./static/docs/website-map.png)  
 
@@ -192,9 +194,8 @@ The static files and the media files are stored in AWS s3 bucket.
 Find the procedure to set up the AWS s3 bucket [here](./static/docs/s3_bucket_setup.md)
 
 ### This is the procedure to follow to deploy Original Crafts to Heroku:  
-1. Go to gitpod.io original-crafts workspace and create a requirement.txt file. This contains the applications and dependencies required to run original-crafts. In the terminal enter the following command:  
-pip3 freeze --local > requirements.txt 
-1. Create a Procfile to tell Heroku which file runs the app, Enter in the terminal the following command:  
+1. Go to gitpod.io original-crafts workspace and create a requirement.txt file. This contains the applications and dependencies required to run original-crafts. In the terminal enter the following command:  pip3 freeze --local > requirements.txt 
+1. Create a Procfile to tell Heroku which file runs the app, Enter in the terminal the following command:web: gunicorn original_crafts.wsgi:application
 1. Go to Heroku.com
 1. Log in to Heroku 
 1. Click create a new app on the top right of the screen  
