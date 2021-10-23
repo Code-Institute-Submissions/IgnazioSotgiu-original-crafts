@@ -191,7 +191,7 @@ List of bugs found in separate file [bugs.md](./static/docs/bugs.md)
 Original Crafts app was developed using gitpod.io workspace, using git push to push changes to the GitHub repository.  
 The website is live in Heroku and automatic deployment from github is enabled.   
 The static files and the media files are stored in AWS s3 bucket.  
-Find the procedure to set up the AWS s3 bucket [here](./static/docs/s3_bucket_setup.md)
+Find the procedure to set up the AWS s3 bucket to store static and media files [here](./static/docs/s3_bucket_setup.md)
 
 ### This is the procedure to follow to deploy Original Crafts to Heroku:  
 1. Go to gitpod.io original-crafts workspace and create a requirement.txt file. This contains the applications and dependencies required to run original-crafts. In the terminal enter the following command:  pip3 freeze --local > requirements.txt 
@@ -250,9 +250,13 @@ The app will automatically deploy the changes pushed on the GitHub repository
 1. Add environment variables in your settings to securely store variables in the development
 
 To clone the repository input this command: git clone https://github.com/IgnazioSotgiu/original-crafts.git  
+
+
 ## Credits 
 
 ### Images
+
+Home page image taken from Armando Carta Private Collection
 
 Stag's head - Photo by <a href="https://unsplash.com/@chrishcush?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Christian Bowen</a> on <a href="https://unsplash.com/s/photos/ireland?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Unsplash</a>
 County Kerry - Photo by <a href="https://unsplash.com/@anikinearthwalker?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Dimitry Anikin</a> on <a href="https://unsplash.com/s/photos/ireland?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Unsplash</a>
@@ -277,7 +281,8 @@ Other product images where taken with Google search
     - [usersnap website](https://usersnap.com/)
     - [Tutorial Example](https://usersnap.com/blog/user-acceptance-testing-right/)
 
-* Stack Overflow page
+* Stack Overflow pages  
+
 ### books  
 * Book - Django for Beginners: Build Websites with Python and Django  -  William S. Vincent 
 * Book - Django for Professionals: Production websites with Python & Django - William S. Vincent  
