@@ -96,7 +96,7 @@ class WebhookHandler():
                         status=200,
                     )
 
-                except ValueError:
+                except Exception as e:
 
                     return HttpResponse(
                         content=f'Webhook received\
@@ -165,10 +165,11 @@ class WebhookHandler():
                             status=200,
                         )
 
-                    except ValueError:
+                    except Exception as e:
 
                         return HttpResponse(
-                            content=f'Webhook received {event["type"]}. ERROR {e}',
+                            content=f'Webhook received\
+                                {event["type"]}. ERROR {e}',
                             status=500)
 
             except Exception as e:

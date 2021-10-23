@@ -570,6 +570,9 @@ a:hover {
     .popular-products-div {
         padding: 30px 30px 30px;
     }
+    .go-to-store-btn {
+        margin-top: 0px;
+    }
 }
 @media screen and (max-width: 575px){
     /*top banner - header */
