@@ -136,10 +136,14 @@ def checkout_completed(request, order_number):
             from_email = settings.DEFAULT_FROM_EMAIL
             recipient_list = order.email_address
             email_subject = f'Order Confirmation { order.order_number}'
-            message = f'Thank you { order.full_name }.\
-                Your order number { order.order_number } was sucessfully\
-                completed. Thank you. If you need any help please contact us\
-                at { settings.DEFAULT_FROM_EMAIL }'
+            message = f'Thank you { order.full_name }.\n \
+            \
+            Your order number { order.order_number } was completed.\n\
+            Thank you.\n\
+            If you need any help please contact us at:\n\
+            { settings.DEFAULT_FROM_EMAIL }\n\
+            \
+            Original Crafts Team'
             try:
                 send_mail(email_subject, message, from_email, [recipient_list],
                           fail_silently=False)
@@ -203,10 +207,13 @@ def checkout_completed(request, order_number):
         from_email = settings.DEFAULT_FROM_EMAIL
         recipient_list = order.email_address
         email_subject = f'Order Confirmation { order.order_number}'
-        message = f'Thank you { order.full_name }.\
-            Your order number { order.order_number } was sucessfully completed\
-            Thank you. If you need any help please contact us\
-            at { settings.DEFAULT_FROM_EMAIL }'
+        message = f'Thank you { order.full_name }.\n\
+            Your order number { order.order_number } was completed\n\
+            Thank you. \n\
+            If you need any help please contact us at:\n\
+            { settings.DEFAULT_FROM_EMAIL }\n\
+            \
+                Original Crafts Team'
         try:
             send_mail(email_subject, message, from_email, [recipient_list],
                       fail_silently=False)
