@@ -11,7 +11,7 @@ class Category(models.Model):
         verbose_name_plural = 'categories'
 
     def __str__(self):
-        return self.name
+        return str(self.name)
 
     def get_friendly_name(self):
         return self.friendly_name
@@ -52,4 +52,4 @@ class Product(models.Model):
         ordering = ('-created',)
 
     def __str__(self):
-        return self.name
+        return str(self.name)

@@ -23,14 +23,9 @@
                             <img src="{{ MEDIA_URL }}noimage.png" alt="{{ review.product.name }}" class="trolley-image">
                         {% endif %}
                     </div>
-                <div class="">Title: {{ review.review_title|title }}</div>
-                <div>
-
-                {{ review.review_text|capfirst }}
-                </div>
-            
-            
-        </div>
+                <div>Title: {{ review.review_title|title }}</div>
+                <div>{{ review.review_text|capfirst }}</div>
+            </div>
         </div>
     </div>
     {% if user.is_authenticated %}

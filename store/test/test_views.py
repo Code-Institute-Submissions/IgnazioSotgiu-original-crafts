@@ -7,7 +7,7 @@ from reviews.models import Review
 
 class TestHomepageView(TestCase):
 
-    def test_display_homepage_render_right_template(self):
+    def test_display_homepage_render_correct_template(self):
         response = self.client.get('/')
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, 'store/index.html')
@@ -54,7 +54,7 @@ class TestSingleProduct(TestCase):
         self.assertTemplateUsed(response, 'store/single_product.html')
 
 
-class TestSearchResultView(TestCase):
+class TestSearchResultAndStoreViews(TestCase):
 
     def setUp(self):
         # store the password to login later

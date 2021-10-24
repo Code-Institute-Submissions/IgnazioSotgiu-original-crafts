@@ -14,6 +14,7 @@
         <span class="white-text trolley-title">Checkout</span>
     </div>
 </div>
+<!-- check if there are trolley items and display them on the page -->
 {% if trolley_items %}
 <div class="row">
     <div class="col-10 offset-1 col-sm-10 offset-sm-1 col-md-8 offset-md-2 col-lg-6 offset-lg-0 order-12">
@@ -35,7 +36,7 @@
                 <div class="col-6 white-text center-align">
                     {{ item.product.name }}
                     <hr class="hr-trolley">
-                    Cat. {{ item.product.category|title }}
+                    Cat. {{ item.product.category.friendly_name|title }}
                     <hr class="hr-trolley">
                     Price 
                     {% if item.product.special_price %}
@@ -74,6 +75,7 @@
             <hr class="hr-trolley">
         {% endfor %}
     </div>
+    <!-- checkout form -->
     <div class="col-10 offset-1 col-sm-8 offset-sm-2 col-md-6 offset-md-3 col-lg-4 offset-lg-1 white-text">
         <form id="payment-form" action="{% url 'view_checkout_page' %}" method="POST" >
             {% csrf_token %}
@@ -131,6 +133,7 @@
                         </div>
                     </div>
                 </div>
+                <!-- stripe payment elements -->
                 <hr class="hr-trolley">
                 <h3 class="ml-5 mt-3">Payment</h3>
                 <div class="col-10 offset-1">
@@ -160,6 +163,7 @@
 {% endif %}
 {% endblock %}
 <!-- code taken from code institute lecture -->
+<!-- make available the stripe_public_key and client_secret values to the javascript function -->
 {% block postloadjs %}
     {{ block.super }}
     <script src="{% static 'checkout/js/checkout.js' %}"></script>

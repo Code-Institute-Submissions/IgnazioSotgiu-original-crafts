@@ -33,7 +33,7 @@
                 <div class="col-5 white-text center-align">
                     {{ item.product.name }}
                     <hr class="hr-trolley">
-                    Cat. {{ item.product.category|title }}
+                    Cat. {{ item.product.category.friendly_name|title }}
                     <hr class="hr-trolley">
                     Price 
                     {% if item.product.special_price %}

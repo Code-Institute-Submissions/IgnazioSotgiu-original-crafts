@@ -9,7 +9,7 @@ from django.contrib.auth import get_user_model
 class TestProfileViews(TestCase):
 
     def setUp(self):
-        # store the password to login later
+        # create admin user
         password = 'mypassword'
 
         self.my_admin = User.objects.create_superuser(
@@ -17,8 +17,9 @@ class TestProfileViews(TestCase):
 
         self.c = Client()
         self.c.login(username=self.my_admin.username, password=password)
-
+        # create an anonymous user
         self.client = Client()
+        # create an categories and products
         self.category = Category.objects.create(name='test', slug='slugtest')
         self.category1 = Category.objects.create(
             name='paint_by_numbers', slug='pby_test')
@@ -27,6 +28,7 @@ class TestProfileViews(TestCase):
         self.product = Product.objects.create(
             category_id=1, name='product', price=19.99, selling_fast_tag=True)
 
+        # create checkout order
         self.checkout_order = CheckoutOrder.objects.create(
             order_number='',
             full_name='test test',

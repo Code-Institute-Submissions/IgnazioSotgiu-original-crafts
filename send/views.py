@@ -8,6 +8,7 @@ from .forms import ContactForm
 
 def send_email(request):
     contact_form = ContactForm()
+    # recipient_list must be a list
     recipient_list = []
 
     if request.method == 'POST':

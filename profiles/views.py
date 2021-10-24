@@ -8,6 +8,7 @@ from reviews.models import Review
 
 def profile_page(request):
     user = request.user
+    # allow authenticated users only
     if user.is_authenticated:
         profile = get_object_or_404(Profile, user=user)
         if request.method == 'POST':
@@ -22,6 +23,7 @@ def profile_page(request):
         all_review_product_ids = []
         for order in orders:
             order_count += 1
+        # filter the product reviews to check if the user reviewed the product
         reviews = Review.objects.all().filter(author=request.user)
         for review in reviews:
             all_review_product_ids.append(review.product.id)
@@ -44,6 +46,7 @@ def profile_page(request):
 
 
 def profile_order_history(request, order_number):
+    # allow authenticated users only
     if request.user.is_authenticated:
         order = get_object_or_404(CheckoutOrder, order_number=order_number)
         from_profile_page = True

@@ -9,7 +9,7 @@ from .forms import ReviewForm
 
 
 def add_review(request, product_id):
-
+    # allow authenticated users only
     if request.user.is_authenticated:
         review_form = ReviewForm()
         product = Product.objects.get(id=product_id)
@@ -42,6 +42,7 @@ def add_review(request, product_id):
 
 
 def edit_review(request, review_id):
+    # allow authenticated users only
     if request.user.is_authenticated:
         review = Review.objects.get(id=review_id)
         review_form = ReviewForm(instance=review)
@@ -77,6 +78,7 @@ def edit_review(request, review_id):
 
 
 def delete_review_warning(request, review_id):
+    # allow authenticated users only
     if request.user.is_authenticated:
         review = Review.objects.get(id=review_id)
         if request.user == review.author:
@@ -96,6 +98,8 @@ def delete_review_warning(request, review_id):
 
 
 def delete_review(request, review_id):
+    # allow authenticated users only
+
     if request.user.is_authenticated:
         review = Review.objects.get(id=review_id)
         if request.user == review.author:

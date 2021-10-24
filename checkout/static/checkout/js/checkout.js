@@ -1,4 +1,5 @@
 document.addEventListener("DOMContentLoaded", function() {
+    // get stripePublicKey and clientSecret from checkout_page.html
     var stripePublicKey = $('#id_stripe_public_key').text().slice(1, -1);
     var clientSecret = $('#id_client_secret').text().slice(1, -1);
 
@@ -39,6 +40,7 @@ document.addEventListener("DOMContentLoaded", function() {
         }
     });
 
+    // get payment form values
     var form = document.getElementById('payment-form');
     form.addEventListener('submit', function(e) {
         e.preventDefault();

@@ -124,8 +124,8 @@ def checkout_completed(request, order_number):
             context = {
                 'order': order,
             }
-            messages.info(request, f'The email for this order was\
-                          sent on {order.order_date}')
+            messages.info(request, f'The email for this order was sent on\
+                {order.order_date.strftime("%Y-%m-%d %H:%M:%S")}')
 
             return render(request, template, context)
 
@@ -236,7 +236,7 @@ def checkout_completed(request, order_number):
         }
         messages.success(request, f'Your order number {order_number} \
             was completed successfully')
-
+        # empty the trolley after checkout
         if 'trolley' in request.session:
             del request.session['trolley']
 

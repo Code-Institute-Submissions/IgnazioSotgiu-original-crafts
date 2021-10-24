@@ -5,6 +5,7 @@ from django.contrib import admin
 from .models import CheckoutOrder, OrderLineItem
 
 # code from code institute lecture
+# checkout order display in the admin panel
 
 
 class CheckoutOrderLineItemAdmin(admin.TabularInline):

@@ -4,7 +4,7 @@ from django.contrib.auth import get_user_model
 
 class TestProfileModel(TestCase):
 
-    def test_profile_model_str(self):
+    def test_profile_model_str_return_user_username(self):
         get_user_model().objects.create(
             username='myuser'
         )
