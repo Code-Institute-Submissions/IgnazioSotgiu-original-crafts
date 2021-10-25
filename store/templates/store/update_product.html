@@ -19,6 +19,9 @@
                 </div>
                 <input type="hidden" name="next" value="{{ request.path }}">
             </form>
+            <div class="container center-align">
+                <a href="{% url 'products' %}" class="btn yellow-inverse-btn mb-5 center-align">Back to products</a>
+            </div>
         </div>
     </div>
 {% endblock %}

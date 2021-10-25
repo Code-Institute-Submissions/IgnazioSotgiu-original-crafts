@@ -312,7 +312,7 @@ def error_404(request, exception, template_name="store/404.html"):
     return response
 
 
-def error_500(request, exception, template_name="store/500.html"):
+def error_500(request, template_name="store/500.html"):
     response = render(request, template_name)
     response.status_code = 500
     return response

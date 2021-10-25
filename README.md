@@ -73,11 +73,12 @@ Admin users can access admin functionality:
 
 ## Database Structure  
  
-For this project, I used a relational database. I build a custom profiles table to extend the Django user table with extra fields with a one to one relation.  
+For this project, I used a relational database. I build a custom profiles table with a one to one relation to extend the Django user table with extra fields.  
 The category table is related to the products with the category fields.  
 Order_line_items table connects the products table to the checkout order table product field.  
-Users profiles tables have a one to many relations with the checkout orders table as one user can have many orders and the order can only have one user.  
-The review table is related to users as the author and the products table. In this case, the many to many relation as a user can review many products and a product can be reviewed from many users.  
+The profiles table is related to the user table and the order table. The order allow for a null profile as not authenticated users can create an order.   
+The review table is related to user table in the author field.  
+The review table is related the products table. In this case, it is a  many to many relation as a user can review many products and a product can be reviewed from many users.  
 The contacts table is not related to other tables as is possible for not registered users to enquiry and use the contact form on the website. It is useful for the admin to keep a record of the received email.
    
 ## Database Schema  
@@ -170,6 +171,10 @@ Find the testing information in a separate file:
 
 Testing was also done in the applications with the Django test covering 84% of the code
 
+run test on files with commmand:  
+
+coverage run --omit='*/lib/*' manage.py test
+
 ## Bugs  
 
 [Here](./static/docs/bugs.md) are the bugs found during the development and testing of the website:  
@@ -246,9 +251,16 @@ The app will automatically deploy the changes pushed on the GitHub repository
 1. Click on the Code button
 1. Select copy the URL in the dropdown menu
 1. Open your favourite IDE and enter the command: git clone https://github.com/IgnazioSotgiu/original-crafts.git
-1. Then you can navigate through the repository files  
-1. Check requirements.txt to see which dependencies are needed to run the application
-1. Add environment variables in your settings to securely store variables in the development
+1. In the terminal type pip3 install -r original-crafts/requirements.txt to install all dependencies
+1. In the environment settings add environment variables:
+    * DEVELOPMENT - to set DEBUG to true
+    * EMAIL_HOST_PASSWORD  - Provided by Google Gmail 
+    * EMAIL_HOST_USER  - Your email host user
+    * SECRET_KEY - Django secret key 
+    * STRIPE_PUBLIC_KEY  - Provided by Stripe
+    * STRIPE_SECRET_KEY  - Provided by Stripe
+    * WEBHOOK_ENDPOINT_SECRET - Provided by Stripe
+1. Then you can navigate through the repository files
 
 To clone the repository input this command: git clone https://github.com/IgnazioSotgiu/original-crafts.git  
 
@@ -284,7 +296,7 @@ Other product images where taken with Google search
 
 * Stack Overflow pages  
 
-### books  
+### Books  
 * Book - Django for Beginners: Build Websites with Python and Django  -  William S. Vincent 
 * Book - Django for Professionals: Production websites with Python & Django - William S. Vincent  
 

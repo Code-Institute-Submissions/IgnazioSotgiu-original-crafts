@@ -101,6 +101,9 @@ label.required-field {
 .float-left {
     float: left;
 }
+.original-craft-signature {
+    color: #e2d407;
+}
 /* back to top link */
 .back-to-top-container {
     background-color: black;
@@ -714,8 +717,8 @@ a:hover {
         width: 150px;
     }
     .review-container {
-        margin: 20px 30px;
-        padding: 20px 30px;
+        margin: 10px 10px;
+        padding: 20px 10px;
         background-color: rgb(68, 65, 65);
         border: 1px solid #fff;
         border-radius: 5px;
