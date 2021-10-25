@@ -60,6 +60,7 @@ class WebhookHandler():
                 attempt += 1
                 time.sleep(1)
         if checkout_order_exists:
+            # check email_sent value
             if checkout_order.email_sent:
 
                 return HttpResponse(
@@ -141,6 +142,7 @@ class WebhookHandler():
 
                 else:
                     try:
+                        # send the confirmation email
                         checkout_order.email_sent = True
                         checkout_order.save()
                         from_email = settings.DEFAULT_FROM_EMAIL
@@ -166,7 +168,7 @@ class WebhookHandler():
                         )
 
                     except Exception as e:
-
+                        # handle generic error
                         return HttpResponse(
                             content=f'Webhook received\
                                 {event["type"]}. ERROR {e}',

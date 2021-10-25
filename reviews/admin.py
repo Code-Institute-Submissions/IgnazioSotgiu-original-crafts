@@ -6,6 +6,9 @@ from .models import Review
 
 
 class ReviewAdmin(admin.ModelAdmin):
+    """
+    Display reviews in the admin panel
+    """
     readonly_fields = ('review_date',)
 
     fields = ('product', 'review_title', 'review_text', 'review_date',

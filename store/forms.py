@@ -8,6 +8,9 @@ from .models import Product
 class ProductForm(forms.ModelForm):
 
     class Meta:
+        """
+        A form to create the product
+        """
         model = Product
         fields = ['image', 'name', 'price', 'category',
                   'description', 'special_price',

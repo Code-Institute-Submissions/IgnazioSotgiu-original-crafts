@@ -22,16 +22,16 @@
           <p>We have free delivery on orders over €50!!</p>
           <p>Check our new products now</p>
         </div>
-        <div class="">
+        <div>
           <a href="{% url 'products' %}" class="btn go-to-store-btn">Check Our Products</a>
         </div>
       {% else %}
         <div class="user-welcome-message">
-          <p>Register and get special offers</p>
-          <p>Register for a speedy checkout</p>
-          <p>Register to review your products</p>
+          <p>Welcome to our website</p>
+          <p><a href="{% url 'account_signup' %}" class="yellow-text">Join</a>  now and get updates and special offers</p>
+          <p>or continue as a guest and...</p>
         </div>
-        <div class="">
+        <div>
           <a href="{% url 'products' %}" class="btn go-to-store-btn">Explore the Shop</a>
         </div>
       {% endif %}

@@ -3,9 +3,9 @@
 ***
 
 ### Project Description  
-Original Craft is an e-commerce website that sells Art and Crafts products: jigsaw, prints, paint-by-number kits and art and crafts accessories (brushes, colors, frames...).  The products are divided into different categories Prints, Jigsaw Puzzle, Pint by Numbers and Accessories. The user can purchase products and pay securely with credit card. The user can register to the site to avail of special services like review items in the order history, check the order history, save delivery address for a smoother user experience. The anonymous user can still buy products off the website but he cannot review them.  
-Both registered and unregistered users will receive a confirmation email to the email address provided at the checkout form with order references in case of any problem.  
-The owner can control the website from the admin panel, which include a stock count for the products, a review, users, orders, review and emails panels.
+Original Craft is an e-commerce website that sells Art and Crafts products: jigsaw, prints, paint-by-number kits and art and crafts accessories (brushes, colors, frames...).  The products are divided into different categories Prints, Jigsaw Puzzle, Pint by Numbers and Accessories. The user can purchase products and pay securely with credit card. The user can register to the site to avail of special services like review items in the order history, check the order history and save delivery address for a smoother user experience. The anonymous user can still buy products off the website but he cannot review them.  
+Both registered and unregistered users will receive a confirmation email after the checkout is completed, to the email address provided at the checkout form with order references.  
+The owner can control the website from the admin panel, add and remove categories and products, and also include a stock count for the products, review, users, orders, review and emails panels.
 
 ---
 ![](./static/docs/original-crafts-mockup.png)  
@@ -30,10 +30,11 @@ The owner can control the website from the admin panel, which include a stock co
 
 ## Website Structure
 The website is composed of a homepage that allows the user to register or log in to their account. On the homepage, the user is informed that there is a free delivery deal for orders over 50 euros. Some of the popular products are displayed on the homepage to show the user which type of product is available.  
-The navigation bar is present on all pages across the website for a consistent and smooth user experience.  
+The navigation bar is present on all pages across the website for a intuitive user experience.  
 After the user performs the search is possible to click on the products to see the product details, add them to the trolley and complete the purchase on the checkout page.  
 Is possible to complete a purchase even for not registered users.  
-Messages are displayed across the website following different user actions to inform customers of their action's results improving the user experience.  The payment is allowed using credit cards and secured by stripe.  
+Messages are displayed across the website following different user actions to inform customers of their action's results improving the user experience.  The payment is allowed using credit cards and secured by stripe. A confirmation email is sent after the checkout is completed. 
+On the navigation bar there is also a link to the contact form for any user suggestion or enquiry.  
 Registered customers can also check their purchase history and leave reviews on products they bought.  
 See the [Website Map](./static/docs/website-map.png)  
 

@@ -5,13 +5,13 @@
 {% block content %}
     <div class="bg-black jumbotron-container">
         <div class="bg-black single-product-container">
-        <hr class="hr-trolley mb-5">
+            <hr class="hr-trolley mb-5">
             <p class="white-text center-align mt-3"><strong class="product-title">{{ product.name|title }}</strong></p>
-            {% if reviews %}
-            <div class="center-align">
-                <a href="#reviews-section" class="white-text center-align mt-2">Reviews ( {{ reviews_count }} )</a>
-            </div>
-            {% endif %}
+                {% if reviews %}
+                    <div class="center-align">
+                        <a href="#reviews-section" class="white-text center-align mt-2">Reviews ( {{ reviews_count }} )</a>
+                    </div>
+                {% endif %}
             <hr class="hr-trolley mb-5">
             <div class="row">
                 <div class="col-12 col-md-6 center-align">
@@ -26,7 +26,7 @@
                 <div class="col-12 col-md-6">
                     <p class="white-text center-align mt-4">Category: {{ product.category.friendly_name }}</p>
                     {% if product.special_price %}
-                    <p class="center-align"><span class="text-red">SALE </span><del class="grey-text">€{{ product.price}}</del><span
+                        <p class="center-align"><span class="text-red">SALE </span><del class="grey-text">€{{ product.price}}</del><span
                             class="white-text"> €{{ product.special_price }}</span></p>
                     {% else %}
                     <p class="white-text center-align">Price €{{ product.price }}</p>
@@ -61,17 +61,17 @@
                     </form>
                     {% if user.is_authenticated %}
                         {% if user.is_superuser %}
-                        <div class="jumbotron">
-                            <div class="row">
-                                <div class="col center-align white-text">Admin <br> Manage Product</div>
-                            </div>
-                            <div class="row mt-1">
-                                <div class="col center-align">
-                                    <a class="btn btn-info btn-sm mr-1" href="{% url 'update_product' product.id %}">Update</a>
-                                    <a class="btn btn-danger btn-sm ml-1" href="{% url 'delete_warning' product.id %}">Delete</a>
+                            <div class="jumbotron">
+                                <div class="row">
+                                    <div class="col center-align white-text">Admin <br> Manage Product</div>
+                                </div>
+                                <div class="row mt-1">
+                                    <div class="col center-align">
+                                        <a class="btn btn-info btn-sm mr-1" href="{% url 'update_product' product.id %}">Update</a>
+                                        <a class="btn btn-danger btn-sm ml-1" href="{% url 'delete_warning' product.id %}">Delete</a>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
                         {% endif %}
                     {% endif %}
                 </div>

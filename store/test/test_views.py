@@ -194,11 +194,3 @@ class TestSearchResultAndStoreViews(TestCase):
         response = self.client.get(f'/store/delete_product/{product.id}/')
         self.assertEqual(response.status_code, 302)
         self.assertRedirects(response, (reverse('home')))
-
-    def test_admin_add_product_functionality(self):
-        product2 = Product.objects.create(
-            category_id=1, name='product1', price=19.99)
-        product2.save()
-        response = self.c.get(reverse('add_product'))
-        self.assertEqual(response.status_code, 200)
-        self.assertTrue(response, 'add_products')

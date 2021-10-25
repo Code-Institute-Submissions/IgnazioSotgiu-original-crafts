@@ -3,6 +3,9 @@ from .models import Review
 
 
 class ReviewForm(ModelForm):
+    """
+    A form to create review
+    """
 
     class Meta:
         model = Review

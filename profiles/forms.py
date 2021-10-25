@@ -3,6 +3,9 @@ from .models import Profile
 
 
 class ProfileForm(ModelForm):
+    """
+    A form to create profile
+    """
 
     class Meta:
         model = Profile

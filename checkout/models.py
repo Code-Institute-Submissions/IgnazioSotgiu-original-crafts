@@ -39,10 +39,12 @@ class CheckoutOrder(models.Model):
     email_sent = models.BooleanField(default=False)
 
     # Create an order number
+    # code taken from code institute lecture
     def _generate_order_number(self):
         return uuid.uuid4().hex.upper()
 
     # Check if there is a order number if not call the function to create it
+    # code taken from code institute lecture
     def save(self, *args, **kwargs):
         """
         Override the original save method to set the order number
@@ -68,7 +70,7 @@ class CheckoutOrder(models.Model):
     def __str__(self):
         return self.order_number
 
-
+# code taken from code institute lecture
 class OrderLineItem(models.Model):
     order = models.ForeignKey(
         CheckoutOrder, null=False, blank=False,

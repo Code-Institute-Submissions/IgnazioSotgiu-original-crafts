@@ -113,6 +113,9 @@ def view_checkout_page(request):
 
 
 def checkout_completed(request, order_number):
+    """
+    A view dispalyed after checkout is completed
+    """
     template = 'checkout/checkout_completed.html'
     order = get_object_or_404(CheckoutOrder, order_number=order_number)
     user = request.user
@@ -178,7 +181,7 @@ def checkout_completed(request, order_number):
                             request, 'Your Address info\
                             were successfully updated')
 
-            # Update number in stock after products are successfully purchased
+            # Update stock quantity
             trolley = request.session.get('trolley', {})
 
             for product_id, quantity in trolley.items():
@@ -227,6 +230,7 @@ def checkout_completed(request, order_number):
                 Original Craft team with the contact page.\
                 Apologies for the inconvenience')
         trolley = request.session.get('trolley', {})
+        # update stock quantity
         for product_id, quantity in trolley.items():
             product = Product.objects.get(id=product_id)
             product.number_in_stock -= quantity
@@ -236,7 +240,7 @@ def checkout_completed(request, order_number):
         }
         messages.success(request, f'Your order number {order_number} \
             was completed successfully')
-        # empty the trolley after checkout
+        # empty the trolley after checkout completed
         if 'trolley' in request.session:
             del request.session['trolley']
 

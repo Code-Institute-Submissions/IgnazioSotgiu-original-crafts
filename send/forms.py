@@ -3,6 +3,9 @@ from .models import Contact
 
 
 class ContactForm(ModelForm):
+    """
+    A form to create an email
+    """
 
     class Meta:
         model = Contact

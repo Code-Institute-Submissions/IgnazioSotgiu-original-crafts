@@ -4,6 +4,8 @@ from django.conf import settings
 from store.models import Product
 from django.contrib import messages
 
+# Code taken form code institute lecture
+
 
 def trolley_contents(request):
 

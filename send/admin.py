@@ -6,6 +6,9 @@ from .models import Contact
 
 
 class ContactAdmin(admin.ModelAdmin):
+    """
+    Display emails in the admin panel
+    """
     readonly_fields = ('email_date', )
 
     fields = ('from_email', 'recipient_list', 'email_subject',

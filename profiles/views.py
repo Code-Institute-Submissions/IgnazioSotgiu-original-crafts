@@ -7,6 +7,9 @@ from reviews.models import Review
 
 
 def profile_page(request):
+    """
+    A view to  display the profile page to the authenticated user
+    """
     user = request.user
     # allow authenticated users only
     if user.is_authenticated:
@@ -46,6 +49,9 @@ def profile_page(request):
 
 
 def profile_order_history(request, order_number):
+    """
+    Display order details from authenticated user's profile page 
+    """
     # allow authenticated users only
     if request.user.is_authenticated:
         order = get_object_or_404(CheckoutOrder, order_number=order_number)

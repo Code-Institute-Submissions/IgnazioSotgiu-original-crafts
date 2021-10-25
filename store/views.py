@@ -8,7 +8,9 @@ from .forms import ProductForm
 
 
 def display_homepage(request):
-    """ Display the homepage """
+    """
+    A view to display the homepage
+    """
     template = 'store/index.html'
     products = Product.objects.all().filter(add_to_popular_products=True)
     context = {
@@ -18,7 +20,9 @@ def display_homepage(request):
 
 
 def products(request):
-    """ display all products in e store - all products page """
+    """
+    A view to display all products in e store - all products page
+    """
     products = Product.objects.order_by('-updated', '-created')
     template = 'store/products.html'
     context = {
@@ -28,7 +32,9 @@ def products(request):
 
 
 def best_sellers(request):
-    """ display Best sellers - Fast selling products """
+    """
+    A view to display Best sellers - Fast selling products
+    """
     products = Product.objects.filter(
         selling_fast_tag=True).order_by('-updated', '-created')
     template = 'store/best_sellers.html'
@@ -39,7 +45,9 @@ def best_sellers(request):
 
 
 def original_gallery(request):
-    """ display Best sellers - Fast selling products """
+    """
+    A view to display Original Art - Original Products
+    """
     products = Product.objects.filter(
         original_tag=True).order_by('-updated', '-created')
     template = 'store/original_gallery.html'
@@ -50,7 +58,9 @@ def original_gallery(request):
 
 
 def accessories(request):
-    """ display Accessories - Accessories page """
+    """
+    A view to display Accessories - Accessories page
+    """
     accessories = Category.objects.get(name='accessories')
     products = Product.objects.filter(
         category=accessories).order_by('-updated', '-created')
@@ -62,7 +72,9 @@ def accessories(request):
 
 
 def paint_by_numbers(request):
-    """ display Paint by Numbers - Paint by Numbers page """
+    """
+    A view to display Paint by Numbers products - Paint by Numbers page
+    """
     paint_by_numbers = Category.objects.get(name='paint_by_numbers')
     products = Product.objects.filter(
         category=paint_by_numbers).order_by('-updated', '-created')
@@ -82,13 +94,18 @@ def about_page(request):
 
 
 def contact_page(request):
-    """ a view to display the contact page """
+    """
+    A view to display the contact page
+    """
 
     template = 'store/contact_page.html'
     return render(request, template)
 
 
 def single_product(request, product_id):
+    """
+    A view to display single product detalis
+    """
     product = get_object_or_404(Product, pk=product_id)
     reviews = Review.objects.all().filter(
         product=product_id).order_by('-review_date')
@@ -108,7 +125,9 @@ def single_product(request, product_id):
 
 def search_result(request):
 
-    """ display search result - search result page """
+    """
+    A view to search products and display search result page
+    """
     products = Product.objects.order_by('-updated', '-created')
     categories = None
     query = None
@@ -150,7 +169,9 @@ def search_result(request):
 
 
 def hidden_products(request):
-    """ display hidden products to the admin """
+    """
+    A view to display hidden products to the admin user
+    """
     if request.user.is_superuser:
         products = Product.objects.filter(hide_product=True)
         template = 'store/hidden_products.html'
@@ -165,7 +186,9 @@ def hidden_products(request):
 
 
 def out_of_stock_products(request):
-    """ display out of stock products to the admin """
+    """
+    A view to display out of stock products to the admin user
+    """
     if request.user.is_superuser:
         out_of_stock_products = []
         products = Product.objects.all()
@@ -184,14 +207,13 @@ def out_of_stock_products(request):
 
 def add_product(request):
     """
-    add product to the database
+    A view to add product to the database
     """
     if request.user.is_superuser:
         form = ProductForm()
 
         if request.method == 'POST':
             form = ProductForm(request.POST, request.FILES)
-            next = request.POST.get('next')
             if form.is_valid:
                 form.save()
                 messages.success(request, 'Product\
@@ -211,7 +233,7 @@ def add_product(request):
 
 def update_product(request, product_id):
     """
-    update product already in the database
+    A view to update products already in the database
     """
     if request.user.is_superuser:
         product = Product.objects.get(id=product_id)
@@ -290,5 +312,7 @@ def error_404(request, exception, template_name="store/404.html"):
     return response
 
 
-def error_500(request, *args, **argv):
-    return render(request, 'store/500.html', status=500)
+def error_500(request, exception, template_name="store/500.html"):
+    response = render(request, template_name)
+    response.status_code = 500
+    return response

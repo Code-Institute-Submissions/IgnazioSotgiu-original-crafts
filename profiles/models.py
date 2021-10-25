@@ -24,8 +24,9 @@ class Profile(models.Model):
 
 @receiver(post_save, sender=User)
 def create_profile(sender, instance, created, **kwargs):
-
-    # create a new user profile or updating an existing one
+    """
+    Save profile instance when form is posted
+    """
     if created:
         Profile.objects.create(user=instance)
     instance.profile.save()

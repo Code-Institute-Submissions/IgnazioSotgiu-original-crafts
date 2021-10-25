@@ -6,13 +6,17 @@ from store.models import Product
 
 
 def view_trolley(request):
-    """ A view to display the trolley"""
+    """
+    A view to display the trolley
+    """
 
     return render(request, 'trolley/view_trolley.html')
 
 
 def add_to_trolley(request, product_id):
-
+    """
+    A view to add products in the trolley
+    """
     quantity = int(request.POST.get('quantity'))
     product = get_object_or_404(Product, id=product_id)
     trolley = request.session.get('trolley', {})
@@ -30,6 +34,9 @@ def add_to_trolley(request, product_id):
 
 
 def update_trolley(request, product_id):
+    """
+    A view to update products in the trolley
+    """
     product = get_object_or_404(Product, pk=product_id)
     quantity = int(request.POST.get('quantity'))
     next = request.POST.get('next')
@@ -52,7 +59,9 @@ def update_trolley(request, product_id):
 
 
 def delete_trolley_product(request, product_id):
-
+    """
+    A view to delete products in the trolley
+    """
     product = get_object_or_404(Product, pk=product_id)
     trolley = request.session.get('trolley', {})
     next = request.POST.get('next')

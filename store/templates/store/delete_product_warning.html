@@ -6,20 +6,20 @@
 {% block content %}
     <div class="row">
         <div class="col-8 offset-2 center-align promotion-section">
-        <span class="promotion-section-title"><strong class="text-uppercase text-red">warning!</strong> Are you sure theat you want to delete {{ product.name }}?</span>
-        <br>
-        <br>
-        <span class="">You can also update the product and select the "Hide Product" option to keep the product hidden in the database!</span>
+            <span class="promotion-section-title"><strong class="text-uppercase text-red">warning!</strong> Are you sure theat you want to delete {{ product.name }}?</span>
+            <br>
+            <br>
+            <span class="">You can also update the product and select the "Hide Product" option to keep the product hidden in the database!</span>
         </div>
     </div>
     {% if user.is_authenticated %}
         {% if user.is_superuser %}
-        <div class="row mt-5">
-            <div class="col center-align mt-5">
-                <a class="btn btn-info btn-sm mr-5" href="{% url 'update_product' product.id %}">Update</a>
-                <a class="btn btn-danger btn-sm ml-5" href="{% url 'delete_product' product.id %}">Delete</a>
+            <div class="row mt-5">
+                <div class="col center-align mt-5">
+                    <a class="btn btn-info btn-sm mr-5" href="{% url 'update_product' product.id %}">Update</a>
+                    <a class="btn btn-danger btn-sm ml-5" href="{% url 'delete_product' product.id %}">Delete</a>
+                </div>
             </div>
-        </div>
         {% endif %}
     {% endif %}
 {% endblock %}

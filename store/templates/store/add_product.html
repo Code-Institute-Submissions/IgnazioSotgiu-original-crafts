@@ -3,24 +3,24 @@
 {% block extra_title %} - Admin - Add Product {% endblock %}
 
 {% block content %}
-<div class="row">
-    <div class="col-12 promotion-section">
-       <span class="promotion-section-title">Admin Add Product</span>
-    </div>
-</div>
-<div class="row">
-    <div class="col-10 offset-1 col-md-8 offset-md-2 col-lg-6 offset-lg-3 white-text">
-        <form action="" method="POST" enctype="multipart/form-data" id="add-product-form">
-            {% csrf_token %}
-            {{ form|crispy }}
-            <input type="hidden" name="next" value="{{ request.path }}">
-            <div class="container center-align">
-                <button type="submit" class="btn yellow-btn mb-2 center-align" name="submit">Add Product</button>
-            </div>
-        </form>
-        <div class="container center-align">
-            <a href="{% url 'products' %}" class="btn yellow-inverse-btn mb-5 center-align">Cancel</a>
+    <div class="row">
+        <div class="col-12 promotion-section">
+        <span class="promotion-section-title">Admin Add Product</span>
         </div>
     </div>
-</div>
+    <div class="row">
+        <div class="col-10 offset-1 col-md-8 offset-md-2 col-lg-6 offset-lg-3 white-text">
+            <form action="" method="POST" enctype="multipart/form-data" id="add-product-form">
+                {% csrf_token %}
+                {{ form|crispy }}
+                <input type="hidden" name="next" value="{{ request.path }}">
+                <div class="container center-align">
+                    <button type="submit" class="btn yellow-btn mb-2 center-align" name="submit">Add Product</button>
+                </div>
+            </form>
+            <div class="container center-align">
+                <a href="{% url 'products' %}" class="btn yellow-inverse-btn mb-5 center-align">Cancel</a>
+            </div>
+        </div>
+    </div>
 {% endblock %}

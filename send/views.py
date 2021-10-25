@@ -7,6 +7,9 @@ from .forms import ContactForm
 
 
 def send_email(request):
+    """
+    A view to allow users to send email from the contact page
+    """
     contact_form = ContactForm()
     # recipient_list must be a list
     recipient_list = []
