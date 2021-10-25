@@ -175,6 +175,9 @@ label.required-field {
 .shopping-cart-icon i {
     font-size: 20px;
 }
+.shopping-cart-icon:hover {
+    color: rgb(97, 93, 93);
+}
 .cart-products-qty {
     font-size: 20px;
     font-weight: 400;
